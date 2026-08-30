@@ -61,6 +61,12 @@
   }
 }
 
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 /* Custom scrollbar for exhibition refinement */
 ::-webkit-scrollbar {
   width: 6px;

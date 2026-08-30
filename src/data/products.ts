@@ -53,7 +53,7 @@ export const products: Product[] = [
       careInstructions: 'Spot clean gently with damp muslin cloth and mild wool detergent. Air dry flat in shade.',
       hardware: 'Brushed solid nickel-free alloy keyring with swivel snap clip'
     },
-    price: '$48 USD',
+    price: '₹149',
     edition: 'Atelier Open Edition'
   },
   {
@@ -108,7 +108,7 @@ export const products: Product[] = [
       careInstructions: 'Gently reshape petals with fingertips if pressed. Keep away from direct abrasive friction.',
       hardware: 'Reinforced stainless steel link chain with spring-gate ring'
     },
-    price: '$52 USD',
+    price: '₹179',
     edition: 'Seasonal Solstice Release'
   },
   {
@@ -155,7 +155,7 @@ export const products: Product[] = [
       fiberOrigin: 'Hypoallergenic milk fiber blended with long-strand cotton.',
       careInstructions: 'Lightly dust with soft makeup brush or gentle cool blow dryer. Stems are bendable to fit various vases.'
     },
-    price: '$64 USD',
+    price: '₹249',
     edition: 'Botanical Heritage Collection'
   },
   {
@@ -202,7 +202,7 @@ export const products: Product[] = [
       fiberOrigin: '100% organic unbleached cotton grown without pesticides.',
       careInstructions: 'Keep in dry interior environments. Shape petals gently with fingertips.'
     },
-    price: '$58 USD',
+    price: '₹229',
     edition: 'Botanical Heritage Collection'
   },
   {
@@ -249,7 +249,7 @@ export const products: Product[] = [
       fiberOrigin: 'Eco-dyed combed cotton yarn with OEKO-TEX Standard 100 certification.',
       careInstructions: 'Avoid direct prolonged sunlight exposure to preserve hue brilliance.'
     },
-    price: '$64 USD',
+    price: '₹249',
     edition: 'Botanical Heritage Collection'
   },
   {
@@ -296,7 +296,7 @@ export const products: Product[] = [
       fiberOrigin: 'Australian fine merino wool blended with silk sheen thread.',
       careInstructions: 'Spot clean only. Store in protective cotton dust pouch when travelling.'
     },
-    price: '$42 USD (Pair)',
+    price: '₹99 (Pair)',
     edition: 'Atelier Wearable Series'
   },
   {
@@ -343,7 +343,7 @@ export const products: Product[] = [
       fiberOrigin: 'Fair-trade natural dyed cotton and plant fibers.',
       careInstructions: 'Keep in dry interior spaces. Avoid moisture.'
     },
-    price: '$135 USD',
+    price: '₹499',
     edition: 'Limited Studio Series (Signed)'
   }
 ];

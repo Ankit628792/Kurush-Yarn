@@ -13,6 +13,8 @@ import { CinematicIntro } from './components/Intro/CinematicIntro';
 import { ProductDetailView } from './components/ProductDetail/ProductDetailView';
 import { InquiryModal } from './components/Common/InquiryModal';
 import { SavedDrawer } from './components/Common/SavedDrawer';
+import { ErrorBoundary } from './components/Common/ErrorBoundary';
+import { useSEO } from './hooks/useSEO';
 import { Product } from './types/product';
 
 const AppContent: React.FC = () => {
@@ -23,6 +25,9 @@ const AppContent: React.FC = () => {
   const [savedProductIds, setSavedProductIds] = useState<string[]>(['product-01', 'product-07']);
   const [activeSection, setActiveSection] = useState<string>('hero');
   const reducedMotion = useReducedMotion();
+
+  // Initialize global SEO meta tags
+  useSEO();
 
   // Initialize Lenis Smooth Scrolling only when reducedMotion is disabled
   useEffect(() => {
@@ -119,30 +124,40 @@ const AppContent: React.FC = () => {
         onOpenSaved={() => setSavedDrawerOpen(true)}
       />
 
-      {/* Main Content Sections */}
+      {/* Main Content Sections with Isolated Error Boundaries */}
       <main className="flex-grow">
         {/* Section 01 & 02: Hero & 3D WebGL Canvas */}
-        <Hero
-          onExploreClick={() => handleNavigate('works')}
-          onSelectProduct={(p) => setSelectedProduct(p)}
-          onMaterialClick={() => handleNavigate('material')}
-        />
+        <ErrorBoundary isolateSection sectionName="Hero Stage">
+          <Hero
+            onExploreClick={() => handleNavigate('works')}
+            onSelectProduct={(p) => setSelectedProduct(p)}
+            onMaterialClick={() => handleNavigate('material')}
+          />
+        </ErrorBoundary>
 
         {/* Section 04 & 05: Editorial Product Gallery */}
-        <ProductGallery
-          onSelectProduct={(p) => setSelectedProduct(p)}
-          savedProductIds={savedProductIds}
-          onToggleSave={handleToggleSave}
-        />
+        <ErrorBoundary isolateSection sectionName="Artisan Product Gallery">
+          <ProductGallery
+            onSelectProduct={(p) => setSelectedProduct(p)}
+            savedProductIds={savedProductIds}
+            onToggleSave={handleToggleSave}
+          />
+        </ErrorBoundary>
 
         {/* Section 11: Material Transformation Canvas */}
-        <MaterialStory />
+        <ErrorBoundary isolateSection sectionName="Material Story Exhibition">
+          <MaterialStory />
+        </ErrorBoundary>
 
         {/* Section 12: Editorial Process Section */}
-        <ProcessSection />
+        <ErrorBoundary isolateSection sectionName="Atelier Craft Process">
+          <ProcessSection />
+        </ErrorBoundary>
 
         {/* Section 14: Atelier Philosophy & Metrics */}
-        <AtelierSection />
+        <ErrorBoundary isolateSection sectionName="Atelier Philosophy & Metrics">
+          <AtelierSection />
+        </ErrorBoundary>
       </main>
 
       {/* Section 20: Footer */}
@@ -156,14 +171,16 @@ const AppContent: React.FC = () => {
 
       {/* Cinematic Product Detail View Modal */}
       {selectedProduct && !inquiryOpen && (
-        <ProductDetailView
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-          onSelectProduct={(p) => setSelectedProduct(p)}
-          onInquire={handleOpenInquiryForProduct}
-          isSaved={savedProductIds.includes(selectedProduct.id)}
-          onToggleSave={handleToggleSave}
-        />
+        <ErrorBoundary isolateSection sectionName="Product Detail Modal">
+          <ProductDetailView
+            product={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+            onSelectProduct={(p) => setSelectedProduct(p)}
+            onInquire={handleOpenInquiryForProduct}
+            isSaved={savedProductIds.includes(selectedProduct.id)}
+            onToggleSave={handleToggleSave}
+          />
+        </ErrorBoundary>
       )}
 
       {/* Saved Collection Pieces Drawer */}
@@ -194,9 +211,11 @@ const AppContent: React.FC = () => {
 
 export const App: React.FC = () => {
   return (
-    <MotionProvider>
-      <AppContent />
-    </MotionProvider>
+    <ErrorBoundary>
+      <MotionProvider>
+        <AppContent />
+      </MotionProvider>
+    </ErrorBoundary>
   );
 };
 

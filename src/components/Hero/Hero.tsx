@@ -4,6 +4,7 @@ import { siteContent } from '../../data/content';
 import { products } from '../../data/products';
 import { Product } from '../../types/product';
 import { LazyImage } from '../Common/LazyImage';
+import { ErrorBoundary } from '../Common/ErrorBoundary';
 import { useReducedMotion } from '../../context/MotionContext';
 import { ArrowDown, ArrowUpRight, Sparkles } from 'lucide-react';
 
@@ -47,8 +48,14 @@ export const Hero: React.FC<HeroProps> = ({
       className="relative min-h-screen flex flex-col justify-between pt-28 pb-12 px-6 md:px-12 overflow-hidden texture-bg select-none text-[#3D2B1F]"
       style={{ fontFamily: 'Georgia, serif' }}
     >
-      {/* 3D WebGL Yarn Curves Background */}
-      <HeroScene />
+      {/* 3D WebGL Yarn Curves Background with Error Isolation */}
+      <ErrorBoundary
+        isolateSection
+        sectionName="3D Yarn Scene"
+        fallback={<div className="absolute inset-0 pointer-events-none opacity-40 texture-bg" />}
+      >
+        <HeroScene />
+      </ErrorBoundary>
 
       {/* Left Hairline & Vertical Metatext (Hidden on small screens) */}
       <div className="hidden xl:block absolute left-12 top-1/2 -translate-y-1/2 h-[380px] w-px bg-[#3D2B1F] opacity-20 pointer-events-none z-10" />
@@ -77,13 +84,13 @@ export const Hero: React.FC<HeroProps> = ({
           {/* Staggered Giant Bold Italic Typography */}
           <div className="relative w-full flex flex-col items-center">
             <h1
-              className="text-[80px] sm:text-[120px] md:text-[150px] lg:text-[170px] leading-[0.82] tracking-tighter italic font-light text-[#3D2B1F] sm:-ml-28 md:-ml-36 transition-all duration-300 drop-shadow-sm"
+              className="text-[72px] sm:text-[110px] md:text-[140px] lg:text-[160px] leading-[0.85] tracking-tighter italic font-light text-[#3D2B1F] sm:-ml-12 md:-ml-20 lg:-ml-24 transition-all duration-300 drop-shadow-sm"
               style={{ fontFamily: 'Georgia, "Playfair Display", serif' }}
             >
               Kurush
             </h1>
             <h1
-              className="text-[80px] sm:text-[120px] md:text-[150px] lg:text-[170px] leading-[0.82] tracking-tighter italic font-light text-[#3D2B1F] sm:ml-28 md:ml-36 -mt-3 sm:-mt-6 transition-all duration-300 drop-shadow-sm"
+              className="text-[72px] sm:text-[110px] md:text-[140px] lg:text-[160px] leading-[0.85] tracking-tighter italic font-light text-[#3D2B1F] sm:ml-12 md:ml-20 lg:ml-24 -mt-2 sm:-mt-4 transition-all duration-300 drop-shadow-sm"
               style={{ fontFamily: 'Georgia, "Playfair Display", serif' }}
             >
               Yarn
@@ -120,7 +127,7 @@ export const Hero: React.FC<HeroProps> = ({
         </div>
 
         {/* Featured Object floating vignette */}
-        <div className="mt-12 w-full max-w-xl mx-auto flex justify-center">
+        <div className="mt-12 w-full max-w-2xl mx-auto flex justify-center">
           <div
             ref={cardRef}
             onMouseMove={handleMouseMove}
@@ -132,9 +139,9 @@ export const Hero: React.FC<HeroProps> = ({
                 : `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
               transition: reducedMotion ? 'none' : 'transform 0.2s cubic-bezier(0.25, 1, 0.5, 1)'
             }}
-            className="w-full bg-[#FFFFFF]/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-[#3D2B1F]/15 shadow-[0_15px_40px_rgba(61,43,31,0.06)] cursor-pointer group flex flex-col sm:flex-row items-center gap-5 hover:border-[#3D2B1F]/30 transition-all duration-300"
+            className="w-full bg-[#FFFFFF]/85 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-[#3D2B1F]/15 shadow-[0_15px_40px_rgba(61,43,31,0.06)] cursor-pointer group flex flex-col sm:flex-row items-center gap-5 hover:border-[#3D2B1F]/30 transition-all duration-300"
           >
-            <div className="relative w-28 h-28 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-[#F7F5F2] flex-shrink-0 border border-[#3D2B1F]/10">
+            <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-[#F7F5F2] flex-shrink-0 border border-[#3D2B1F]/10">
               <LazyImage
                 src={heroProduct.heroImage}
                 alt={heroProduct.name}

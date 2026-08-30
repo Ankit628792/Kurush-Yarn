@@ -22,13 +22,13 @@ This digital showroom offers an editorial, exhibition-grade platform where colle
 
 | No. | Piece Name | Category | Material Core | Price |
 |---|---|---|---|---|
-| **01** | **Petite Oreo Macaron Charm** | Key Adornment | Cocoa Cotton & Ivory Milk Yarn | `$48 USD` |
-| **02** | **Solstice Sunflower Charm** | Key Adornment | Ochre Wool & Spiral Brown Seed Disk | `$52 USD` |
-| **03** | **Dawn Peach Tulip Stem** | Botanical Stem | Soft Peach Yarn, Green Foliage, Wire Stem | `$64 USD` |
-| **04** | **Meadow Daisy Stem** | Botanical Stem | Ivory Petals, Honey Center, Floral Wire | `$58 USD` |
-| **05** | **Roseate Pink Tulip Stem** | Botanical Stem | Rose Petal Yarn, Emerald Leaf, Wire Core | `$64 USD` |
-| **06** | **Papillon Hair Adornments (Set of 2)** | Wearable Accent | Magenta Wing Loops, Alligator Clips | `$42 USD` |
-| **07** | **Coral Bell Flora Bonsai** | Potted Sculpture | Ribbed Hazelnut Yarn Pot, Twin Coral Lilies | `$135 USD` |
+| **01** | **Petite Oreo Macaron Charm** | Key Adornment | Cocoa Cotton & Ivory Milk Yarn | `₹149` |
+| **02** | **Solstice Sunflower Charm** | Key Adornment | Ochre Wool & Spiral Brown Seed Disk | `₹179` |
+| **03** | **Dawn Peach Tulip Stem** | Botanical Stem | Soft Peach Yarn, Green Foliage, Wire Stem | `₹249` |
+| **04** | **Meadow Daisy Stem** | Botanical Stem | Ivory Petals, Honey Center, Floral Wire | `₹229` |
+| **05** | **Roseate Pink Tulip Stem** | Botanical Stem | Rose Petal Yarn, Emerald Leaf, Wire Core | `₹249` |
+| **06** | **Papillon Hair Adornments (Set of 2)** | Wearable Accent | Magenta Wing Loops, Alligator Clips | `₹99 (Pair)` |
+| **07** | **Coral Bell Flora Bonsai** | Potted Sculpture | Ribbed Hazelnut Yarn Pot, Twin Coral Lilies | `₹499` |
 
 ---
 

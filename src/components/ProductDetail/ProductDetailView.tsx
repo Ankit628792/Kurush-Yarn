@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Product } from '../../types/product';
 import { AngleGallery } from './AngleGallery';
 import { products } from '../../data/products';
+import { useProductSEO } from '../../hooks/useSEO';
+import { ErrorBoundary } from '../Common/ErrorBoundary';
 import {
   X,
   ArrowLeft,
@@ -31,6 +33,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   isSaved = false,
   onToggleSave
 }) => {
+  // Dynamically update document head, OpenGraph, and Twitter tags for this product
+  useProductSEO(product);
+
   // Find current index for prev/next navigation
   const currentIndex = products.findIndex((p) => p.id === product.id);
   const prevProduct = products[(currentIndex - 1 + products.length) % products.length];
@@ -101,7 +106,8 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
       {/* Main Content Area */}
       <main className="max-w-7xl mx-auto w-full px-6 md:px-12 py-10 flex-grow">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <ErrorBoundary sectionName="Product Detail Exhibition View" isolateSection={true}>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Multi-Angle Studio Gallery & Texture Zoom */}
           <div className="lg:col-span-6 lg:sticky lg:top-24">
             <AngleGallery product={product} />
@@ -259,6 +265,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             </div>
           </div>
         </div>
+      </ErrorBoundary>
 
         {/* Exhibition Next/Prev Walkthrough Bar */}
         <div className="mt-20 pt-8 border-t border-[#3D2B1F]/15 flex items-center justify-between">

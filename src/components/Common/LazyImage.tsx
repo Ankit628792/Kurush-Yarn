@@ -84,12 +84,10 @@ export const LazyImage: React.FC<LazyImageProps> = ({
       ref={containerRef}
       className={`relative overflow-hidden bg-[#F7F5F2] ${aspectRatio} ${containerClassName}`}
     >
-      {/* Low-resolution / Skeleton Placeholder */}
+      {/* Low-resolution / Skeleton Placeholder with Shimmer Wave */}
       {lowResPlaceholder && !isLoaded && (
         <div
-          className={`absolute inset-0 bg-[#F7F5F2] flex items-center justify-center ${
-            reducedMotion ? '' : 'animate-pulse'
-          }`}
+          className="absolute inset-0 bg-[#F7F5F2] flex items-center justify-center overflow-hidden"
           aria-hidden="true"
         >
           {placeholderSrc ? (
@@ -99,10 +97,16 @@ export const LazyImage: React.FC<LazyImageProps> = ({
               className="w-full h-full object-cover filter blur-lg scale-105 opacity-60"
             />
           ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center p-4 text-[#3D2B1F]/20">
-              <Sparkles size={20} className="stroke-[1.5]" />
-              <div className="w-8 h-px bg-[#3D2B1F]/15 mt-2" />
-            </div>
+            <>
+              {/* Skeleton Shimmer Gradient Wave */}
+              {!reducedMotion && (
+                <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-[#FFFFFF]/50 to-transparent" />
+              )}
+              <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-4 text-[#3D2B1F]/20">
+                <Sparkles size={20} className="stroke-[1.5] animate-pulse" />
+                <div className="w-8 h-px bg-[#3D2B1F]/15 mt-2" />
+              </div>
+            </>
           )}
         </div>
       )}

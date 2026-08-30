@@ -111,9 +111,13 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
 
       {/* Product Display Gallery */}
       <div
-        className={`grid gap-10 md:gap-12 lg:gap-14 pt-4 ${
-          layoutMode === 'editorial'
+        className={`grid gap-8 md:gap-10 lg:gap-12 pt-4 items-stretch ${
+          layoutMode === 'editorial' && selectedCategory === 'all'
             ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+            : filteredProducts.length === 1
+            ? 'grid-cols-1 max-w-xl mx-auto'
+            : filteredProducts.length === 2
+            ? 'grid-cols-1 sm:grid-cols-2 max-w-4xl mx-auto'
             : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
         }`}
       >
@@ -122,10 +126,11 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
             key={product.id}
             product={product}
             index={index}
+            totalItems={filteredProducts.length}
             onSelect={onSelectProduct}
             isSaved={savedProductIds.includes(product.id)}
             onToggleSave={onToggleSave}
-            layout={layoutMode}
+            layout={selectedCategory === 'all' ? layoutMode : 'grid'}
           />
         ))}
       </div>
