@@ -1,0 +1,6 @@
+{
+  "name": "Kurush Yarn — Immersive Product Showcase",
+  "description": "A soft-futuristic digital exhibition for handcrafted textile objects created using Kurush and yarn.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
