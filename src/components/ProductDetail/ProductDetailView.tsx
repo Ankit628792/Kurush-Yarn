@@ -33,6 +33,8 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   isSaved = false,
   onToggleSave
 }) => {
+  const modalScrollerRef = React.useRef<HTMLDivElement | null>(null);
+
   // Dynamically update document head, OpenGraph, and Twitter tags for this product
   useProductSEO(product);
 
@@ -59,9 +61,14 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   }, [onClose, onSelectProduct, prevProduct, nextProduct]);
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#FDFCFB]/95 backdrop-blur-xl flex flex-col justify-between selection:bg-[#3D2B1F] selection:text-[#FDFCFB] text-[#3D2B1F] animate-in fade-in duration-300">
+    <div
+      ref={modalScrollerRef}
+      data-lenis-prevent
+      tabIndex={-1}
+      className="fixed inset-0 z-50 overflow-y-auto bg-[#FDFCFB]/95 backdrop-blur-xl flex flex-col justify-between selection:bg-[#3D2B1F] selection:text-[#FDFCFB] text-[#3D2B1F] animate-in fade-in duration-300 scroll-smooth outline-none"
+    >
       {/* Top Floating Control Bar */}
-      <header className="sticky top-0 z-20 bg-[#FDFCFB]/85 backdrop-blur-md border-b border-[#3D2B1F]/15 px-6 md:px-12 py-4 flex items-center justify-between">
+      <header className="sticky top-0 z-30 bg-[#FDFCFB]/85 backdrop-blur-md border-b border-[#3D2B1F]/15 px-6 md:px-12 py-4 flex items-center justify-between">
         <button
           onClick={onClose}
           className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-semibold text-[#3D2B1F] hover:opacity-60 transition-opacity py-2"
@@ -108,13 +115,13 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
       <main className="max-w-7xl mx-auto w-full px-6 md:px-12 py-10 flex-grow">
         <ErrorBoundary sectionName="Product Detail Exhibition View" isolateSection={true}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Multi-Angle Studio Gallery & Texture Zoom */}
-          <div className="lg:col-span-6 lg:sticky lg:top-24">
-            <AngleGallery product={product} />
-          </div>
+            {/* Left Column: Multi-Angle Studio Gallery with Scroll-Driven Parallax Sequence */}
+            <div className="lg:col-span-6 lg:sticky lg:top-24 z-10">
+              <AngleGallery product={product} scrollerRef={modalScrollerRef} />
+            </div>
 
-          {/* Right Column: Editorial Dossier, Story, Craft Specifications */}
-          <div className="lg:col-span-6 space-y-8">
+            {/* Right Column: Editorial Dossier, Story, Craft Specifications */}
+            <div className="lg:col-span-6 space-y-8">
             {/* Header Title Block */}
             <div className="space-y-3 border-b border-[#3D2B1F]/15 pb-6">
               <div className="flex items-center justify-between">

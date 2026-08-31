@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from '../Brand/Logo';
-import { useMotion } from '../../context/MotionContext';
-import { Menu, X, Sparkles, ShoppingBag, Volume2, VolumeX, Eye, EyeOff } from 'lucide-react';
+import { Menu, X, Sparkles, ShoppingBag } from 'lucide-react';
 
 interface NavbarProps {
   onNavigate: (sectionId: string) => void;
@@ -20,8 +19,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(false);
-  const { reducedMotion, toggleReducedMotion } = useMotion();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,10 +42,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   const handleLinkClick = (id: string) => {
     setMobileMenuOpen(false);
     onNavigate(id);
-  };
-
-  const toggleSound = () => {
-    setSoundEnabled(!soundEnabled);
   };
 
   return (
@@ -104,34 +97,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="font-medium text-[#3D2B1F]">Atelier Active</span>
           </div>
 
-          {/* Reduced Motion Toggle Button */}
-          <button
-            type="button"
-            onClick={toggleReducedMotion}
-            aria-pressed={reducedMotion}
-            title={reducedMotion ? 'Reduced Motion: ON (Click to enable animations)' : 'Reduced Motion: OFF (Click to reduce animations)'}
-            aria-label={reducedMotion ? 'Enable animations' : 'Reduce motion and simplify animations'}
-            className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center ${
-              reducedMotion
-                ? 'bg-[#3D2B1F] text-[#FDFCFB] shadow-sm'
-                : 'text-[#3D2B1F]/60 hover:text-[#3D2B1F] hover:bg-[#3D2B1F]/5'
-            }`}
-          >
-            {reducedMotion ? <EyeOff size={15} /> : <Eye size={15} />}
-            <span className="sr-only">
-              {reducedMotion ? 'Reduced motion active' : 'Full motion active'}
-            </span>
-          </button>
-
-          {/* Ambient Sound Toggle */}
-          <button
-            onClick={toggleSound}
-            title={soundEnabled ? 'Mute atelier ambiance' : 'Listen to atelier ambiance'}
-            className="p-2 rounded-full text-[#3D2B1F]/60 hover:text-[#3D2B1F] hover:bg-[#3D2B1F]/5 transition-colors hidden sm:flex items-center justify-center"
-          >
-            {soundEnabled ? <Volume2 size={15} /> : <VolumeX size={15} />}
-          </button>
-
           {/* Saved Pieces / Exhibition Wishlist */}
           <button
             onClick={onOpenSaved}
@@ -186,14 +151,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <div className="w-1.5 h-1.5 bg-[#D4A373] rounded-full"></div>
                 <span>Atelier Active</span>
               </div>
-              <button
-                type="button"
-                onClick={toggleReducedMotion}
-                className="flex items-center gap-1.5 text-[9px] font-semibold uppercase px-2.5 py-1 rounded-full border border-[#3D2B1F]/20 text-[#3D2B1F]"
-              >
-                {reducedMotion ? <EyeOff size={12} /> : <Eye size={12} />}
-                <span>{reducedMotion ? 'Reduced Motion' : 'Full Motion'}</span>
-              </button>
             </div>
             <button
               onClick={() => {

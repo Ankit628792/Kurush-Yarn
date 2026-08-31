@@ -84,7 +84,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
       </div>
 
       {/* Filter Category Chips */}
-      <div className="py-8 flex items-center gap-2 overflow-x-auto no-scrollbar">
+      <div data-lenis-prevent className="py-8 flex items-center gap-2 overflow-x-auto no-scrollbar">
         <span className="text-[10px] uppercase tracking-[0.25em] text-[#3D2B1F]/50 mr-2 hidden sm:inline-flex items-center gap-1 font-medium" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
           <Filter size={11} /> Filter:
         </span>

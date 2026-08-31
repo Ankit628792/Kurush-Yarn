@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { useReducedMotion } from '../../context/MotionContext';
 
 interface FiberCanvasProps {
   stage: number; // 0 to 4 (Yarn, Fiber, Pattern, Structure, Form)
@@ -7,7 +6,6 @@ interface FiberCanvasProps {
 
 export const FiberCanvas: React.FC<FiberCanvasProps> = ({ stage }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -23,9 +21,6 @@ export const FiberCanvas: React.FC<FiberCanvasProps> = ({ stage }) => {
       if (!canvas || !canvas.parentElement) return;
       width = canvas.width = canvas.parentElement.clientWidth;
       height = canvas.height = canvas.parentElement.clientHeight;
-      if (reducedMotion) {
-        drawStage(0);
-      }
     };
 
     window.addEventListener('resize', handleResize);
@@ -175,16 +170,12 @@ export const FiberCanvas: React.FC<FiberCanvasProps> = ({ stage }) => {
       }
     };
 
-    if (reducedMotion) {
-      drawStage(0);
-    } else {
-      const render = () => {
-        time += 0.015;
-        drawStage(time);
-        frameId = requestAnimationFrame(render);
-      };
-      render();
-    }
+    const render = () => {
+      time += 0.015;
+      drawStage(time);
+      frameId = requestAnimationFrame(render);
+    };
+    render();
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -192,7 +183,7 @@ export const FiberCanvas: React.FC<FiberCanvasProps> = ({ stage }) => {
         cancelAnimationFrame(frameId);
       }
     };
-  }, [stage, reducedMotion]);
+  }, [stage]);
 
   return (
     <div className="relative w-full h-full min-h-[300px] flex items-center justify-center bg-[#F7F5F2] rounded-3xl overflow-hidden border border-[#3D2B1F]/15">

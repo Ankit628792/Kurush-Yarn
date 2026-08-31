@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { useReducedMotion } from '../../context/MotionContext';
 
 export const HeroScene: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [webglError, setWebglError] = useState(false);
-  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const container = containerRef.current;
@@ -90,7 +88,7 @@ export const HeroScene: React.FC = () => {
       }
 
       // Add delicate floating fiber dust particles
-      const particleCount = reducedMotion ? 20 : 45;
+      const particleCount = 45;
       const particleGeo = new THREE.BufferGeometry();
       const positions = new Float32Array(particleCount * 3);
 
@@ -119,15 +117,12 @@ export const HeroScene: React.FC = () => {
       let targetY = 0;
 
       const handleMouseMove = (e: MouseEvent) => {
-        if (reducedMotion) return;
         const rect = container.getBoundingClientRect();
         mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
         mouseY = -((e.clientY - rect.top) / rect.height - 0.5) * 2;
       };
 
-      if (!reducedMotion) {
-        window.addEventListener('mousemove', handleMouseMove, { passive: true });
-      }
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
       // Resize observer
       const resizeObserver = new ResizeObserver((entries) => {
@@ -137,46 +132,38 @@ export const HeroScene: React.FC = () => {
             camera.aspect = w / h;
             camera.updateProjectionMatrix();
             renderer.setSize(w, h);
-            if (reducedMotion) {
-              renderer.render(scene, camera);
-            }
           }
         }
       });
 
       resizeObserver.observe(container);
 
-      // Initial static render
-      renderer.render(scene, camera);
+      // Animation loop
+      const animate = () => {
+        animationId = requestAnimationFrame(animate);
 
-      // If reduced motion is NOT requested, run continuous gentle loop
-      if (!reducedMotion) {
-        const animate = () => {
-          animationId = requestAnimationFrame(animate);
+        // Smooth mouse damping
+        targetX += (mouseX * 1.2 - targetX) * 0.04;
+        targetY += (mouseY * 1.0 - targetY) * 0.04;
 
-          // Smooth mouse damping
-          targetX += (mouseX * 1.2 - targetX) * 0.04;
-          targetY += (mouseY * 1.0 - targetY) * 0.04;
+        camera.position.x = targetX;
+        camera.position.y = targetY;
+        camera.lookAt(0, 0, 0);
 
-          camera.position.x = targetX;
-          camera.position.y = targetY;
-          camera.lookAt(0, 0, 0);
+        // Rotate yarn loops
+        yarnStrands.forEach((strand) => {
+          strand.rotation.x += strand.userData.rotationSpeedX;
+          strand.rotation.y += strand.userData.rotationSpeedY;
+          strand.rotation.z += strand.userData.rotationSpeedZ;
+        });
 
-          // Rotate yarn loops
-          yarnStrands.forEach((strand) => {
-            strand.rotation.x += strand.userData.rotationSpeedX;
-            strand.rotation.y += strand.userData.rotationSpeedY;
-            strand.rotation.z += strand.userData.rotationSpeedZ;
-          });
+        // Drift particles
+        particlesGroup.rotation.y += 0.0004;
 
-          // Drift particles
-          particlesGroup.rotation.y += 0.0004;
+        renderer.render(scene, camera);
+      };
 
-          renderer.render(scene, camera);
-        };
-
-        animate();
-      }
+      animate();
 
       return () => {
         if (animationId !== null) {
@@ -207,7 +194,7 @@ export const HeroScene: React.FC = () => {
       console.warn('WebGL initialization fallback activated:', err);
       setWebglError(true);
     }
-  }, [reducedMotion]);
+  }, []);
 
   if (webglError) {
     return (

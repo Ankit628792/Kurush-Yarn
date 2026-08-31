@@ -1,14 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { useReducedMotion } from '../../context/MotionContext';
 
 export const YarnCursor: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    // Disable on touch devices or if reduced motion is enabled
+    // Disable on touch devices
     if (
-      reducedMotion ||
       typeof window === 'undefined' ||
       window.matchMedia('(pointer: coarse)').matches
     ) {
@@ -107,11 +104,7 @@ export const YarnCursor: React.FC = () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
     };
-  }, [reducedMotion]);
-
-  if (reducedMotion) {
-    return null;
-  }
+  }, []);
 
   return (
     <canvas

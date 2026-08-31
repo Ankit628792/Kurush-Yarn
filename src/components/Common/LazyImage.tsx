@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useReducedMotion } from '../../context/MotionContext';
 import { Sparkles } from 'lucide-react';
 
 export interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -30,7 +29,6 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     // If IntersectionObserver is not supported, load immediately
@@ -99,9 +97,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
           ) : (
             <>
               {/* Skeleton Shimmer Gradient Wave */}
-              {!reducedMotion && (
-                <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-[#FFFFFF]/50 to-transparent" />
-              )}
+              <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-[#FFFFFF]/50 to-transparent" />
               <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-4 text-[#3D2B1F]/20">
                 <Sparkles size={20} className="stroke-[1.5] animate-pulse" />
                 <div className="w-8 h-px bg-[#3D2B1F]/15 mt-2" />
@@ -130,9 +126,9 @@ export const LazyImage: React.FC<LazyImageProps> = ({
           decoding={decoding}
           onLoad={handleImageLoad}
           onError={handleImageError}
-          className={`w-full h-full object-cover transition-opacity ${
-            reducedMotion ? 'duration-0' : 'duration-500 ease-out'
-          } ${isLoaded ? 'opacity-100' : 'opacity-0'} ${className}`}
+          className={`w-full h-full object-cover transition-opacity duration-500 ease-out ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          } ${className}`}
           {...props}
         />
       )}

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { useReducedMotion } from '../../context/MotionContext';
 
 interface CinematicIntroProps {
   onComplete: () => void;
@@ -12,14 +11,8 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
   const textRef = useRef<HTMLDivElement | null>(null);
   const taglineRef = useRef<HTMLDivElement | null>(null);
   const [isSkipped, setIsSkipped] = useState(false);
-  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (reducedMotion) {
-      onComplete();
-      return;
-    }
-
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         onComplete: () => {
@@ -91,6 +84,22 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
       onComplete();
     }
   };
+
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      handleSkip();
+    };
+
+    window.addEventListener('wheel', handleUserInteraction, { once: true, passive: true });
+    window.addEventListener('touchstart', handleUserInteraction, { once: true, passive: true });
+    window.addEventListener('keydown', handleUserInteraction, { once: true });
+
+    return () => {
+      window.removeEventListener('wheel', handleUserInteraction);
+      window.removeEventListener('touchstart', handleUserInteraction);
+      window.removeEventListener('keydown', handleUserInteraction);
+    };
+  }, []);
 
   if (isSkipped) return null;
 

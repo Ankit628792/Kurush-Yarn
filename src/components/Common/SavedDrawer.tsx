@@ -50,7 +50,7 @@ export const SavedDrawer: React.FC<SavedDrawerProps> = ({
           </div>
 
           {/* List or Empty State */}
-          <div className="flex-1 overflow-y-auto py-6 space-y-4">
+          <div data-lenis-prevent className="flex-1 overflow-y-auto py-6 space-y-4">
             {savedProducts.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center p-6 space-y-3">
                 <div className="w-12 h-12 rounded-full bg-white border border-[#3D2B1F]/15 flex items-center justify-center text-[#3D2B1F]/60">

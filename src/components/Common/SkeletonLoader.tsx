@@ -1,5 +1,4 @@
 import React from 'react';
-import { useReducedMotion } from '../../context/MotionContext';
 import { Sparkles, Layers } from 'lucide-react';
 
 interface SkeletonProps {
@@ -7,16 +6,11 @@ interface SkeletonProps {
 }
 
 export const SkeletonShimmer: React.FC<SkeletonProps> = ({ className = '' }) => {
-  const reducedMotion = useReducedMotion();
   return (
     <div
-      className={`relative overflow-hidden bg-[#3D2B1F]/[0.06] rounded-md ${
-        reducedMotion ? '' : 'animate-pulse'
-      } ${className}`}
+      className={`relative overflow-hidden bg-[#3D2B1F]/[0.06] rounded-md animate-pulse ${className}`}
     >
-      {!reducedMotion && (
-        <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-[#FDFCFB]/40 to-transparent" />
-      )}
+      <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-[#FDFCFB]/40 to-transparent" />
     </div>
   );
 };

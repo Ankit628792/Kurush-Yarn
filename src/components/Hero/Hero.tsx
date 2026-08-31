@@ -5,7 +5,6 @@ import { products } from '../../data/products';
 import { Product } from '../../types/product';
 import { LazyImage } from '../Common/LazyImage';
 import { ErrorBoundary } from '../Common/ErrorBoundary';
-import { useReducedMotion } from '../../context/MotionContext';
 import { ArrowDown, ArrowUpRight, Sparkles } from 'lucide-react';
 
 interface HeroProps {
@@ -22,10 +21,9 @@ export const Hero: React.FC<HeroProps> = ({
   const heroProduct = products[0]; // Petite Oreo Charm or Bonsai
   const cardRef = useRef<HTMLDivElement | null>(null);
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
-  const reducedMotion = useReducedMotion();
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (reducedMotion || !cardRef.current) return;
+    if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -134,10 +132,8 @@ export const Hero: React.FC<HeroProps> = ({
             onMouseLeave={handleMouseLeave}
             onClick={() => onSelectProduct(heroProduct)}
             style={{
-              transform: reducedMotion
-                ? 'none'
-                : `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
-              transition: reducedMotion ? 'none' : 'transform 0.2s cubic-bezier(0.25, 1, 0.5, 1)'
+              transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+              transition: 'transform 0.2s cubic-bezier(0.25, 1, 0.5, 1)'
             }}
             className="w-full bg-[#FFFFFF]/85 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-[#3D2B1F]/15 shadow-[0_15px_40px_rgba(61,43,31,0.06)] cursor-pointer group flex flex-col sm:flex-row items-center gap-5 hover:border-[#3D2B1F]/30 transition-all duration-300"
           >
