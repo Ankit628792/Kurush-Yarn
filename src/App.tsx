@@ -26,8 +26,24 @@ const AppContent: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [savedDrawerOpen, setSavedDrawerOpen] = useState(false);
-  const [savedProductIds, setSavedProductIds] = useState<string[]>(['product-01', 'product-07']);
+  const [savedProductIds, setSavedProductIds] = useState<string[]>(() => {
+    try {
+      const stored = localStorage.getItem('kurush_saved_pieces');
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
   const [activeSection, setActiveSection] = useState<string>('hero');
+
+  // Persist saved collection pieces
+  useEffect(() => {
+    try {
+      localStorage.setItem('kurush_saved_pieces', JSON.stringify(savedProductIds));
+    } catch {
+      // ignore
+    }
+  }, [savedProductIds]);
 
   const lenisRef = useRef<Lenis | null>(null);
   const mainContainerRef = useRef<HTMLDivElement | null>(null);
@@ -307,6 +323,10 @@ const AppContent: React.FC = () => {
         onOpenInquiry={() => {
           setSavedDrawerOpen(false);
           setInquiryOpen(true);
+        }}
+        onExploreWorks={() => {
+          setSavedDrawerOpen(false);
+          handleNavigate('works');
         }}
       />
 
