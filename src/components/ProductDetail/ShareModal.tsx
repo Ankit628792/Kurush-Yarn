@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import gsap from 'gsap';
 import { Product } from '../../types/product';
 import { getProductPieceUrl, getAbsoluteAssetUrl } from '../../utils/url';
 import QRCode from 'qrcode';
@@ -33,13 +34,24 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   isOpen,
   onClose
 }) => {
+  const [shouldRender, setShouldRender] = useState(isOpen);
   const [copiedLink, setCopiedLink] = useState(false);
   const [copiedCaption, setCopiedCaption] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string>('');
   const [activeTab, setActiveTab] = useState<'platforms' | 'qr' | 'caption'>('platforms');
   const [canNativeShare, setCanNativeShare] = useState(false);
 
+  const backdropRef = useRef<HTMLDivElement | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
+  const isClosingRef = useRef(false);
+
+  // Sync render state with isOpen
+  useEffect(() => {
+    if (isOpen) {
+      setShouldRender(true);
+      isClosingRef.current = false;
+    }
+  }, [isOpen]);
 
   // Canonical shareable deep link URL dynamically derived from current origin
   const shareUrl = getProductPieceUrl(product.slug);
@@ -127,21 +139,224 @@ Explore the exhibition: ${shareUrl}
     }
   };
 
+  // GSAP Hover-scale handler for social media cards and buttons
+  const handleCardMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget;
+    const icon = card.querySelector('.gsap-icon-target');
+    const badge = card.querySelector('.gsap-badge-target');
+
+    if (icon) {
+      gsap.to(icon, {
+        scale: 1.2,
+        y: -2,
+        rotate: 5,
+        duration: 0.35,
+        ease: 'back.out(2.2)',
+        overwrite: 'auto'
+      });
+    }
+
+    if (badge) {
+      gsap.to(badge, {
+        x: 2,
+        duration: 0.25,
+        ease: 'power2.out',
+        overwrite: 'auto'
+      });
+    }
+
+    gsap.to(card, {
+      y: -3,
+      scale: 1.025,
+      boxShadow: '0 12px 24px -6px rgba(61, 43, 31, 0.14)',
+      borderColor: 'rgba(61, 43, 31, 0.25)',
+      duration: 0.3,
+      ease: 'power2.out',
+      overwrite: 'auto'
+    });
+  };
+
+  const handleCardMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget;
+    const icon = card.querySelector('.gsap-icon-target');
+    const badge = card.querySelector('.gsap-badge-target');
+
+    if (icon) {
+      gsap.to(icon, {
+        scale: 1,
+        y: 0,
+        rotate: 0,
+        duration: 0.25,
+        ease: 'power2.out',
+        overwrite: 'auto'
+      });
+    }
+
+    if (badge) {
+      gsap.to(badge, {
+        x: 0,
+        duration: 0.2,
+        ease: 'power2.out',
+        overwrite: 'auto'
+      });
+    }
+
+    gsap.to(card, {
+      y: 0,
+      scale: 1,
+      boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+      borderColor: 'rgba(61, 43, 31, 0.1)',
+      duration: 0.25,
+      ease: 'power2.out',
+      overwrite: 'auto'
+    });
+  };
+
+  const handleButtonHover = (e: React.MouseEvent<HTMLElement>, scale = 1.05) => {
+    gsap.to(e.currentTarget, {
+      scale,
+      y: -1,
+      duration: 0.25,
+      ease: 'power2.out',
+      overwrite: 'auto'
+    });
+  };
+
+  const handleButtonLeave = (e: React.MouseEvent<HTMLElement>) => {
+    gsap.to(e.currentTarget, {
+      scale: 1,
+      y: 0,
+      duration: 0.2,
+      ease: 'power2.out',
+      overwrite: 'auto'
+    });
+  };
+
+  // Animate Entrance when rendered with fade and translate effects
+  useEffect(() => {
+    if (!shouldRender || !isOpen) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        defaults: { ease: 'power3.out' }
+      });
+
+      if (backdropRef.current) {
+        gsap.set(backdropRef.current, { opacity: 0 });
+        tl.to(backdropRef.current, {
+          opacity: 1,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      }
+
+      if (modalRef.current) {
+        gsap.set(modalRef.current, {
+          opacity: 0,
+          scale: 0.94,
+          y: 28
+        });
+        tl.to(
+          modalRef.current,
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.42,
+            ease: 'power3.out',
+            clearProps: 'transform'
+          },
+          '-=0.22'
+        );
+
+        // Subtle stagger for header and inner sections
+        const staggerItems = modalRef.current.querySelectorAll('.gsap-fade-translate-item');
+        if (staggerItems.length > 0) {
+          gsap.set(staggerItems, { opacity: 0, y: 10 });
+          tl.to(
+            staggerItems,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.35,
+              stagger: 0.05,
+              ease: 'power2.out',
+              clearProps: 'transform'
+            },
+            '-=0.25'
+          );
+        }
+      }
+    });
+
+    return () => {
+      ctx.revert();
+    };
+  }, [shouldRender, isOpen]);
+
+  // Tab switch fade & translate transition
+  const tabContentRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (tabContentRef.current) {
+      gsap.fromTo(
+        tabContentRef.current,
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out', clearProps: 'transform' }
+      );
+    }
+  }, [activeTab]);
+
+  // Animated exit handler
+  const handleAnimatedClose = () => {
+    if (isClosingRef.current) return;
+    isClosingRef.current = true;
+
+    if (!backdropRef.current || !modalRef.current) {
+      setShouldRender(false);
+      onClose();
+      return;
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setShouldRender(false);
+        isClosingRef.current = false;
+        onClose();
+      }
+    });
+
+    tl.to(modalRef.current, {
+      opacity: 0,
+      scale: 0.95,
+      y: 18,
+      duration: 0.22,
+      ease: 'power2.in'
+    }).to(
+      backdropRef.current,
+      {
+        opacity: 0,
+        duration: 0.2,
+        ease: 'power2.in'
+      },
+      '-=0.15'
+    );
+  };
+
   // Handle ESC key press & backdrop lock
   useEffect(() => {
-    if (!isOpen) return;
+    if (!shouldRender || !isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        handleAnimatedClose();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [shouldRender, isOpen]);
 
-  if (!isOpen) return null;
+  if (!shouldRender) return null;
 
   // Copy Link Handler
   const handleCopyLink = async () => {
@@ -272,7 +487,8 @@ Explore the exhibition: ${shareUrl}
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-[9999] overflow-y-auto bg-[#3D2B1F]/65 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 md:p-6 animate-in fade-in duration-200"
+      ref={backdropRef}
+      className="fixed inset-0 z-[9999] overflow-y-auto bg-[#3D2B1F]/65 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 md:p-6"
       role="dialog"
       aria-modal="true"
       aria-labelledby="share-modal-title"
@@ -280,7 +496,7 @@ Explore the exhibition: ${shareUrl}
       {/* Click outside backdrop */}
       <div
         className="fixed inset-0 cursor-pointer"
-        onClick={onClose}
+        onClick={handleAnimatedClose}
         aria-hidden="true"
       />
 
@@ -288,10 +504,10 @@ Explore the exhibition: ${shareUrl}
       <div
         ref={modalRef}
         data-lenis-prevent
-        className="relative z-10 w-full max-w-lg max-h-[min(90vh,680px)] bg-[#FDFCFB] rounded-3xl border border-[#3D2B1F]/15 shadow-2xl overflow-hidden text-[#3D2B1F] animate-in zoom-in-95 duration-200 flex flex-col m-auto"
+        className="relative z-10 w-full max-w-lg max-h-[min(90vh,680px)] bg-[#FDFCFB] rounded-3xl border border-[#3D2B1F]/15 shadow-2xl overflow-hidden text-[#3D2B1F] flex flex-col m-auto"
       >
         {/* Header - Fixed Top */}
-        <div className="px-5 sm:px-6 py-4 sm:py-5 border-b border-[#3D2B1F]/10 flex items-center justify-between bg-[#FAF7F2]/80 flex-shrink-0">
+        <div className="gsap-fade-translate-item px-5 sm:px-6 py-4 sm:py-5 border-b border-[#3D2B1F]/10 flex items-center justify-between bg-[#FAF7F2]/80 flex-shrink-0">
           <div className="flex items-center gap-2.5 sm:gap-3">
             <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#3D2B1F] text-[#FDFCFB] flex items-center justify-center shadow-xs flex-shrink-0">
               <Share2 size={15} />
@@ -315,7 +531,9 @@ Explore the exhibition: ${shareUrl}
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleAnimatedClose}
+            onMouseEnter={(e) => handleButtonHover(e, 1.12)}
+            onMouseLeave={handleButtonLeave}
             className="p-2 sm:p-2.5 rounded-full text-[#3D2B1F]/60 hover:text-[#3D2B1F] hover:bg-[#3D2B1F]/10 transition-colors cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center"
             title="Close Share Window"
             aria-label="Close Share Window"
@@ -327,7 +545,7 @@ Explore the exhibition: ${shareUrl}
         {/* Scrollable Center Body Area */}
         <div className="flex-1 overflow-y-auto divide-y divide-[#3D2B1F]/10" data-lenis-prevent>
           {/* Product Mini Dossier Preview Card */}
-          <div className="p-4 sm:p-6 pb-4">
+          <div className="gsap-fade-translate-item p-4 sm:p-6 pb-4">
             <div className="flex items-center gap-3.5 sm:gap-4 p-3 sm:p-3.5 rounded-2xl bg-white border border-[#3D2B1F]/10 shadow-xs">
               <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-[#F5EBE0] flex-shrink-0 border border-[#3D2B1F]/10">
                 <img
@@ -365,7 +583,7 @@ Explore the exhibition: ${shareUrl}
           </div>
 
           {/* Copy Direct Link Bar */}
-          <div className="p-4 sm:px-6 sm:py-4">
+          <div className="gsap-fade-translate-item p-4 sm:px-6 sm:py-4">
             <label
               className="text-[8.5px] sm:text-[9px] uppercase tracking-[0.2em] text-[#3D2B1F]/70 font-bold block mb-2"
               style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
@@ -381,6 +599,8 @@ Explore the exhibition: ${shareUrl}
               <button
                 type="button"
                 onClick={handleCopyLink}
+                onMouseEnter={(e) => handleButtonHover(e, 1.04)}
+                onMouseLeave={handleButtonLeave}
                 className={`px-3.5 sm:px-4 py-2.5 rounded-xl text-[11px] sm:text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-xs flex-shrink-0 cursor-pointer active:scale-95 ${
                   copiedLink
                     ? 'bg-[#2E7D32] text-white'
@@ -404,7 +624,7 @@ Explore the exhibition: ${shareUrl}
           </div>
 
           {/* Navigation Tabs (Direct Platforms / QR Code / Atelier Caption) */}
-          <div className="px-4 sm:px-6 pt-3 bg-[#FAF7F2]/40">
+          <div className="gsap-fade-translate-item px-4 sm:px-6 pt-3 bg-[#FAF7F2]/40">
             <div className="flex gap-1.5 sm:gap-2 text-[9.5px] sm:text-[10px] uppercase tracking-[0.18em] font-semibold border-b border-[#3D2B1F]/10">
               <button
                 type="button"
@@ -448,162 +668,177 @@ Explore the exhibition: ${shareUrl}
             </div>
           </div>
 
-          {/* Tab 1: Direct Social Media Platforms */}
-          {activeTab === 'platforms' && (
-            <div className="p-4 sm:p-6 space-y-3.5 sm:space-y-4">
-              {/* Native device share button if supported (iOS / Android / macOS) */}
-              {canNativeShare && (
-                <button
-                  type="button"
-                  onClick={handleNativeShare}
-                  className="w-full p-3 sm:p-3.5 rounded-2xl bg-[#3D2B1F]/5 hover:bg-[#3D2B1F]/10 border border-[#3D2B1F]/15 flex items-center justify-between text-xs font-semibold text-[#3D2B1F] transition-all group cursor-pointer active:scale-[0.99]"
-                  style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-full bg-[#3D2B1F] text-white flex items-center justify-center">
-                      <Share2 size={13} />
+          {/* Active Tab Animated Content Container */}
+          <div ref={tabContentRef}>
+            {/* Tab 1: Direct Social Media Platforms */}
+            {activeTab === 'platforms' && (
+              <div className="p-4 sm:p-6 space-y-3.5 sm:space-y-4">
+                {/* Native device share button if supported (iOS / Android / macOS) */}
+                {canNativeShare && (
+                  <button
+                    type="button"
+                    onClick={handleNativeShare}
+                    onMouseEnter={handleCardMouseEnter}
+                    onMouseLeave={handleCardMouseLeave}
+                    className="w-full p-3 sm:p-3.5 rounded-2xl bg-[#3D2B1F]/5 hover:bg-[#3D2B1F]/10 border border-[#3D2B1F]/15 flex items-center justify-between text-xs font-semibold text-[#3D2B1F] transition-all group cursor-pointer active:scale-[0.99]"
+                    style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <div className="gsap-icon-target w-7 h-7 rounded-full bg-[#3D2B1F] text-white flex items-center justify-center transition-colors">
+                        <Share2 size={13} />
+                      </div>
+                      <span className="uppercase tracking-wider text-[9.5px] sm:text-[10px]">
+                        Share via Native Device Sheet (AirDrop, Messages, Stories)
+                      </span>
                     </div>
-                    <span className="uppercase tracking-wider text-[9.5px] sm:text-[10px]">
-                      Share via Native Device Sheet (AirDrop, Messages, Stories)
+                    <ExternalLink size={13} className="gsap-badge-target text-[#3D2B1F]/50 group-hover:text-[#3D2B1F] transition-transform" />
+                  </button>
+                )}
+
+                {/* Social Platform Grid with GSAP hover-scaling icons */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
+                  {platformLinks.map((p) => {
+                    const IconComponent = p.icon;
+                    return (
+                      <button
+                        key={p.name}
+                        type="button"
+                        onClick={p.action}
+                        onMouseEnter={handleCardMouseEnter}
+                        onMouseLeave={handleCardMouseLeave}
+                        className={`p-2.5 sm:p-3 rounded-2xl bg-white border border-[#3D2B1F]/10 shadow-2xs flex flex-col items-start gap-1.5 sm:gap-2 text-left transition-all ${p.color} group cursor-pointer active:scale-95`}
+                      >
+                        <div className="w-full flex items-center justify-between">
+                          <div className="gsap-icon-target p-1.5 rounded-lg bg-[#FAF7F2] group-hover:bg-white transition-colors">
+                            <IconComponent size={16} />
+                          </div>
+                          <span className="gsap-badge-target text-[7.5px] sm:text-[8px] uppercase tracking-wider text-[#3D2B1F]/50 font-bold truncate">
+                            {p.badge}
+                          </span>
+                        </div>
+                        <div>
+                          <span className="text-[11.5px] sm:text-xs font-semibold text-[#3D2B1F] block">{p.name}</span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Instagram Atelier Callout */}
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-[#FAF7F2] border border-[#3D2B1F]/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs">
+                  <div className="flex items-center gap-2.5 text-[#3D2B1F]">
+                    <Instagram size={16} className="text-[#D4A373] flex-shrink-0" />
+                    <span className="text-[11px] text-[#3D2B1F]/80 font-sans leading-snug">
+                      Tag <strong className="font-semibold text-[#3D2B1F]">@kurush.yarn</strong> in stories or send via DM.
                     </span>
                   </div>
-                  <ExternalLink size={13} className="text-[#3D2B1F]/50 group-hover:text-[#3D2B1F]" />
-                </button>
-              )}
-
-              {/* Social Platform Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
-                {platformLinks.map((p) => {
-                  const IconComponent = p.icon;
-                  return (
-                    <button
-                      key={p.name}
-                      type="button"
-                      onClick={p.action}
-                      className={`p-2.5 sm:p-3 rounded-2xl bg-white border border-[#3D2B1F]/10 shadow-2xs flex flex-col items-start gap-1.5 sm:gap-2 text-left transition-all ${p.color} group cursor-pointer active:scale-95`}
-                    >
-                      <div className="w-full flex items-center justify-between">
-                        <div className="p-1.5 rounded-lg bg-[#FAF7F2] group-hover:bg-white transition-colors">
-                          <IconComponent size={16} />
-                        </div>
-                        <span className="text-[7.5px] sm:text-[8px] uppercase tracking-wider text-[#3D2B1F]/50 font-bold truncate">
-                          {p.badge}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="text-[11.5px] sm:text-xs font-semibold text-[#3D2B1F] block">{p.name}</span>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Instagram Atelier Callout */}
-              <div className="p-3 sm:p-3.5 rounded-2xl bg-[#FAF7F2] border border-[#3D2B1F]/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs">
-                <div className="flex items-center gap-2.5 text-[#3D2B1F]">
-                  <Instagram size={16} className="text-[#D4A373] flex-shrink-0" />
-                  <span className="text-[11px] text-[#3D2B1F]/80 font-sans leading-snug">
-                    Tag <strong className="font-semibold text-[#3D2B1F]">@kurush.yarn</strong> in stories or send via DM.
-                  </span>
+                  <a
+                    href="https://instagram.com/kurush.yarn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onMouseEnter={(e) => handleButtonHover(e, 1.05)}
+                    onMouseLeave={handleButtonLeave}
+                    className="text-[9px] uppercase tracking-wider font-bold text-[#3D2B1F] hover:underline flex-shrink-0 cursor-pointer inline-flex items-center gap-1 self-start sm:self-auto"
+                  >
+                    <span>Visit @kurush.yarn</span>
+                    <ExternalLink size={10} />
+                  </a>
                 </div>
-                <a
-                  href="https://instagram.com/kurush.yarn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[9px] uppercase tracking-wider font-bold text-[#3D2B1F] hover:underline flex-shrink-0 cursor-pointer inline-flex items-center gap-1 self-start sm:self-auto"
-                >
-                  <span>Visit @kurush.yarn</span>
-                  <ExternalLink size={10} />
-                </a>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Tab 2: QR Code */}
-          {activeTab === 'qr' && (
-            <div className="p-4 sm:p-6 flex flex-col items-center text-center space-y-3.5 sm:space-y-4">
-              <div className="p-3 sm:p-4 bg-white rounded-2xl border border-[#3D2B1F]/15 shadow-sm inline-block">
-                {qrDataUrl ? (
-                  <img
-                    src={qrDataUrl}
-                    alt={`QR Code for ${product.name}`}
-                    className="w-36 h-36 sm:w-44 sm:h-44 object-contain rounded-lg mx-auto"
-                  />
-                ) : (
-                  <div className="w-36 h-36 sm:w-44 sm:h-44 flex items-center justify-center text-xs text-[#3D2B1F]/40">
-                    Generating QR...
-                  </div>
+            {/* Tab 2: QR Code */}
+            {activeTab === 'qr' && (
+              <div className="p-4 sm:p-6 flex flex-col items-center text-center space-y-3.5 sm:space-y-4">
+                <div className="p-3 sm:p-4 bg-white rounded-2xl border border-[#3D2B1F]/15 shadow-sm inline-block">
+                  {qrDataUrl ? (
+                    <img
+                      src={qrDataUrl}
+                      alt={`QR Code for ${product.name}`}
+                      className="w-36 h-36 sm:w-44 sm:h-44 object-contain rounded-lg mx-auto"
+                    />
+                  ) : (
+                    <div className="w-36 h-36 sm:w-44 sm:h-44 flex items-center justify-center text-xs text-[#3D2B1F]/40">
+                      Generating QR...
+                    </div>
+                  )}
+                </div>
+
+                <div className="space-y-1">
+                  <p
+                    className="font-editorial text-sm sm:text-base text-[#3D2B1F]"
+                    style={{ fontFamily: 'Georgia, "Playfair Display", serif' }}
+                  >
+                    Scan with any mobile camera
+                  </p>
+                  <p className="text-[11px] sm:text-xs text-[#3D2B1F]/60 max-w-xs font-sans">
+                    Instantly opens Piece No. {product.number} on any phone or tablet for in-person exhibition sharing.
+                  </p>
+                </div>
+
+                {qrDataUrl && (
+                  <button
+                    type="button"
+                    onClick={handleDownloadQr}
+                    onMouseEnter={(e) => handleButtonHover(e, 1.05)}
+                    onMouseLeave={handleButtonLeave}
+                    className="py-2 px-4 rounded-xl border border-[#3D2B1F]/20 hover:border-[#3D2B1F] bg-white text-[#3D2B1F] text-[10px] uppercase tracking-wider font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer active:scale-95"
+                    style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                  >
+                    <Download size={13} />
+                    <span>Save QR Image</span>
+                  </button>
                 )}
               </div>
+            )}
 
-              <div className="space-y-1">
-                <p
-                  className="font-editorial text-sm sm:text-base text-[#3D2B1F]"
-                  style={{ fontFamily: 'Georgia, "Playfair Display", serif' }}
-                >
-                  Scan with any mobile camera
-                </p>
-                <p className="text-[11px] sm:text-xs text-[#3D2B1F]/60 max-w-xs font-sans">
-                  Instantly opens Piece No. {product.number} on any phone or tablet for in-person exhibition sharing.
-                </p>
-              </div>
+            {/* Tab 3: Story Caption */}
+            {activeTab === 'caption' && (
+              <div className="p-4 sm:p-6 space-y-3">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-white border border-[#3D2B1F]/15 shadow-2xs text-[11.5px] sm:text-xs font-sans text-[#3D2B1F]/80 whitespace-pre-line leading-relaxed max-h-[160px] sm:max-h-[190px] overflow-y-auto select-all">
+                  {fullCaptionText}
+                </div>
 
-              {qrDataUrl && (
                 <button
                   type="button"
-                  onClick={handleDownloadQr}
-                  className="py-2 px-4 rounded-xl border border-[#3D2B1F]/20 hover:border-[#3D2B1F] bg-white text-[#3D2B1F] text-[10px] uppercase tracking-wider font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer active:scale-95"
+                  onClick={handleCopyCaption}
+                  onMouseEnter={(e) => handleButtonHover(e, 1.02)}
+                  onMouseLeave={handleButtonLeave}
+                  className={`w-full py-3 px-4 rounded-xl text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer active:scale-98 ${
+                    copiedCaption
+                      ? 'bg-[#2E7D32] text-white'
+                      : 'bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB]'
+                  }`}
                   style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
                 >
-                  <Download size={13} />
-                  <span>Save QR Image</span>
+                  {copiedCaption ? (
+                    <>
+                      <Check size={14} />
+                      <span>Caption Copied to Clipboard!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={14} />
+                      <span>Copy Formatted Caption &amp; Story</span>
+                    </>
+                  )}
                 </button>
-              )}
-            </div>
-          )}
-
-          {/* Tab 3: Story Caption */}
-          {activeTab === 'caption' && (
-            <div className="p-4 sm:p-6 space-y-3">
-              <div className="p-3 sm:p-3.5 rounded-2xl bg-white border border-[#3D2B1F]/15 shadow-2xs text-[11.5px] sm:text-xs font-sans text-[#3D2B1F]/80 whitespace-pre-line leading-relaxed max-h-[160px] sm:max-h-[190px] overflow-y-auto select-all">
-                {fullCaptionText}
               </div>
-
-              <button
-                type="button"
-                onClick={handleCopyCaption}
-                className={`w-full py-3 px-4 rounded-xl text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer active:scale-98 ${
-                  copiedCaption
-                    ? 'bg-[#2E7D32] text-white'
-                    : 'bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB]'
-                }`}
-                style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-              >
-                {copiedCaption ? (
-                  <>
-                    <Check size={14} />
-                    <span>Caption Copied to Clipboard!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy size={14} />
-                    <span>Copy Formatted Caption &amp; Story</span>
-                  </>
-                )}
-              </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         {/* Footer - Fixed Bottom */}
-        <div className="px-5 sm:px-6 py-3.5 sm:py-4 bg-[#FAF7F2]/80 border-t border-[#3D2B1F]/10 flex items-center justify-between text-[9.5px] sm:text-[10px] text-[#3D2B1F]/60 flex-shrink-0">
+        <div className="gsap-fade-translate-item px-5 sm:px-6 py-3.5 sm:py-4 bg-[#FAF7F2]/80 border-t border-[#3D2B1F]/10 flex items-center justify-between text-[9.5px] sm:text-[10px] text-[#3D2B1F]/60 flex-shrink-0">
           <span className="flex items-center gap-1.5">
             <Sparkles size={11} className="text-[#D4A373]" />
             <span>Kurush Yarn Atelier Exhibition</span>
           </span>
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleAnimatedClose}
+            onMouseEnter={(e) => handleButtonHover(e, 1.08)}
+            onMouseLeave={handleButtonLeave}
             className="font-semibold uppercase tracking-wider text-[#3D2B1F] hover:opacity-75 cursor-pointer py-1 px-2"
             style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
