@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import gsap from 'gsap';
 import { Product } from '../../types/product';
 import { AngleGallery } from './AngleGallery';
 import { ShareModal } from './ShareModal';
@@ -41,7 +42,11 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   isSaved = false,
   onToggleSave
 }) => {
-  const modalScrollerRef = React.useRef<HTMLDivElement | null>(null);
+  const modalScrollerRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef<HTMLElement | null>(null);
+  const mainContentRef = useRef<HTMLElement | null>(null);
+  const isClosingRef = useRef(false);
+
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [copiedQuickLink, setCopiedQuickLink] = useState(false);
 
@@ -52,6 +57,110 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   const currentIndex = products.findIndex((p) => p.id === product.id);
   const prevProduct = products[(currentIndex - 1 + products.length) % products.length];
   const nextProduct = products[(currentIndex + 1) % products.length];
+
+  // GSAP Entrance Animation: Smooth fade-in and subtle scale-up on mount & product switch
+  useEffect(() => {
+    if (!modalScrollerRef.current || !mainContentRef.current) return;
+
+    isClosingRef.current = false;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        defaults: { ease: 'power3.out' }
+      });
+
+      // Set initial starting states
+      gsap.set(modalScrollerRef.current, {
+        opacity: 0
+      });
+      gsap.set(mainContentRef.current, {
+        opacity: 0,
+        scale: 0.95,
+        y: 24,
+        transformOrigin: '50% 20%'
+      });
+
+      if (headerRef.current) {
+        gsap.set(headerRef.current, {
+          opacity: 0,
+          y: -15
+        });
+      }
+
+      // 1. Fade in the backdrop overlay
+      tl.to(modalScrollerRef.current, {
+        opacity: 1,
+        duration: 0.4,
+        ease: 'power2.out'
+      })
+      // 2. Animate modal content: fade in and subtly scale up
+      .to(
+        mainContentRef.current,
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.65,
+          ease: 'power3.out',
+          clearProps: 'transform' // Clear inline transform so sticky gallery & children layout accurately
+        },
+        '-=0.25'
+      );
+
+      // 3. Stagger header controls smoothly
+      if (headerRef.current) {
+        tl.to(
+          headerRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            clearProps: 'transform'
+          },
+          '-=0.5'
+        );
+      }
+    }, modalScrollerRef);
+
+    return () => {
+      ctx.revert();
+    };
+  }, [product.id]);
+
+  // Smooth exit animation
+  const handleAnimatedClose = () => {
+    if (isClosingRef.current) return;
+    isClosingRef.current = true;
+
+    if (!modalScrollerRef.current || !mainContentRef.current) {
+      onClose();
+      return;
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        onClose();
+      }
+    });
+
+    tl.to(mainContentRef.current, {
+      opacity: 0,
+      scale: 0.97,
+      y: 16,
+      duration: 0.25,
+      ease: 'power2.in'
+    })
+    .to(
+      modalScrollerRef.current,
+      {
+        opacity: 0,
+        duration: 0.25,
+        ease: 'power2.in'
+      },
+      '-=0.15'
+    );
+  };
 
   // Quick link copy
   const handleQuickCopyLink = async (e?: React.MouseEvent) => {
@@ -103,7 +212,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
         if (shareModalOpen) {
           setShareModalOpen(false);
         } else {
-          onClose();
+          handleAnimatedClose();
         }
       }
       if (!shareModalOpen) {
@@ -126,13 +235,17 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
       ref={modalScrollerRef}
       data-lenis-prevent
       tabIndex={-1}
-      className="fixed inset-0 z-50 overflow-y-auto bg-[#FDFCFB]/95 backdrop-blur-xl flex flex-col justify-between selection:bg-[#3D2B1F] selection:text-[#FDFCFB] text-[#3D2B1F] animate-in fade-in duration-300 scroll-smooth outline-none"
+      className="fixed inset-0 z-50 overflow-y-auto bg-[#FDFCFB]/95 backdrop-blur-xl flex flex-col justify-between selection:bg-[#3D2B1F] selection:text-[#FDFCFB] text-[#3D2B1F] scroll-smooth outline-none"
     >
       {/* Top Floating Control Bar */}
-      <header className="sticky top-0 z-30 bg-[#FDFCFB]/85 backdrop-blur-md border-b border-[#3D2B1F]/15 px-6 md:px-12 py-4 flex items-center justify-between">
+      <header
+        ref={headerRef}
+        className="sticky top-0 z-30 bg-[#FDFCFB]/85 backdrop-blur-md border-b border-[#3D2B1F]/15 px-6 md:px-12 py-4 flex items-center justify-between"
+      >
         <button
-          onClick={onClose}
-          className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-semibold text-[#3D2B1F] hover:opacity-60 transition-opacity py-2"
+          type="button"
+          onClick={handleAnimatedClose}
+          className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-semibold text-[#3D2B1F] hover:opacity-60 transition-opacity py-2 cursor-pointer"
           style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
         >
           <ArrowLeft size={14} />
@@ -177,7 +290,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleAnimatedClose}
             className="p-2.5 rounded-full bg-[#3D2B1F] text-[#FDFCFB] hover:bg-[#3D2B1F]/80 transition-colors cursor-pointer"
             title="Close View"
           >
@@ -187,7 +300,10 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto w-full px-6 md:px-12 py-10 flex-grow">
+      <main
+        ref={mainContentRef}
+        className="max-w-7xl mx-auto w-full px-6 md:px-12 py-10 flex-grow"
+      >
         <ErrorBoundary sectionName="Product Detail Exhibition View" isolateSection={true}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left Column: Multi-Angle Studio Gallery with Scroll-Driven Parallax Sequence */}
