@@ -18,6 +18,7 @@ import { SavedDrawer } from './components/Common/SavedDrawer';
 import { ErrorBoundary } from './components/Common/ErrorBoundary';
 import { useSEO } from './hooks/useSEO';
 import { Product } from './types/product';
+import { products } from './data/products';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,6 +36,52 @@ const AppContent: React.FC = () => {
     }
   });
   const [activeSection, setActiveSection] = useState<string>('hero');
+
+  // Deep-link initial resolver: Check URL parameters or hash on mount for shared piece
+  useEffect(() => {
+    try {
+      const searchParams = new URLSearchParams(window.location.search);
+      const pieceParam = searchParams.get('piece') || searchParams.get('product');
+      const hash = window.location.hash.replace(/^#piece-|^#/, '');
+
+      const targetIdentifier = pieceParam || hash;
+      if (targetIdentifier) {
+        const found = products.find(
+          (p) =>
+            p.slug.toLowerCase() === targetIdentifier.toLowerCase() ||
+            p.id.toLowerCase() === targetIdentifier.toLowerCase() ||
+            p.number === targetIdentifier
+        );
+        if (found) {
+          setSelectedProduct(found);
+          setIntroFinished(true); // Directly open piece view for shared visitors
+        }
+      }
+    } catch (e) {
+      console.warn('Could not parse initial deep link', e);
+    }
+  }, []);
+
+  // Synchronize active product in browser address bar without reload
+  useEffect(() => {
+    try {
+      if (selectedProduct) {
+        const newUrl = `${window.location.pathname}?piece=${selectedProduct.slug}`;
+        window.history.replaceState({ piece: selectedProduct.slug }, '', newUrl);
+      } else {
+        // Only clear piece query param if no product is active
+        const url = new URL(window.location.href);
+        if (url.searchParams.has('piece') || url.searchParams.has('product')) {
+          url.searchParams.delete('piece');
+          url.searchParams.delete('product');
+          const cleanUrl = url.pathname + (url.search ? url.search : '') + url.hash;
+          window.history.replaceState(null, '', cleanUrl || '/');
+        }
+      }
+    } catch {
+      // ignore in environments without history api
+    }
+  }, [selectedProduct]);
 
   // Persist saved collection pieces
   useEffect(() => {

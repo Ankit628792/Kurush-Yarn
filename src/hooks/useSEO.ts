@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Product } from '../types/product';
+import { getAppOrigin, getProductPieceUrl, getAbsoluteAssetUrl, getCanonicalPageUrl } from '../utils/url';
 
 export interface SEOConfig {
   title?: string;
@@ -17,7 +18,7 @@ const DEFAULT_SEO: Required<Omit<SEOConfig, 'priceAmount' | 'priceCurrency' | 'a
   title: 'Kurush Yarn — Handcrafted Textile Exhibition & Atelier',
   description:
     'Explore hand-crocheted botanical stems, bespoke charms, wearable adornments, and architectural fiber sculptures by Kurush Yarn Atelier. Handcrafted in combed cotton and merino wool.',
-  canonical: typeof window !== 'undefined' ? window.location.origin : '',
+  canonical: getAppOrigin(),
   image: '/images/products/product-07/hero.jpg',
   type: 'website',
   keywords: [
@@ -70,14 +71,13 @@ export function useSEO(config?: SEOConfig) {
   useEffect(() => {
     if (typeof window === 'undefined' || typeof document === 'undefined') return;
 
+    const currentOrigin = getAppOrigin();
     const title = config?.title ? `${config.title}` : DEFAULT_SEO.title;
     const description = config?.description || DEFAULT_SEO.description;
     const image = config?.image
-      ? config.image.startsWith('http')
-        ? config.image
-        : `${window.location.origin}${config.image}`
-      : `${window.location.origin}${DEFAULT_SEO.image}`;
-    const canonical = config?.canonical || window.location.href;
+      ? getAbsoluteAssetUrl(config.image)
+      : getAbsoluteAssetUrl(DEFAULT_SEO.image);
+    const canonical = config?.canonical || getCanonicalPageUrl();
     const type = config?.type || DEFAULT_SEO.type;
     const keywords = config?.keywords ? config.keywords.join(', ') : DEFAULT_SEO.keywords.join(', ');
 
@@ -120,7 +120,7 @@ export function useSEO(config?: SEOConfig) {
       setMetaTag('name', 'keywords', DEFAULT_SEO.keywords.join(', '));
       setMetaTag('property', 'og:title', DEFAULT_SEO.title);
       setMetaTag('property', 'og:description', DEFAULT_SEO.description);
-      setMetaTag('property', 'og:image', `${window.location.origin}${DEFAULT_SEO.image}`);
+      setMetaTag('property', 'og:image', getAbsoluteAssetUrl(DEFAULT_SEO.image));
       setMetaTag('property', 'og:type', DEFAULT_SEO.type);
     };
   }, [
@@ -146,7 +146,7 @@ export function useProductSEO(product: Product | null) {
         description: `${product.tagline || product.description} Handcrafted with ${product.material}. Dimensions: ${product.dimensions}. Price: ${product.price}.`,
         image: product.heroImage,
         type: 'product',
-        canonical: typeof window !== 'undefined' ? `${window.location.origin}/#piece-${product.slug}` : '',
+        canonical: getProductPieceUrl(product.slug),
         priceAmount: product.price ? product.price.replace(/[^0-9]/g, '') : undefined,
         priceCurrency: 'INR',
         availability: 'in stock',

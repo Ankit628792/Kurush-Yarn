@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Product } from '../../types/product';
 import { AngleGallery } from './AngleGallery';
+import { ShareModal } from './ShareModal';
 import { products } from '../../data/products';
 import { useProductSEO } from '../../hooks/useSEO';
 import { ErrorBoundary } from '../Common/ErrorBoundary';
+import { getProductPieceUrl, getAbsoluteAssetUrl } from '../../utils/url';
 import {
   X,
   ArrowLeft,
@@ -13,7 +15,13 @@ import {
   Layers,
   ShieldCheck,
   Feather,
-  Instagram
+  Instagram,
+  Share2,
+  Copy,
+  Check,
+  MessageCircle,
+  Pin,
+  Twitter
 } from 'lucide-react';
 
 interface ProductDetailViewProps {
@@ -34,6 +42,8 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   onToggleSave
 }) => {
   const modalScrollerRef = React.useRef<HTMLDivElement | null>(null);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
+  const [copiedQuickLink, setCopiedQuickLink] = useState(false);
 
   // Dynamically update document head, OpenGraph, and Twitter tags for this product
   useProductSEO(product);
@@ -43,12 +53,63 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   const prevProduct = products[(currentIndex - 1 + products.length) % products.length];
   const nextProduct = products[(currentIndex + 1) % products.length];
 
+  // Quick link copy
+  const handleQuickCopyLink = async (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    const shareUrl = getProductPieceUrl(product.slug);
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = shareUrl;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+      setCopiedQuickLink(true);
+      setTimeout(() => setCopiedQuickLink(false), 2200);
+    } catch (err) {
+      console.error('Failed to copy link', err);
+    }
+  };
+
+  // Quick WhatsApp Share
+  const handleQuickWhatsApp = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const shareUrl = getProductPieceUrl(product.slug);
+    const text = `🧶 Discover "${product.name}" (Piece No. ${product.number}) — Handcrafted crochet ${product.categoryLabel.toLowerCase()} by Kurush Yarn Atelier:\n\n${shareUrl}`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+  };
+
+  // Quick Pinterest Share
+  const handleQuickPinterest = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const shareUrl = getProductPieceUrl(product.slug);
+    const fullImageUrl = getAbsoluteAssetUrl(product.heroImage);
+    const text = `${product.name} — Handcrafted Crochet Piece No. ${product.number} | Kurush Yarn Atelier`;
+    const pinUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(
+      shareUrl
+    )}&media=${encodeURIComponent(fullImageUrl)}&description=${encodeURIComponent(text)}`;
+    window.open(pinUrl, '_blank', 'noopener,noreferrer');
+  };
+
   // Lock body scroll and listen for escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowLeft') onSelectProduct(prevProduct);
-      if (e.key === 'ArrowRight') onSelectProduct(nextProduct);
+      if (e.key === 'Escape') {
+        if (shareModalOpen) {
+          setShareModalOpen(false);
+        } else {
+          onClose();
+        }
+      }
+      if (!shareModalOpen) {
+        if (e.key === 'ArrowLeft') onSelectProduct(prevProduct);
+        if (e.key === 'ArrowRight') onSelectProduct(nextProduct);
+      }
     };
 
     document.body.style.overflow = 'hidden';
@@ -58,7 +119,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
       document.body.style.overflow = 'unset';
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onClose, onSelectProduct, prevProduct, nextProduct]);
+  }, [onClose, onSelectProduct, prevProduct, nextProduct, shareModalOpen]);
 
   return (
     <div
@@ -86,11 +147,24 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
         </div>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
+          <button
+            type="button"
+            onClick={() => setShareModalOpen(true)}
+            className="p-2.5 rounded-full bg-white text-[#3D2B1F] border border-[#3D2B1F]/20 hover:border-[#3D2B1F] hover:bg-[#FAF7F2] transition-all flex items-center gap-1.5 shadow-xs group cursor-pointer"
+            title="Share Creation to Social Media or Copy Link"
+          >
+            <Share2 size={14} className="group-hover:scale-110 transition-transform" />
+            <span className="hidden md:inline text-[9px] uppercase tracking-wider font-semibold pr-1" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
+              Share
+            </span>
+          </button>
+
           {onToggleSave && (
             <button
+              type="button"
               onClick={() => onToggleSave(product.id)}
-              className={`p-2.5 rounded-full border transition-all ${
+              className={`p-2.5 rounded-full border transition-all cursor-pointer ${
                 isSaved
                   ? 'bg-[#3D2B1F] text-white border-[#3D2B1F]'
                   : 'bg-white text-[#3D2B1F] border-[#3D2B1F]/20 hover:border-[#3D2B1F]'
@@ -102,8 +176,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           )}
 
           <button
+            type="button"
             onClick={onClose}
-            className="p-2.5 rounded-full bg-[#3D2B1F] text-[#FDFCFB] hover:bg-[#3D2B1F]/80 transition-colors"
+            className="p-2.5 rounded-full bg-[#3D2B1F] text-[#FDFCFB] hover:bg-[#3D2B1F]/80 transition-colors cursor-pointer"
             title="Close View"
           >
             <X size={15} />
@@ -244,8 +319,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             {/* Action CTA Buttons */}
             <div className="pt-4 flex flex-col sm:flex-row items-center gap-4">
               <button
+                type="button"
                 onClick={() => onInquire(product)}
-                className="w-full sm:w-auto flex-1 bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB] py-4 px-8 rounded-full text-[10px] uppercase tracking-[0.25em] font-medium transition-all duration-300 shadow-md flex items-center justify-center gap-2"
+                className="w-full sm:w-auto flex-1 bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB] py-4 px-8 rounded-full text-[10px] uppercase tracking-[0.25em] font-medium transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer"
                 style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
                 <Instagram size={14} />
@@ -254,13 +330,95 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               </button>
 
               <button
+                type="button"
                 onClick={() => onToggleSave && onToggleSave(product.id)}
-                className="w-full sm:w-auto py-4 px-6 rounded-full border border-[#3D2B1F]/25 hover:border-[#3D2B1F] hover:bg-white text-[#3D2B1F] text-[10px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 flex items-center justify-center gap-2"
+                className="w-full sm:w-auto py-4 px-6 rounded-full border border-[#3D2B1F]/25 hover:border-[#3D2B1F] hover:bg-white text-[#3D2B1F] text-[10px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
                 style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
                 <Heart size={14} className={isSaved ? 'fill-[#3D2B1F] text-[#3D2B1F]' : ''} />
                 <span>{isSaved ? 'Saved in Collection' : 'Save Piece'}</span>
               </button>
+            </div>
+
+            {/* Social Media Sharing & Deep Link Bar */}
+            <div className="p-5 rounded-2xl bg-white border border-[#3D2B1F]/15 shadow-sm space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-[#3D2B1F] font-bold" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
+                  <Share2 size={13} className="text-[#3D2B1F]" />
+                  <span>Share This Creation</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShareModalOpen(true)}
+                  className="text-[9px] uppercase tracking-[0.15em] font-bold text-[#3D2B1F]/70 hover:text-[#3D2B1F] hover:underline cursor-pointer"
+                  style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                >
+                  More Platforms / QR →
+                </button>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                {/* 1. Quick Copy Link Button */}
+                <button
+                  type="button"
+                  onClick={handleQuickCopyLink}
+                  className={`flex-1 min-w-[130px] py-2.5 px-3.5 rounded-xl border text-[10px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1.5 transition-all shadow-2xs cursor-pointer ${
+                    copiedQuickLink
+                      ? 'bg-[#2E7D32] text-white border-[#2E7D32]'
+                      : 'bg-[#FAF7F2] hover:bg-white text-[#3D2B1F] border-[#3D2B1F]/15 hover:border-[#3D2B1F]'
+                  }`}
+                  style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                  title="Copy link to this handcrafted piece"
+                >
+                  {copiedQuickLink ? (
+                    <>
+                      <Check size={13} />
+                      <span>Link Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={13} />
+                      <span>Copy Link</span>
+                    </>
+                  )}
+                </button>
+
+                {/* 2. Direct WhatsApp Button */}
+                <button
+                  type="button"
+                  onClick={handleQuickWhatsApp}
+                  className="py-2.5 px-3.5 rounded-xl bg-[#FAF7F2] hover:bg-[#25D366]/10 text-[#128C7E] border border-[#3D2B1F]/15 hover:border-[#25D366] text-[10px] uppercase tracking-wider font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
+                  style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                  title="Share directly via WhatsApp"
+                >
+                  <MessageCircle size={14} />
+                  <span>WhatsApp</span>
+                </button>
+
+                {/* 3. Direct Pinterest Button */}
+                <button
+                  type="button"
+                  onClick={handleQuickPinterest}
+                  className="py-2.5 px-3.5 rounded-xl bg-[#FAF7F2] hover:bg-[#E60023]/10 text-[#BD081C] border border-[#3D2B1F]/15 hover:border-[#E60023] text-[10px] uppercase tracking-wider font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
+                  style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                  title="Save Pin on Pinterest"
+                >
+                  <Pin size={14} />
+                  <span>Pin</span>
+                </button>
+
+                {/* 4. Full Modal Trigger */}
+                <button
+                  type="button"
+                  onClick={() => setShareModalOpen(true)}
+                  className="py-2.5 px-3 rounded-xl bg-[#3D2B1F] text-[#FDFCFB] hover:bg-[#3D2B1F]/85 text-[10px] uppercase tracking-wider font-semibold flex items-center gap-1 transition-all shadow-2xs cursor-pointer"
+                  style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                  title="Open full share dialog with QR code and all platforms"
+                >
+                  <Share2 size={13} />
+                  <span className="hidden sm:inline">All</span>
+                </button>
+              </div>
             </div>
 
             {/* Studio Guarantee */}
@@ -307,6 +465,13 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           </button>
         </div>
       </main>
+
+      {/* Social Media Sharing Modal */}
+      <ShareModal
+        product={product}
+        isOpen={shareModalOpen}
+        onClose={() => setShareModalOpen(false)}
+      />
     </div>
   );
 };
