@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Product } from '../../types/product';
 import { getProductPieceUrl, getAbsoluteAssetUrl } from '../../utils/url';
 import QRCode from 'qrcode';
@@ -17,7 +18,7 @@ import {
   QrCode,
   Sparkles,
   ExternalLink,
-  Heart,
+  Download,
   Instagram
 } from 'lucide-react';
 
@@ -62,19 +63,27 @@ Explore the exhibition: ${shareUrl}
 
 #kurushyarn #crochet #textileart #fiberart #botanicalcrochet #handmade #craftsmanship`;
 
-  // Detect native share capability
+  // Detect native share capability across mobile & desktop browsers
   useEffect(() => {
     if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
-      setCanNativeShare(true);
+      try {
+        if (typeof navigator.canShare === 'function') {
+          setCanNativeShare(navigator.canShare({ url: window.location.href }));
+        } else {
+          setCanNativeShare(true);
+        }
+      } catch {
+        setCanNativeShare(true);
+      }
     }
   }, []);
 
-  // Generate QR Code on mount or when product changes
+  // Generate high-resolution QR Code on mount or when product changes
   useEffect(() => {
     if (!isOpen) return;
 
     QRCode.toDataURL(shareUrl, {
-      width: 280,
+      width: 360,
       margin: 2,
       color: {
         dark: '#3D2B1F',
@@ -85,7 +94,40 @@ Explore the exhibition: ${shareUrl}
       .catch((err) => console.error('Failed to generate QR code', err));
   }, [shareUrl, isOpen]);
 
-  // Handle ESC key press
+  // Robust cross-platform clipboard copy helper (works in iOS Safari, Chrome, iframes, and legacy WebViews)
+  const copyTextToClipboard = async (text: string): Promise<boolean> => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch {
+      // Continue to fallback
+    }
+
+    try {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      // Position off-screen without triggering mobile scroll jumps or zooms
+      textarea.style.position = 'fixed';
+      textarea.style.top = '0';
+      textarea.style.left = '-9999px';
+      textarea.style.opacity = '0';
+      textarea.setAttribute('readonly', '');
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      textarea.setSelectionRange(0, 99999);
+      const successful = document.execCommand('copy');
+      document.body.removeChild(textarea);
+      return successful;
+    } catch (err) {
+      console.error('Cross-device clipboard copy failed', err);
+      return false;
+    }
+  };
+
+  // Handle ESC key press & backdrop lock
   useEffect(() => {
     if (!isOpen) return;
 
@@ -103,45 +145,34 @@ Explore the exhibition: ${shareUrl}
 
   // Copy Link Handler
   const handleCopyLink = async () => {
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(shareUrl);
-      } else {
-        const textarea = document.createElement('textarea');
-        textarea.value = shareUrl;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-      }
+    const success = await copyTextToClipboard(shareUrl);
+    if (success) {
       setCopiedLink(true);
       setTimeout(() => setCopiedLink(false), 2500);
-    } catch (err) {
-      console.error('Failed to copy link', err);
     }
   };
 
   // Copy Caption Handler
   const handleCopyCaption = async () => {
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(fullCaptionText);
-      } else {
-        const textarea = document.createElement('textarea');
-        textarea.value = fullCaptionText;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-      }
+    const success = await copyTextToClipboard(fullCaptionText);
+    if (success) {
       setCopiedCaption(true);
       setTimeout(() => setCopiedCaption(false), 2500);
-    } catch (err) {
-      console.error('Failed to copy caption', err);
     }
   };
 
-  // Native Device Share
+  // Download QR Code Image
+  const handleDownloadQr = () => {
+    if (!qrDataUrl) return;
+    const downloadLink = document.createElement('a');
+    downloadLink.href = qrDataUrl;
+    downloadLink.download = `kurush-yarn-piece-${product.number}-${product.slug}-qr.png`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+
+  // Native Device Share (iOS / Android Share Sheet)
   const handleNativeShare = async () => {
     if (navigator.share) {
       try {
@@ -152,13 +183,13 @@ Explore the exhibition: ${shareUrl}
         });
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {
-          console.error('Error sharing', err);
+          console.error('Device share failed', err);
         }
       }
     }
   };
 
-  // Platform Links
+  // Direct Social Platform Links & Handlers
   const platformLinks = [
     {
       name: 'WhatsApp',
@@ -231,37 +262,50 @@ Explore the exhibition: ${shareUrl}
       badge: 'Send Dossier',
       action: () => {
         const subject = `Kurush Yarn Atelier: ${product.name} (Piece No. ${product.number})`;
-        const body = `Hello,\n\nI wanted to share this handcrafted textile piece from Kurush Yarn Atelier:\n\n${product.name} — Piece No. ${product.number}\n${product.subtitle}\nPrice: ${product.price}\n\nView details & craftsmanship:\n${shareUrl}`;
+        const body = `Hello,\n\nI wanted to share this handcrafted textile piece from Kurush Yarn Atelier:\n\n${product.name} — Piece No. ${product.number}\n${product.subtitle || ''}\nPrice: ${product.price || ''}\n\nView details & craftsmanship:\n${shareUrl}`;
         window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       }
     }
   ];
 
-  return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#3D2B1F]/60 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-250">
-      {/* Click outside backdrop */}
-      <div className="fixed inset-0" onClick={onClose} aria-hidden="true" />
+  if (!isOpen) return null;
 
-      {/* Modal Container */}
+  const modalContent = (
+    <div
+      className="fixed inset-0 z-[9999] overflow-y-auto bg-[#3D2B1F]/65 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 md:p-6 animate-in fade-in duration-200"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="share-modal-title"
+    >
+      {/* Click outside backdrop */}
+      <div
+        className="fixed inset-0 cursor-pointer"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Modal Container with Responsive Constraints */}
       <div
         ref={modalRef}
-        className="relative z-10 w-full max-w-lg bg-[#FDFCFB] rounded-3xl border border-[#3D2B1F]/15 shadow-2xl overflow-hidden text-[#3D2B1F] animate-in zoom-in-95 duration-250 flex flex-col my-auto"
+        data-lenis-prevent
+        className="relative z-10 w-full max-w-lg max-h-[min(90vh,680px)] bg-[#FDFCFB] rounded-3xl border border-[#3D2B1F]/15 shadow-2xl overflow-hidden text-[#3D2B1F] animate-in zoom-in-95 duration-200 flex flex-col m-auto"
       >
-        {/* Header */}
-        <div className="px-6 py-5 border-b border-[#3D2B1F]/10 flex items-center justify-between bg-[#FAF7F2]/60">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-[#3D2B1F] text-[#FDFCFB] flex items-center justify-center">
+        {/* Header - Fixed Top */}
+        <div className="px-5 sm:px-6 py-4 sm:py-5 border-b border-[#3D2B1F]/10 flex items-center justify-between bg-[#FAF7F2]/80 flex-shrink-0">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#3D2B1F] text-[#FDFCFB] flex items-center justify-center shadow-xs flex-shrink-0">
               <Share2 size={15} />
             </div>
             <div>
               <h2
-                className="font-editorial text-xl text-[#3D2B1F] leading-tight"
+                id="share-modal-title"
+                className="font-editorial text-lg sm:text-xl text-[#3D2B1F] leading-tight"
                 style={{ fontFamily: 'Georgia, "Playfair Display", serif' }}
               >
                 Share Creation
               </h2>
               <p
-                className="text-[9px] uppercase tracking-[0.2em] text-[#3D2B1F]/60 font-semibold"
+                className="text-[8.5px] sm:text-[9px] uppercase tracking-[0.2em] text-[#3D2B1F]/60 font-semibold"
                 style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
                 Kurush Yarn Atelier Piece No. {product.number}
@@ -272,265 +316,287 @@ Explore the exhibition: ${shareUrl}
           <button
             type="button"
             onClick={onClose}
-            className="p-2 rounded-full text-[#3D2B1F]/60 hover:text-[#3D2B1F] hover:bg-[#3D2B1F]/10 transition-colors cursor-pointer"
+            className="p-2 sm:p-2.5 rounded-full text-[#3D2B1F]/60 hover:text-[#3D2B1F] hover:bg-[#3D2B1F]/10 transition-colors cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center"
             title="Close Share Window"
+            aria-label="Close Share Window"
           >
-            <X size={16} />
+            <X size={17} />
           </button>
         </div>
 
-        {/* Product Mini Dossier Preview Card */}
-        <div className="p-6 pb-4">
-          <div className="flex items-center gap-4 p-3.5 rounded-2xl bg-white border border-[#3D2B1F]/10 shadow-sm">
-            <div className="w-16 h-16 rounded-xl overflow-hidden bg-[#F5EBE0] flex-shrink-0 border border-[#3D2B1F]/10">
-              <img
-                src={product.heroImage}
-                alt={product.name}
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center justify-between gap-2">
-                <span
-                  className="text-[8.5px] uppercase tracking-[0.2em] text-[#3D2B1F]/60 font-bold"
-                  style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-                >
-                  Piece No. {product.number} • {product.categoryLabel}
-                </span>
-                <span className="font-editorial text-sm text-[#3D2B1F] font-medium">
-                  {product.price}
-                </span>
+        {/* Scrollable Center Body Area */}
+        <div className="flex-1 overflow-y-auto divide-y divide-[#3D2B1F]/10" data-lenis-prevent>
+          {/* Product Mini Dossier Preview Card */}
+          <div className="p-4 sm:p-6 pb-4">
+            <div className="flex items-center gap-3.5 sm:gap-4 p-3 sm:p-3.5 rounded-2xl bg-white border border-[#3D2B1F]/10 shadow-xs">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-[#F5EBE0] flex-shrink-0 border border-[#3D2B1F]/10">
+                <img
+                  src={product.heroImage}
+                  alt={product.name}
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
               </div>
-              <h3
-                className="font-editorial text-base text-[#3D2B1F] truncate leading-snug mt-0.5"
-                style={{ fontFamily: 'Georgia, "Playfair Display", serif' }}
-              >
-                {product.name}
-              </h3>
-              <p className="text-[11px] text-[#3D2B1F]/70 truncate font-sans mt-0.5">
-                {product.subtitle || product.tagline}
-              </p>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center justify-between gap-2">
+                  <span
+                    className="text-[8px] sm:text-[8.5px] uppercase tracking-[0.2em] text-[#3D2B1F]/60 font-bold truncate"
+                    style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                  >
+                    Piece No. {product.number} • {product.categoryLabel}
+                  </span>
+                  {product.price && (
+                    <span className="font-editorial text-xs sm:text-sm text-[#3D2B1F] font-semibold flex-shrink-0">
+                      {product.price}
+                    </span>
+                  )}
+                </div>
+                <h3
+                  className="font-editorial text-sm sm:text-base text-[#3D2B1F] truncate leading-snug mt-0.5"
+                  style={{ fontFamily: 'Georgia, "Playfair Display", serif' }}
+                >
+                  {product.name}
+                </h3>
+                <p className="text-[10.5px] sm:text-[11px] text-[#3D2B1F]/70 truncate font-sans mt-0.5">
+                  {product.subtitle || product.tagline}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Copy Direct Link Bar */}
-        <div className="px-6 pb-4">
-          <label
-            className="text-[9px] uppercase tracking-[0.2em] text-[#3D2B1F]/70 font-bold block mb-2"
-            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-          >
-            Direct Product Link
-          </label>
-          <div className="flex items-center gap-2">
-            <div className="flex-1 flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white border border-[#3D2B1F]/15 text-xs text-[#3D2B1F]/80 font-mono overflow-hidden">
-              <span className="truncate selection:bg-[#3D2B1F] selection:text-white select-all">
-                {shareUrl}
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={handleCopyLink}
-              className={`px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-sm flex-shrink-0 cursor-pointer ${
-                copiedLink
-                  ? 'bg-[#2E7D32] text-white'
-                  : 'bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB]'
-              }`}
+          {/* Copy Direct Link Bar */}
+          <div className="p-4 sm:px-6 sm:py-4">
+            <label
+              className="text-[8.5px] sm:text-[9px] uppercase tracking-[0.2em] text-[#3D2B1F]/70 font-bold block mb-2"
               style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
             >
-              {copiedLink ? (
-                <>
-                  <Check size={14} />
-                  <span>Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Copy size={14} />
-                  <span>Copy Link</span>
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Navigation Tabs (Direct Platforms / QR Code / Atelier Caption) */}
-        <div className="px-6 border-b border-[#3D2B1F]/10 flex gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold">
-          <button
-            type="button"
-            onClick={() => setActiveTab('platforms')}
-            className={`pb-2.5 px-1 border-b-2 transition-colors cursor-pointer ${
-              activeTab === 'platforms'
-                ? 'border-[#3D2B1F] text-[#3D2B1F]'
-                : 'border-transparent text-[#3D2B1F]/50 hover:text-[#3D2B1F]'
-            }`}
-            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-          >
-            Direct Platforms
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab('qr')}
-            className={`pb-2.5 px-1 border-b-2 flex items-center gap-1.5 transition-colors cursor-pointer ${
-              activeTab === 'qr'
-                ? 'border-[#3D2B1F] text-[#3D2B1F]'
-                : 'border-transparent text-[#3D2B1F]/50 hover:text-[#3D2B1F]'
-            }`}
-            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-          >
-            <QrCode size={12} />
-            <span>Scan QR</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab('caption')}
-            className={`pb-2.5 px-1 border-b-2 flex items-center gap-1.5 transition-colors cursor-pointer ${
-              activeTab === 'caption'
-                ? 'border-[#3D2B1F] text-[#3D2B1F]'
-                : 'border-transparent text-[#3D2B1F]/50 hover:text-[#3D2B1F]'
-            }`}
-            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-          >
-            <Sparkles size={12} />
-            <span>Story Caption</span>
-          </button>
-        </div>
-
-        {/* Tab 1: Direct Social Media Platforms */}
-        {activeTab === 'platforms' && (
-          <div className="p-6 space-y-4 max-h-[290px] overflow-y-auto" data-lenis-prevent>
-            {/* Native device share button if supported */}
-            {canNativeShare && (
+              Direct Exhibition Link
+            </label>
+            <div className="flex items-center gap-2">
+              <div className="flex-1 flex items-center gap-2 px-3 sm:px-3.5 py-2.5 rounded-xl bg-white border border-[#3D2B1F]/15 text-[11px] sm:text-xs text-[#3D2B1F]/80 font-mono overflow-hidden">
+                <span className="truncate selection:bg-[#3D2B1F] selection:text-white select-all">
+                  {shareUrl}
+                </span>
+              </div>
               <button
                 type="button"
-                onClick={handleNativeShare}
-                className="w-full p-3.5 rounded-2xl bg-[#3D2B1F]/5 hover:bg-[#3D2B1F]/10 border border-[#3D2B1F]/15 flex items-center justify-between text-xs font-semibold text-[#3D2B1F] transition-all group cursor-pointer"
+                onClick={handleCopyLink}
+                className={`px-3.5 sm:px-4 py-2.5 rounded-xl text-[11px] sm:text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-xs flex-shrink-0 cursor-pointer active:scale-95 ${
+                  copiedLink
+                    ? 'bg-[#2E7D32] text-white'
+                    : 'bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB]'
+                }`}
                 style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-full bg-[#3D2B1F] text-white flex items-center justify-center">
-                    <Share2 size={13} />
+                {copiedLink ? (
+                  <>
+                    <Check size={14} />
+                    <span>Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy size={14} />
+                    <span>Copy</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Navigation Tabs (Direct Platforms / QR Code / Atelier Caption) */}
+          <div className="px-4 sm:px-6 pt-3 bg-[#FAF7F2]/40">
+            <div className="flex gap-1.5 sm:gap-2 text-[9.5px] sm:text-[10px] uppercase tracking-[0.18em] font-semibold border-b border-[#3D2B1F]/10">
+              <button
+                type="button"
+                onClick={() => setActiveTab('platforms')}
+                className={`pb-2.5 px-2 border-b-2 transition-colors cursor-pointer min-h-[36px] flex items-center gap-1.5 ${
+                  activeTab === 'platforms'
+                    ? 'border-[#3D2B1F] text-[#3D2B1F]'
+                    : 'border-transparent text-[#3D2B1F]/50 hover:text-[#3D2B1F]'
+                }`}
+                style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+              >
+                <Share2 size={12} />
+                <span>Direct Platforms</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('qr')}
+                className={`pb-2.5 px-2 border-b-2 flex items-center gap-1.5 transition-colors cursor-pointer min-h-[36px] ${
+                  activeTab === 'qr'
+                    ? 'border-[#3D2B1F] text-[#3D2B1F]'
+                    : 'border-transparent text-[#3D2B1F]/50 hover:text-[#3D2B1F]'
+                }`}
+                style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+              >
+                <QrCode size={12} />
+                <span>Scan QR</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('caption')}
+                className={`pb-2.5 px-2 border-b-2 flex items-center gap-1.5 transition-colors cursor-pointer min-h-[36px] ${
+                  activeTab === 'caption'
+                    ? 'border-[#3D2B1F] text-[#3D2B1F]'
+                    : 'border-transparent text-[#3D2B1F]/50 hover:text-[#3D2B1F]'
+                }`}
+                style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+              >
+                <Sparkles size={12} />
+                <span>Story Caption</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Tab 1: Direct Social Media Platforms */}
+          {activeTab === 'platforms' && (
+            <div className="p-4 sm:p-6 space-y-3.5 sm:space-y-4">
+              {/* Native device share button if supported (iOS / Android / macOS) */}
+              {canNativeShare && (
+                <button
+                  type="button"
+                  onClick={handleNativeShare}
+                  className="w-full p-3 sm:p-3.5 rounded-2xl bg-[#3D2B1F]/5 hover:bg-[#3D2B1F]/10 border border-[#3D2B1F]/15 flex items-center justify-between text-xs font-semibold text-[#3D2B1F] transition-all group cursor-pointer active:scale-[0.99]"
+                  style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-full bg-[#3D2B1F] text-white flex items-center justify-center">
+                      <Share2 size={13} />
+                    </div>
+                    <span className="uppercase tracking-wider text-[9.5px] sm:text-[10px]">
+                      Share via Native Device Sheet (AirDrop, Messages, Stories)
+                    </span>
                   </div>
-                  <span className="uppercase tracking-wider text-[10px]">
-                    Share via Device Sheet (AirDrop, Messages, Instagram)
+                  <ExternalLink size={13} className="text-[#3D2B1F]/50 group-hover:text-[#3D2B1F]" />
+                </button>
+              )}
+
+              {/* Social Platform Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
+                {platformLinks.map((p) => {
+                  const IconComponent = p.icon;
+                  return (
+                    <button
+                      key={p.name}
+                      type="button"
+                      onClick={p.action}
+                      className={`p-2.5 sm:p-3 rounded-2xl bg-white border border-[#3D2B1F]/10 shadow-2xs flex flex-col items-start gap-1.5 sm:gap-2 text-left transition-all ${p.color} group cursor-pointer active:scale-95`}
+                    >
+                      <div className="w-full flex items-center justify-between">
+                        <div className="p-1.5 rounded-lg bg-[#FAF7F2] group-hover:bg-white transition-colors">
+                          <IconComponent size={16} />
+                        </div>
+                        <span className="text-[7.5px] sm:text-[8px] uppercase tracking-wider text-[#3D2B1F]/50 font-bold truncate">
+                          {p.badge}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-[11.5px] sm:text-xs font-semibold text-[#3D2B1F] block">{p.name}</span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Instagram Atelier Callout */}
+              <div className="p-3 sm:p-3.5 rounded-2xl bg-[#FAF7F2] border border-[#3D2B1F]/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs">
+                <div className="flex items-center gap-2.5 text-[#3D2B1F]">
+                  <Instagram size={16} className="text-[#D4A373] flex-shrink-0" />
+                  <span className="text-[11px] text-[#3D2B1F]/80 font-sans leading-snug">
+                    Tag <strong className="font-semibold text-[#3D2B1F]">@kurush.yarn</strong> in stories or send via DM.
                   </span>
                 </div>
-                <ExternalLink size={13} className="text-[#3D2B1F]/50 group-hover:text-[#3D2B1F]" />
-              </button>
-            )}
-
-            {/* Social Platform Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-              {platformLinks.map((p) => {
-                const IconComponent = p.icon;
-                return (
-                  <button
-                    key={p.name}
-                    type="button"
-                    onClick={p.action}
-                    className={`p-3 rounded-2xl bg-white border border-[#3D2B1F]/10 shadow-xs flex flex-col items-start gap-2 text-left transition-all ${p.color} group cursor-pointer`}
-                  >
-                    <div className="w-full flex items-center justify-between">
-                      <div className="p-1.5 rounded-lg bg-[#FAF7F2] group-hover:bg-white transition-colors">
-                        <IconComponent size={16} />
-                      </div>
-                      <span className="text-[8px] uppercase tracking-wider text-[#3D2B1F]/50 font-bold">
-                        {p.badge}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="text-xs font-semibold text-[#3D2B1F] block">{p.name}</span>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Instagram Atelier Callout */}
-            <div className="p-3.5 rounded-2xl bg-[#FAF7F2] border border-[#3D2B1F]/10 flex items-center justify-between gap-3 text-xs">
-              <div className="flex items-center gap-2.5 text-[#3D2B1F]">
-                <Instagram size={16} className="text-[#D4A373] flex-shrink-0" />
-                <span className="text-[11px] text-[#3D2B1F]/80 font-sans">
-                  Tag <strong className="font-semibold text-[#3D2B1F]">@kurush.yarn</strong> in your stories or send via Instagram DM.
-                </span>
+                <a
+                  href="https://instagram.com/kurush.yarn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[9px] uppercase tracking-wider font-bold text-[#3D2B1F] hover:underline flex-shrink-0 cursor-pointer inline-flex items-center gap-1 self-start sm:self-auto"
+                >
+                  <span>Visit @kurush.yarn</span>
+                  <ExternalLink size={10} />
+                </a>
               </div>
-              <a
-                href="https://instagram.com/kurush.yarn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[9px] uppercase tracking-wider font-bold text-[#3D2B1F] hover:underline flex-shrink-0 cursor-pointer"
-              >
-                Visit @kurush.yarn
-              </a>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Tab 2: QR Code */}
-        {activeTab === 'qr' && (
-          <div className="p-6 flex flex-col items-center text-center space-y-4" data-lenis-prevent>
-            <div className="p-4 bg-white rounded-2xl border border-[#3D2B1F]/15 shadow-sm inline-block">
-              {qrDataUrl ? (
-                <img
-                  src={qrDataUrl}
-                  alt={`QR Code for ${product.name}`}
-                  className="w-44 h-44 object-contain rounded-lg"
-                />
-              ) : (
-                <div className="w-44 h-44 flex items-center justify-center text-xs text-[#3D2B1F]/40">
-                  Generating QR...
-                </div>
+          {/* Tab 2: QR Code */}
+          {activeTab === 'qr' && (
+            <div className="p-4 sm:p-6 flex flex-col items-center text-center space-y-3.5 sm:space-y-4">
+              <div className="p-3 sm:p-4 bg-white rounded-2xl border border-[#3D2B1F]/15 shadow-sm inline-block">
+                {qrDataUrl ? (
+                  <img
+                    src={qrDataUrl}
+                    alt={`QR Code for ${product.name}`}
+                    className="w-36 h-36 sm:w-44 sm:h-44 object-contain rounded-lg mx-auto"
+                  />
+                ) : (
+                  <div className="w-36 h-36 sm:w-44 sm:h-44 flex items-center justify-center text-xs text-[#3D2B1F]/40">
+                    Generating QR...
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-1">
+                <p
+                  className="font-editorial text-sm sm:text-base text-[#3D2B1F]"
+                  style={{ fontFamily: 'Georgia, "Playfair Display", serif' }}
+                >
+                  Scan with any mobile camera
+                </p>
+                <p className="text-[11px] sm:text-xs text-[#3D2B1F]/60 max-w-xs font-sans">
+                  Instantly opens Piece No. {product.number} on any phone or tablet for in-person exhibition sharing.
+                </p>
+              </div>
+
+              {qrDataUrl && (
+                <button
+                  type="button"
+                  onClick={handleDownloadQr}
+                  className="py-2 px-4 rounded-xl border border-[#3D2B1F]/20 hover:border-[#3D2B1F] bg-white text-[#3D2B1F] text-[10px] uppercase tracking-wider font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer active:scale-95"
+                  style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                >
+                  <Download size={13} />
+                  <span>Save QR Image</span>
+                </button>
               )}
             </div>
+          )}
 
-            <div className="space-y-1">
-              <p
-                className="font-editorial text-base text-[#3D2B1F]"
-                style={{ fontFamily: 'Georgia, "Playfair Display", serif' }}
+          {/* Tab 3: Story Caption */}
+          {activeTab === 'caption' && (
+            <div className="p-4 sm:p-6 space-y-3">
+              <div className="p-3 sm:p-3.5 rounded-2xl bg-white border border-[#3D2B1F]/15 shadow-2xs text-[11.5px] sm:text-xs font-sans text-[#3D2B1F]/80 whitespace-pre-line leading-relaxed max-h-[160px] sm:max-h-[190px] overflow-y-auto select-all">
+                {fullCaptionText}
+              </div>
+
+              <button
+                type="button"
+                onClick={handleCopyCaption}
+                className={`w-full py-3 px-4 rounded-xl text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer active:scale-98 ${
+                  copiedCaption
+                    ? 'bg-[#2E7D32] text-white'
+                    : 'bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB]'
+                }`}
+                style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
-                Scan with any mobile camera
-              </p>
-              <p className="text-xs text-[#3D2B1F]/60 max-w-xs font-sans">
-                Instantly reveals Piece No. {product.number} on phones for in-person exhibition sharing.
-              </p>
+                {copiedCaption ? (
+                  <>
+                    <Check size={14} />
+                    <span>Caption Copied to Clipboard!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy size={14} />
+                    <span>Copy Formatted Caption &amp; Story</span>
+                  </>
+                )}
+              </button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
-        {/* Tab 3: Story Caption */}
-        {activeTab === 'caption' && (
-          <div className="p-6 space-y-3" data-lenis-prevent>
-            <div className="p-3.5 rounded-2xl bg-white border border-[#3D2B1F]/15 shadow-sm text-xs font-sans text-[#3D2B1F]/80 whitespace-pre-line leading-relaxed max-h-[190px] overflow-y-auto select-all">
-              {fullCaptionText}
-            </div>
-
-            <button
-              type="button"
-              onClick={handleCopyCaption}
-              className={`w-full py-3 px-4 rounded-xl text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer ${
-                copiedCaption
-                  ? 'bg-[#2E7D32] text-white'
-                  : 'bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB]'
-              }`}
-              style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-            >
-              {copiedCaption ? (
-                <>
-                  <Check size={14} />
-                  <span>Caption Copied to Clipboard!</span>
-                </>
-              ) : (
-                <>
-                  <Copy size={14} />
-                  <span>Copy Formatted Caption &amp; Story</span>
-                </>
-              )}
-            </button>
-          </div>
-        )}
-
-        {/* Footer */}
-        <div className="px-6 py-4 bg-[#FAF7F2]/60 border-t border-[#3D2B1F]/10 flex items-center justify-between text-[10px] text-[#3D2B1F]/60">
+        {/* Footer - Fixed Bottom */}
+        <div className="px-5 sm:px-6 py-3.5 sm:py-4 bg-[#FAF7F2]/80 border-t border-[#3D2B1F]/10 flex items-center justify-between text-[9.5px] sm:text-[10px] text-[#3D2B1F]/60 flex-shrink-0">
           <span className="flex items-center gap-1.5">
             <Sparkles size={11} className="text-[#D4A373]" />
             <span>Kurush Yarn Atelier Exhibition</span>
@@ -538,7 +604,7 @@ Explore the exhibition: ${shareUrl}
           <button
             type="button"
             onClick={onClose}
-            className="font-semibold uppercase tracking-wider text-[#3D2B1F] hover:opacity-75 cursor-pointer"
+            className="font-semibold uppercase tracking-wider text-[#3D2B1F] hover:opacity-75 cursor-pointer py-1 px-2"
             style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             Done
@@ -547,4 +613,9 @@ Explore the exhibition: ${shareUrl}
       </div>
     </div>
   );
+
+  return typeof document !== 'undefined'
+    ? createPortal(modalContent, document.body)
+    : null;
 };
+
