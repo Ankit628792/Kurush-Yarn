@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from '../Brand/Logo';
-import { Menu, X, Sparkles, ShoppingBag } from 'lucide-react';
+import { Menu, X, Sparkles, Heart } from 'lucide-react';
 
 interface NavbarProps {
   onNavigate: (sectionId: string) => void;
@@ -63,9 +63,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="text-xs tracking-[0.3em] font-bold uppercase text-[#3D2B1F]" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
               Kurush Yarn
             </span>
-            <span className="text-[9px] tracking-[0.25em] uppercase text-[#3D2B1F]/50 font-medium">
-              Atelier 2024–2025
-            </span>
           </div>
         </button>
 
@@ -89,23 +86,25 @@ export const Navbar: React.FC<NavbarProps> = ({
           ))}
         </nav>
 
-        {/* Right Status & Utility Buttons */}
-        <div className="flex items-center gap-4">
-          {/* Production Status indicator from design */}
-          <div className="hidden lg:flex items-center space-x-2 text-[10px] uppercase tracking-[0.2em] text-[#3D2B1F]/70 border-r border-[#3D2B1F]/15 pr-4">
-            <div className="w-1.5 h-1.5 bg-[#D4A373] rounded-full animate-pulse"></div>
-            <span className="font-medium text-[#3D2B1F]">Atelier Active</span>
-          </div>
-
-          {/* Saved Pieces / Exhibition Wishlist */}
+        {/* Right Utility Buttons */}
+        <div className="flex items-center gap-3 md:gap-4">
+          {/* Saved Pieces / Favorite Works */}
           <button
             onClick={onOpenSaved}
-            className="relative p-2 rounded-full text-[#3D2B1F] hover:bg-[#3D2B1F]/5 transition-colors flex items-center justify-center"
-            title="Saved Exhibition Works"
+            className="relative p-2.5 rounded-full text-[#3D2B1F] hover:bg-[#3D2B1F]/5 transition-all flex items-center justify-center group"
+            title="Favorite Exhibition Works"
+            aria-label="View saved favorite exhibition works"
           >
-            <ShoppingBag size={16} />
+            <Heart
+              size={18}
+              className={`transition-all duration-300 ${
+                savedCount > 0
+                  ? 'fill-[#3D2B1F] text-[#3D2B1F] scale-105'
+                  : 'text-[#3D2B1F] group-hover:scale-110'
+              }`}
+            />
             {savedCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 bg-[#3D2B1F] text-[#FDFCFB] text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+              <span className="absolute -top-0.5 -right-0.5 bg-[#3D2B1F] text-[#FDFCFB] text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold shadow-sm animate-in zoom-in-50 duration-200">
                 {savedCount}
               </span>
             )}
@@ -146,12 +145,24 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {link.label}
               </button>
             ))}
-            <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-[#3D2B1F]/70 py-2 border-b border-[#3D2B1F]/10">
-              <div className="flex items-center space-x-2">
-                <div className="w-1.5 h-1.5 bg-[#D4A373] rounded-full"></div>
-                <span>Atelier Active</span>
+
+            {/* Mobile Saved Favorites Shortcut */}
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenSaved();
+              }}
+              className="flex items-center justify-between py-2.5 border-b border-[#3D2B1F]/10 text-xs uppercase tracking-[0.2em] text-[#3D2B1F]"
+            >
+              <div className="flex items-center gap-2 font-medium">
+                <Heart size={14} className={savedCount > 0 ? 'fill-[#3D2B1F]' : ''} />
+                <span>Saved Favorites</span>
               </div>
-            </div>
+              <span className="bg-[#3D2B1F]/10 text-[#3D2B1F] text-[10px] px-2 py-0.5 rounded-full font-bold">
+                {savedCount}
+              </span>
+            </button>
+
             <button
               onClick={() => {
                 setMobileMenuOpen(false);

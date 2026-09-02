@@ -16,7 +16,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
   selectedProduct
 }) => {
   const [selectedPieceName, setSelectedPieceName] = useState(
-    selectedProduct ? selectedProduct.name : 'Bespoke Custom Commission'
+    selectedProduct ? selectedProduct.name : 'Bespoke Custom Creation'
   );
   const [copied, setCopied] = useState(false);
 
@@ -25,7 +25,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
   const instagramUrl = siteContent.footer.instagramUrl;
   const instagramHandle = siteContent.footer.instagramHandle;
 
-  const inquiryText = `Hello Kurush Atelier! I would like to inquire about "${selectedPieceName}" seen on your digital exhibition catalog. Could you share details regarding availability, custom options, and crafting timeline?`;
+  const inquiryText = `Hello Kurush Atelier! I would like to inquire about "${selectedPieceName}" seen on your digital exhibition catalog. Could you share details regarding availability, bespoke options, and crafting timeline?`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(inquiryText);
@@ -43,7 +43,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full text-[#3D2B1F]/60 hover:text-[#3D2B1F] hover:bg-[#3D2B1F]/5 transition-colors"
+          className="absolute top-5 right-5 p-2 rounded-full text-[#3D2B1F]/60 hover:text-[#3D2B1F] hover:bg-[#3D2B1F]/5 transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <X size={18} />
@@ -57,16 +57,16 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
               style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
             >
               <Sparkles size={12} className="text-[#D4A373]" />
-              <span>Studio Contact &amp; Commissions</span>
+              <span>Studio Inquiries &amp; Custom Acquisitions</span>
             </div>
             <h2
               className="font-editorial text-2xl sm:text-3xl text-[#3D2B1F] tracking-tight"
               style={{ fontFamily: 'Georgia, "Playfair Display", serif' }}
             >
-              Connect via Instagram
+              Inquire on Instagram
             </h2>
             <p className="text-xs text-[#3D2B1F]/70 mt-1 font-sans leading-relaxed">
-              All commissions, orders, and inquiries are received and managed exclusively through our Instagram direct messages.
+              All bespoke orders, acquisitions, and inquiries are received and managed exclusively through our Instagram direct messages.
             </p>
           </div>
 
@@ -76,14 +76,14 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
               className="block text-[10px] uppercase tracking-wider text-[#3D2B1F]/70 font-semibold"
               style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
             >
-              Piece of Interest / Commission Type
+              Piece of Interest / Creation Type
             </label>
             <select
               value={selectedPieceName}
               onChange={(e) => setSelectedPieceName(e.target.value)}
               className="w-full bg-white border border-[#3D2B1F]/20 rounded-xl px-4 py-2.5 text-xs text-[#3D2B1F] focus:outline-none focus:border-[#3D2B1F] shadow-sm font-sans"
             >
-              <option value="Bespoke Custom Commission">Bespoke Custom Commission (New Handcrafted Design)</option>
+              <option value="Bespoke Custom Creation">Bespoke Custom Creation (New Handcrafted Design)</option>
               {products.map((p) => (
                 <option key={p.id} value={p.name}>
                   {p.name} ({p.price})

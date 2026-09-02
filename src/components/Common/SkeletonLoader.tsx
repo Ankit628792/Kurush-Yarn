@@ -124,7 +124,7 @@ export const ProductDetailSkeleton: React.FC = () => {
                   className="text-[9px] uppercase tracking-[0.25em] font-semibold mt-3"
                   style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
                 >
-                  Loading Multi-Angle View
+                  Loading Gallery
                 </span>
               </div>
             </div>

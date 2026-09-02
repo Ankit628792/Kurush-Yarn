@@ -3,259 +3,547 @@ import { Product } from '../types/product';
 export const products: Product[] = [
   {
     id: 'product-01',
-    slug: 'petite-oreo-macaron-charm',
+    slug: 'oreo-biscuit-keychain',
     number: '01',
-    name: 'Petite Oreo Macaron Charm',
-    subtitle: 'Dual-Tone Confectionery Key Adornment',
+    name: 'Oreo Biscuit Keychain',
+    subtitle: 'Handmade Crochet Confectionery Key Adornment',
     category: 'charm',
-    categoryLabel: 'Key Adornment',
-    tagline: 'A whimsical sculptural charm balancing rich espresso cocoa stitches with ivory milk cream.',
+    categoryLabel: 'Keychain',
+    tagline: 'A cute handmade crochet Oreo biscuit keychain, perfect for adding a playful touch to your keys, bags, or backpacks.',
     description:
-      'Handcrafted using dense spiral single-crochet disks in deep cocoa wool yarn, stuffed with hypoallergenic organic cotton and sandwiched around a scalloped vanilla cream filling. Finished with reinforced steel hardware for daily bag attachment.',
-    material: '100% Mercerized Combed Cotton & Wool Blend',
+      'A cute handmade crochet Oreo biscuit keychain, perfect for adding a playful touch to your keys, bags, or backpacks. Handcrafted using dense spiral single-crochet discs in deep cocoa yarn with a fluffy white cream center and reinforced silver keyring hardware.',
+    material: '100% Mercerized Combed Cotton & Alloy Keyring',
     palette: ['#392220', '#FBF8F8', '#8A5A54'],
-    dimensions: 'Ø 5.5 cm × H 3.2 cm',
-    weight: '38 g',
-    stitchCount: '480 hand stitches',
-    craftTime: '4.5 hours per piece',
+    dimensions: 'Ø 6.0 cm',
+    weight: '13 g',
+    stitchCount: '300 hand stitches',
+    craftTime: '1.5 hours per piece',
     originalImage: '/images/products/product-01/hero.jpg',
     heroImage: '/images/products/product-01/hero.jpg',
     featured: true,
     gallery: [
       {
         type: 'front',
-        label: 'Straight-on View',
+        label: '01',
         src: '/images/products/product-01/hero.jpg',
-        alt: 'Front studio perspective of Crocheted Oreo Macaron Charm on white tote',
-        description: 'Frontal silhouette highlighting waffle-weave crochet tension and keyring attachment.'
+        alt: 'Handmade crochet Oreo Biscuit Keychain'
       },
       {
-        type: 'angle-right',
-        label: 'Side Profile',
-        src: '/images/products/product-01/angle-side.jpg',
-        alt: 'Side 45-degree angle profile of Oreo Macaron Charm',
-        description: 'Reveals the layered cream cushion and dimensional edge stitches.'
+        type: 'detail',
+        label: '02',
+        src: '/images/products/product-01/angled.jpg',
+        alt: 'Handmade crochet Oreo Biscuit Keychain'
       },
       {
-        type: 'texture',
-        label: 'Yarn Texture Macro',
-        src: '/images/brand/yarn_macro.jpg',
-        alt: 'Microscopic macro yarn fiber texture',
-        description: 'Close-up view of the double-ply twisted cotton fibers and tight crochet loops.'
-      }
-    ],
+        type: 'side',
+        label: '03',
+        src: '/images/products/product-01/side.jpg',
+        alt: 'Handmade crochet Oreo Biscuit Keychain'
+      }],
     details: {
-      dimensions: 'Diameter: 55mm | Thickness: 32mm | Chain drop: 65mm',
-      process: 'Continuous spiral crochet method with invisible seam closure and inner tension ring.',
+      dimensions: 'Diameter: 6.0 cm | Thickness: ~2.5 cm | Weight: 13 g',
+      process: 'Hand-crocheted spiral circle technique with 300 individual stitches, stuffed with hypoallergenic organic cotton and securely joined with reinforced split keyring.',
       story:
-        'Born from childhood nostalgic confections, this piece translates everyday comfort foods into tactile wool sculpture. Each disc is calibrated for optimal palm ergonomics.',
-      fiberOrigin: 'Ethically sourced organic cotton fibers from ethical family-run mills.',
-      careInstructions: 'Spot clean gently with damp muslin cloth and mild wool detergent. Air dry flat in shade.',
-      hardware: 'Brushed solid nickel-free alloy keyring with swivel snap clip'
+        'A delightful, nostalgic handmade accessory. Designed to bring whimsical charm to daily essentials, handbags, backpacks, and keys with an ultra-light 13g weight.',
+      fiberOrigin: '100% hypoallergenic organic combed cotton yarn from ethical mills.',
+      careInstructions: 'Spot clean gently with a damp muslin cloth and mild detergent. Air dry flat in shade.',
+      hardware: 'Brushed solid nickel-free alloy split keyring with sturdy link chain'
     },
-    price: '₹149',
+    price: '₹119',
     edition: 'Atelier Open Edition'
   },
   {
     id: 'product-02',
-    slug: 'solstice-sunflower-charm',
+    slug: 'sunflower-keychain',
     number: '02',
-    name: 'Solstice Sunflower Charm',
-    subtitle: 'Sunburst Ochre Botanical Bag Accent',
+    name: 'Sunflower Keychain',
+    subtitle: 'Handmade Crochet Sunflower Key Adornment',
     category: 'charm',
-    categoryLabel: 'Key Adornment',
-    tagline: 'Radiant botanical warmth woven through layered double-crochet petals and textured seed spirals.',
+    categoryLabel: 'Keychain',
+    tagline: 'A cheerful handmade crochet sunflower keychain, perfect for decorating your keys, bags, or backpacks.',
     description:
-      'Inspired by heliotropic summer fields, this sunflower charm features an intricately textured chocolate-brown seed core encircled by 14 sculpted sun-gold petals with pinched tips.',
-    material: 'Organic Gassed Cotton Yarn & Recycled Wool',
-    palette: ['#E6A117', '#392220', '#C57D18'],
-    dimensions: 'Ø 7.8 cm × D 2.4 cm',
-    weight: '32 g',
+      'A cheerful handmade crochet sunflower keychain, perfect for decorating your keys, bags, or backpacks.',
+    material: '100% Mercerized Combed Cotton Yarn & Silver Alloy Keyring',
+    palette: ['#E6A117', '#392220', '#2E4A28'],
+    dimensions: 'Ø 6.0 cm',
+    weight: '10 g',
     stitchCount: '620 hand stitches',
-    craftTime: '5.2 hours per piece',
+    craftTime: '1.0 hour per piece',
     originalImage: '/images/products/product-02/hero.jpg',
     heroImage: '/images/products/product-02/hero.jpg',
     featured: true,
     gallery: [
       {
         type: 'front',
-        label: 'Full Sunburst View',
+        label: '01',
         src: '/images/products/product-02/hero.jpg',
-        alt: 'Front studio perspective of Solstice Sunflower Charm on tote',
-        description: 'Geometric petal symmetry and central seed spiral alignment.'
+        alt: 'Handmade crochet Sunflower Keychain'
       },
       {
-        type: 'angle-left',
-        label: '45° Detail Perspective',
-        src: '/images/products/product-02/angle-side.jpg',
-        alt: 'Angled detail shot of Sunflower crochet petals',
-        description: 'Shows petal relief depth and layered yarn tension.'
+        type: 'detail',
+        label: '02',
+        src: '/images/products/product-02/top.jpg',
+        alt: 'Handmade crochet Sunflower Keychain top view'
       },
       {
-        type: 'texture',
-        label: 'Fiber Macro',
-        src: '/images/brand/yarn_macro.jpg',
-        alt: 'Macro texture of sun-gold cotton fiber',
-        description: 'Vibrant natural vegetable-dyed ochre yarn filaments.'
-      }
-    ],
+        type: 'side',
+        label: '03',
+        src: '/images/products/product-02/side.jpg',
+        alt: 'Handmade crochet Sunflower Keychain side view'
+      },
+      {
+        type: 'detail',
+        label: '04',
+        src: '/images/products/product-02/bottom.jpg',
+        alt: 'Handmade crochet Sunflower Keychain bottom view'
+      }],
     details: {
-      dimensions: 'Diameter: 78mm | Depth: 24mm | Chain drop: 70mm',
-      process: 'Dual-stage crochet: spiral seed disk followed by integrated picot petal sculpting.',
+      dimensions: 'Diameter: 6.0 cm | Thickness: ~1.8 cm | Weight: 10 g',
+      process: 'Hand-crocheted spiral center disc with 620 individual stitches, encircled with vibrant yellow pointed petals and joined with a reinforced silver keyring.',
       story:
-        'A study in botanical geometry and tactile warmth. Designed to bring kinetic sunshine to tote bags, backpacks, and luggage straps.',
-      fiberOrigin: 'Plant-dyed natural long-staple cotton yarn.',
-      careInstructions: 'Gently reshape petals with fingertips if pressed. Keep away from direct abrasive friction.',
-      hardware: 'Reinforced stainless steel link chain with spring-gate ring'
+        'A cheerful handmade crochet sunflower keychain, perfect for decorating your keys, bags, or backpacks with radiant handmade warmth.',
+      fiberOrigin: '100% hypoallergenic organic combed cotton yarn in botanical yellow, rich chocolate brown, and forest green.',
+      careInstructions: 'Spot clean gently with a damp cloth and mild soap. Air dry flat in shade.',
+      hardware: 'Polished silver nickel-free alloy split keyring with reinforced link chain'
     },
-    price: '₹179',
-    edition: 'Seasonal Solstice Release'
+    price: '₹119',
+    edition: 'Atelier Open Edition'
   },
   {
-    id: 'product-03',
-    slug: 'dawn-tulip-botanical-stem',
+    id: 'product-03-pink',
+    slug: 'pink-tulip-flower-bulb',
     number: '03',
-    name: 'Dawn Tulip Single Stem',
-    subtitle: 'Blush-Peach Architectural Blossom',
+    name: 'Pink Tulip Flower Bulb',
+    subtitle: 'Blossom Pink Handcrafted Bulb',
     category: 'botanical',
-    categoryLabel: 'Botanical Stem',
-    tagline: 'An everlasting morning bloom shaped in soft peach yarn with ribbed foliage.',
+    categoryLabel: 'Flowers',
+    tagline: 'A handmade crochet pink tulip flower bulb, carefully crafted in soft petal pink cotton.',
     description:
-      'A sculptural single-stem tulip crafted in soft peach-blush yarn. Featuring an architectural 3D cup petal geometry supported by an internal wire armature wrapped in forest moss yarn, flanked by two graceful ribbed leaves.',
-    material: 'Natural Milk Cotton Yarn & Flexible Copper Core',
-    palette: ['#F2B49B', '#4D7C3B', '#D88A72'],
-    dimensions: 'H 32 cm × W 11 cm',
-    weight: '45 g',
-    stitchCount: '890 hand stitches',
-    craftTime: '6.5 hours per stem',
-    originalImage: '/images/products/product-03/hero.jpg',
-    heroImage: '/images/products/product-03/hero.jpg',
+      'A handmade crochet pink tulip flower bulb in blossom pink yarn with neat green stem and sculpted leaf.',
+    material: '100% Fine Combed Cotton Yarn & Organic Fill',
+    palette: ['#F194B8', '#387332'],
+    colors: ['#F194B8'],
+    dimensions: '25 cm',
+    weight: '17 g',
+    stitchCount: '1,200 hand stitches',
+    craftTime: '2.0 hours per piece',
+    originalImage: '/images/products/product-03/pink_front.jpg',
+    heroImage: '/images/products/product-03/pink_front.jpg',
     featured: true,
     gallery: [
       {
         type: 'front',
-        label: 'Studio Still Life',
-        src: '/images/products/product-03/hero.jpg',
-        alt: 'Handcrafted Dawn Tulip Stem on linen with craft basket',
-        description: 'Full vertical silhouette with organic leaf curvature.'
+        label: '01',
+        src: '/images/products/product-03/pink_front.jpg',
+        alt: 'Handmade crochet Pink Tulip Flower Bulb'
       },
       {
-        type: 'texture',
-        label: 'Woven Stitch Detail',
-        src: '/images/brand/yarn_macro.jpg',
-        alt: 'Macro texture of peach tulip crochet stitches',
-        description: 'Soft cashmere-touch milk cotton stitch close-up.'
-      }
-    ],
+        type: 'detail',
+        label: '02',
+        src: '/images/products/product-03/pink_angled.jpg',
+        alt: 'Handmade crochet Pink Tulip Flower Bulb angled view'
+      },
+      {
+        type: 'detail',
+        label: '03',
+        src: '/images/products/product-03/pink_grown.jpg',
+        alt: 'Handmade crochet Pink Tulip Flower Bulb with blooming stem'
+      }],
     details: {
-      dimensions: 'Total Length: 320mm | Flower Head: 75mm × 60mm | Leaves: 140mm',
-      process: 'Three-dimensional spherical shaping with hand-wrapped botanical stem binding.',
-      story:
-        'Celebrating the fleeting beauty of spring florals through permanent fiber craft. Never wilts, requiring zero water while radiating gentle quietude.',
-      fiberOrigin: 'Hypoallergenic milk fiber blended with long-strand cotton.',
-      careInstructions: 'Lightly dust with soft makeup brush or gentle cool blow dryer. Stems are bendable to fit various vases.'
+      dimensions: 'Length: 25 cm | Weight: 17 g',
+      process: 'Handmade crochet tulip flower bulb crafted with 1,200 individual stitches in blossom pink cotton.',
+      story: 'Crafted to capture the gentle optimism of springtime blossom pink, adding soft pastel serenity to any interior space.',
+      fiberOrigin: '100% fine combed cotton yarn.',
+      careInstructions: 'Gently dust with a soft brush or dry cloth. Store in a dry place.'
     },
-    price: '₹249',
+    price: '₹149',
+    edition: 'Botanical Heritage Collection'
+  },
+  {
+    id: 'product-03-peach',
+    slug: 'peach-tulip-flower-bulb',
+    number: '04',
+    name: 'Peach Tulip Flower Bulb',
+    subtitle: 'Pastel Peach Handcrafted Bulb',
+    category: 'botanical',
+    categoryLabel: 'Flowers',
+    tagline: 'A handmade crochet peach tulip flower bulb in soft pastel peach-orange yarn with green stem.',
+    description:
+      'A handmade crochet peach tulip flower bulb, carefully crafted in delicate peach yarn with neat green foliage.',
+    material: '100% Fine Combed Cotton Yarn & Organic Fill',
+    palette: ['#F4A582', '#387332'],
+    colors: ['#F4A582'],
+    dimensions: '25 cm',
+    weight: '17 g',
+    stitchCount: '1,200 hand stitches',
+    craftTime: '2.0 hours per piece',
+    originalImage: '/images/products/product-03/peach_front.jpg',
+    heroImage: '/images/products/product-03/peach_front.jpg',
+    featured: true,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/product-03/peach_front.jpg',
+        alt: 'Handmade crochet Peach Tulip Flower Bulb'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/product-03/peach_angled.jpg',
+        alt: 'Handmade crochet Peach Tulip Flower Bulb angled view'
+      }],
+    details: {
+      dimensions: 'Length: 25 cm | Weight: 17 g',
+      process: 'Handmade crochet tulip flower bulb crafted with 1,200 individual stitches in warm peach cotton.',
+      story: 'Radiating soft, sunny warmth with delicate peach tones and subtle botanical realism.',
+      fiberOrigin: '100% fine combed cotton yarn.',
+      careInstructions: 'Gently dust with a soft brush or dry cloth. Store in a dry place.'
+    },
+    price: '₹149',
     edition: 'Botanical Heritage Collection'
   },
   {
     id: 'product-04',
-    slug: 'meadow-daisy-flower-stem',
-    number: '04',
-    name: 'Meadow Daisy Stem',
-    subtitle: 'Ivory & Chamomile Sculptural Bloom',
+    slug: 'bloomed-tulip-flower',
+    number: '05',
+    name: 'Bloomed Tulip Flower',
+    subtitle: 'Handmade Crochet Bloomed Tulip Flower',
     category: 'botanical',
-    categoryLabel: 'Botanical Stem',
-    tagline: 'Pure white fluted petals framing a dense honey-colored pollen dome.',
+    categoryLabel: 'Flowers',
+    tagline: 'A handmade crochet bloomed tulip flower, carefully crafted to showcase graceful open petals in rich artisan hues.',
     description:
-      'A timeless wild meadow daisy reimagined in crisp white yarn with textured bobble-stitch yellow disk floret. The stem is bendable to allow bespoke floral styling in ceramic vases.',
-    material: 'Premium Organic Cotton & Linen Fiber',
-    palette: ['#FBF8F8', '#EBB02D', '#3B6E32'],
-    dimensions: 'H 29 cm × W 9 cm',
-    weight: '36 g',
-    stitchCount: '740 hand stitches',
-    craftTime: '5.0 hours per stem',
-    originalImage: '/images/products/product-04/hero.jpg',
-    heroImage: '/images/products/product-04/hero.jpg',
+      'A handmade crochet bloomed tulip flower, carefully crafted to showcase graceful open petals in rich artisan hues. Supported by a flexible green stem wrapped in neat cotton yarn with botanical foliage, offering everlasting beauty without fading.',
+    material: '100% Fine Combed Cotton Yarn & Flexible Wire Core',
+    palette: ['#3B6EB5', '#D62D74', '#7A4B96', '#7BAFE0'],
+    colors: ['#3B6EB5', '#D62D74', '#7A4B96', '#7BAFE0'],
+    dimensions: '28 cm',
+    weight: '22 g',
+    stitchCount: '1,450 hand stitches',
+    craftTime: '3.0 hours per piece',
+    originalImage: '/images/products/bloomed-tulip/deep_pink_hero.jpg',
+    heroImage: '/images/products/bloomed-tulip/deep_pink_hero.jpg',
     featured: true,
     gallery: [
       {
         type: 'front',
-        label: 'Studio Composition',
-        src: '/images/products/product-04/hero.jpg',
-        alt: 'Handcrafted Meadow Daisy Stem with baby breath florals',
-        description: 'Crisp petal arrangement and organic foliage placement.'
+        label: '01',
+        src: '/images/products/bloomed-tulip/deep_pink_hero.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower - Deep Pink'
       },
       {
-        type: 'texture',
-        label: 'Floret Center Macro',
-        src: '/images/brand/yarn_macro.jpg',
-        alt: 'Macro detail of yellow daisy center',
-        description: 'High-relief bobble stitch texture simulating pollen grain clusters.'
+        type: 'detail',
+        label: '02',
+        src: '/images/products/bloomed-tulip/deep_pink_angle.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower - Deep Pink Angled'
+      },
+      {
+        type: 'detail',
+        label: '03',
+        src: '/images/products/bloomed-tulip/blue_hero.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower - Blue'
+      },
+      {
+        type: 'detail',
+        label: '04',
+        src: '/images/products/bloomed-tulip/blue_angle.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower - Blue Angled'
+      },
+      {
+        type: 'detail',
+        label: '05',
+        src: '/images/products/bloomed-tulip/purple_hero.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower - Purple'
+      },
+      {
+        type: 'detail',
+        label: '06',
+        src: '/images/products/bloomed-tulip/purple_angle.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower - Purple Angled'
+      },
+      {
+        type: 'detail',
+        label: '07',
+        src: '/images/products/bloomed-tulip/sky_blue_hero.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower - Sky Blue'
+      },
+      {
+        type: 'detail',
+        label: '08',
+        src: '/images/products/bloomed-tulip/sky_blue_angle.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower - Sky Blue Angled'
+      }],
+    variants: [
+      {
+        name: 'Blue',
+        images: [
+          '/images/products/bloomed-tulip/blue_hero.jpg',
+          '/images/products/bloomed-tulip/blue_angle.jpg'
+        ]
+      },
+      {
+        name: 'Deep Pink',
+        images: [
+          '/images/products/bloomed-tulip/deep_pink_hero.jpg',
+          '/images/products/bloomed-tulip/deep_pink_angle.jpg'
+        ]
+      },
+      {
+        name: 'Purple',
+        images: [
+          '/images/products/bloomed-tulip/purple_hero.jpg',
+          '/images/products/bloomed-tulip/purple_angle.jpg'
+        ]
+      },
+      {
+        name: 'Sky Blue',
+        images: [
+          '/images/products/bloomed-tulip/sky_blue_hero.jpg',
+          '/images/products/bloomed-tulip/sky_blue_angle.jpg'
+        ]
       }
     ],
     details: {
-      dimensions: 'Total Length: 290mm | Blossom Diameter: 90mm',
-      process: 'Multi-layer petal foundation with integrated leaf armature.',
+      dimensions: 'Length: 28 cm | Flower Head: 8.5 cm × 7.0 cm | Weight: 22 g',
+      process: 'Hand-crocheted open petal fluting with 1,450 individual stitches, hypoallergenic organic fill, and bendable wire-reinforced botanical stem.',
       story:
-        'Inspired by alpine wildflowers swaying in quiet meadows. Each petal is individually cast and connected by hand without synthetic adhesives.',
-      fiberOrigin: '100% organic unbleached cotton grown without pesticides.',
-      careInstructions: 'Keep in dry interior environments. Shape petals gently with fingertips.'
+        'A handmade crochet bloomed tulip flower, carefully crafted to capture the fleeting wonder of a full spring bloom in everlasting fiber art. Designed to bring vibrant botanical warmth to desks, bedside tables, and ceramic vases.',
+      fiberOrigin: '100% fine combed cotton yarn in royal blue, deep pink, violet purple, and pastel sky blue tones.',
+      careInstructions: 'Gently dust with a soft dry cloth or cool blow dryer. Stems are bendable to fit various vases.'
     },
-    price: '₹229',
+    price: '₹179',
     edition: 'Botanical Heritage Collection'
   },
   {
     id: 'product-05',
-    slug: 'roseate-tulip-stem',
-    number: '05',
-    name: 'Roseate Tulip Stem',
-    subtitle: 'Blossom Pink Sculptural Petal Cup',
+    slug: 'bloomed-tulip-blue',
+    number: '06',
+    name: 'Bloomed Tulip - Blue',
+    subtitle: 'Royal Blue Open Blossom',
     category: 'botanical',
-    categoryLabel: 'Botanical Stem',
-    tagline: 'A vibrant pink tulip capturing the graceful opening arc of spring renewal.',
+    categoryLabel: 'Flowers',
+    tagline: 'A vibrant royal blue handmade crochet bloomed tulip flower on bendable green stem.',
     description:
-      'Crafted in a rich blossom-pink colorway, this tulip features ribbed petal contours and elongated emerald foliage. Perfectly balanced weight allows it to stand gracefully in single-stem test-tube vases.',
+      'A vibrant royal blue handmade crochet bloomed tulip flower on a flexible wire-reinforced green stem with sculpted foliage.',
     material: '100% Fine Combed Cotton Yarn & Wire Core',
-    palette: ['#F48CA4', '#387332', '#F7B7C7'],
-    dimensions: 'H 31 cm × W 10.5 cm',
-    weight: '42 g',
-    stitchCount: '860 hand stitches',
-    craftTime: '6.0 hours per stem',
-    originalImage: '/images/products/product-05/hero.jpg',
-    heroImage: '/images/products/product-05/hero.jpg',
+    palette: ['#3B6EB5', '#2E4A28'],
+    colors: ['#3B6EB5'],
+    dimensions: '28 cm',
+    weight: '22 g',
+    stitchCount: '1,450 hand stitches',
+    craftTime: '3.0 hours per piece',
+    originalImage: '/images/products/bloomed-tulip/blue_hero.jpg',
+    heroImage: '/images/products/bloomed-tulip/blue_hero.jpg',
     featured: false,
     gallery: [
       {
         type: 'front',
-        label: 'Full Stem Profile',
-        src: '/images/products/product-05/hero.jpg',
-        alt: 'Roseate Pink Tulip Stem on woven linen background',
-        description: 'Sculpted petal curve and elongated emerald green leaf.'
+        label: '01',
+        src: '/images/products/bloomed-tulip/blue_hero.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower in Blue'
       },
       {
-        type: 'texture',
-        label: 'Pink Yarn Weave',
-        src: '/images/brand/yarn_macro.jpg',
-        alt: 'Macro detail of pink yarn loop density',
-        description: 'Even tension stitch geometry creating a smooth, velvety outer surface.'
-      }
-    ],
+        type: 'detail',
+        label: '02',
+        src: '/images/products/bloomed-tulip/blue_angle.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower Blue angled view'
+      }],
     details: {
-      dimensions: 'Total Length: 310mm | Flower Head: 78mm × 62mm',
-      process: 'Continuous single-crochet taper with wire-reinforced ribbing.',
-      story:
-        'Representing unconditional affection and quiet optimism, the Roseate Tulip combines classical Japanese amigurumi technique with Scandinavian minimalism.',
-      fiberOrigin: 'Eco-dyed combed cotton yarn with OEKO-TEX Standard 100 certification.',
-      careInstructions: 'Avoid direct prolonged sunlight exposure to preserve hue brilliance.'
+      dimensions: 'Length: 28 cm | Weight: 22 g',
+      process: 'Hand-crocheted open petal structure with 1,450 individual stitches in saturated royal blue cotton.',
+      story: 'A calming, rich blue bloomed tulip handcrafted to bring serenity and botanical color to any corner of your home.',
+      fiberOrigin: '100% fine combed cotton yarn.',
+      careInstructions: 'Gently dust with a soft brush. Keep in dry interior spaces.'
     },
-    price: '₹249',
+    price: '₹179',
     edition: 'Botanical Heritage Collection'
   },
   {
     id: 'product-06',
+    slug: 'bloomed-tulip-deep-pink',
+    number: '07',
+    name: 'Bloomed Tulip - Deep Pink',
+    subtitle: 'Rich Magenta Blossom',
+    category: 'botanical',
+    categoryLabel: 'Flowers',
+    tagline: 'A striking deep pink handmade crochet bloomed tulip flower with lush green foliage.',
+    description:
+      'A striking deep pink handmade crochet bloomed tulip flower crafted with vivid magenta-rose yarn and slender bendable stem.',
+    material: '100% Fine Combed Cotton Yarn & Wire Core',
+    palette: ['#D62D74', '#2E4A28'],
+    colors: ['#D62D74'],
+    dimensions: '28 cm',
+    weight: '22 g',
+    stitchCount: '1,450 hand stitches',
+    craftTime: '3.0 hours per piece',
+    originalImage: '/images/products/bloomed-tulip/deep_pink_hero.jpg',
+    heroImage: '/images/products/bloomed-tulip/deep_pink_hero.jpg',
+    featured: false,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/bloomed-tulip/deep_pink_hero.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower in Deep Pink'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/bloomed-tulip/deep_pink_angle.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower Deep Pink angled view'
+      }],
+    details: {
+      dimensions: 'Length: 28 cm | Weight: 22 g',
+      process: 'Hand-crocheted open petal contouring with rich magenta yarn loops and neat stem wrapping.',
+      story: 'Radiating passionate warmth and playful vibrancy, this deep pink tulip never wilts or fades.',
+      fiberOrigin: '100% combed cotton yarn with rich dye saturation.',
+      careInstructions: 'Spot clean or dry dust. Avoid wet washing.'
+    },
+    price: '₹179',
+    edition: 'Botanical Heritage Collection'
+  },
+  {
+    id: 'product-07',
+    slug: 'bloomed-tulip-purple',
+    number: '08',
+    name: 'Bloomed Tulip - Purple',
+    subtitle: 'Violet Bloom & Emerald Stem',
+    category: 'botanical',
+    categoryLabel: 'Flowers',
+    tagline: 'An elegant purple handmade crochet bloomed tulip flower with fluted petal curves.',
+    description:
+      'An elegant violet-purple handmade crochet bloomed tulip flower crafted with delicate precision and bendable stem.',
+    material: '100% Fine Combed Cotton Yarn & Wire Core',
+    palette: ['#7A4B96', '#2E4A28'],
+    colors: ['#7A4B96'],
+    dimensions: '28 cm',
+    weight: '22 g',
+    stitchCount: '1,450 hand stitches',
+    craftTime: '3.0 hours per piece',
+    originalImage: '/images/products/bloomed-tulip/purple_hero.jpg',
+    heroImage: '/images/products/bloomed-tulip/purple_hero.jpg',
+    featured: false,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/bloomed-tulip/purple_hero.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower in Purple'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/bloomed-tulip/purple_angle.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower Purple angled view'
+      }],
+    details: {
+      dimensions: 'Length: 28 cm | Weight: 22 g',
+      process: '1,450 hand stitches creating refined spherical-to-fluted petal geometry in violet cotton.',
+      story: 'A serene and regal touch of nature, crafted for minimalists and floral enthusiasts alike.',
+      fiberOrigin: '100% fine combed cotton yarn.',
+      careInstructions: 'Dust with a soft brush. Keep away from water.'
+    },
+    price: '₹179',
+    edition: 'Botanical Heritage Collection'
+  },
+  {
+    id: 'product-08',
+    slug: 'bloomed-tulip-sky-blue',
+    number: '09',
+    name: 'Bloomed Tulip - Sky Blue',
+    subtitle: 'Pastel Sky Blue Bloom',
+    category: 'botanical',
+    categoryLabel: 'Flowers',
+    tagline: 'A gentle pastel sky blue handmade crochet bloomed tulip flower with fresh spring charm.',
+    description:
+      'A gentle pastel sky blue handmade crochet bloomed tulip flower with graceful open petal contour and flexible stem.',
+    material: '100% Fine Combed Cotton Yarn & Wire Core',
+    palette: ['#7BAFE0', '#2E4A28'],
+    colors: ['#7BAFE0'],
+    dimensions: '28 cm',
+    weight: '22 g',
+    stitchCount: '1,450 hand stitches',
+    craftTime: '3.0 hours per piece',
+    originalImage: '/images/products/bloomed-tulip/sky_blue_hero.jpg',
+    heroImage: '/images/products/bloomed-tulip/sky_blue_hero.jpg',
+    featured: false,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/bloomed-tulip/sky_blue_hero.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower in Sky Blue'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/bloomed-tulip/sky_blue_angle.jpg',
+        alt: 'Handmade crochet Bloomed Tulip Flower Sky Blue angled view'
+      }],
+    details: {
+      dimensions: 'Length: 28 cm | Weight: 22 g',
+      process: 'Hand-crocheted open petal structure in soft baby sky blue cotton with organic fill.',
+      story: 'Evoking crisp morning skies and spring breezes, bringing an airy lightness to interior spaces.',
+      fiberOrigin: '100% fine combed cotton yarn.',
+      careInstructions: 'Gently dust with a dry cloth. Bend stem gently to fit vases.'
+    },
+    price: '₹179',
+    edition: 'Botanical Heritage Collection'
+  },
+  {
+    id: 'product-09',
+    slug: 'meadow-daisy-flower-stem',
+    number: '10',
+    name: 'Meadow Daisy Stem',
+    subtitle: 'Ivory & Chamomile Sculptural Bloom',
+    category: 'botanical',
+    categoryLabel: 'Flowers',
+    tagline: 'Pure white fluted petals framing a dense textured yellow pollen dome with green stem and leaf.',
+    description:
+      'A handmade crochet daisy flower stem featuring pure white petals, a textured golden-yellow dome floret, and a slender green stem with a delicate leaf.',
+    material: '100% Fine Combed Cotton Yarn & Organic Fill',
+    palette: ['#FBF8F8', '#EBB02D', '#3B6E32'],
+    dimensions: '25 cm',
+    weight: '11 g',
+    stitchCount: '600 hand stitches',
+    craftTime: '1.5 hours per piece',
+    originalImage: '/images/products/product-04/front.jpg',
+    heroImage: '/images/products/product-04/front.jpg',
+    featured: true,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/product-04/front.jpg',
+        alt: 'Handcrafted Meadow Daisy Stem front view'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/product-04/angled.jpg',
+        alt: 'Handcrafted Meadow Daisy Stem three-quarter angled view'
+      },
+      {
+        type: 'detail',
+        label: '03',
+        src: '/images/products/product-04/macro.jpg',
+        alt: 'Close-up macro detail of yellow daisy center and white petals'
+      }],
+    details: {
+      dimensions: 'Length: 25 cm | Weight: 11 g',
+      process: 'Hand-crocheted daisy flower stem crafted with 600 precision stitches and delicate leaf armature.',
+      story:
+        'Inspired by fresh morning meadows and wild daisies. Features an enduring hand-crocheted bloom that adds permanent cheer to any table, vase, or workspace.',
+      fiberOrigin: '100% fine combed cotton yarn in chamomile yellow, milk white, and meadow green.',
+      careInstructions: 'Keep in dry interior environments. Gently dust with a soft dry cloth.'
+    },
+    price: '₹139',
+    edition: 'Botanical Heritage Collection'
+  },
+  {
+    id: 'product-10',
     slug: 'papillon-magenta-hair-bows',
-    number: '06',
+    number: '11',
     name: 'Papillon Hair Adornments (Set of 2)',
     subtitle: 'Sculpted Magenta Butterfly Clips',
     category: 'wearable',
@@ -275,19 +563,10 @@ export const products: Product[] = [
     gallery: [
       {
         type: 'front',
-        label: 'Worn & Flat Lay View',
+        label: '01',
         src: '/images/products/product-06/hero.jpg',
-        alt: 'Pair of handcrafted magenta butterfly hair bows in hair and on knit',
-        description: 'Demonstrating scale when worn in hair alongside tactile knit flat-lay.'
-      },
-      {
-        type: 'texture',
-        label: 'Wing Stitch Contour',
-        src: '/images/brand/yarn_macro.jpg',
-        alt: 'Macro of magenta wing crochet ridges',
-        description: 'Scalloped wing edges with reinforced center cinch knot.'
-      }
-    ],
+        alt: 'Pair of handcrafted magenta butterfly hair bows'
+      }],
     details: {
       dimensions: 'Width: 68mm | Height: 52mm | Clip Length: 45mm',
       process: 'Symmetrical two-wing crochet with center yarn-wrap cinch and reinforced back base.',
@@ -300,50 +579,563 @@ export const products: Product[] = [
     edition: 'Atelier Wearable Series'
   },
   {
-    id: 'product-07',
-    slug: 'coral-bell-lily-bonsai',
-    number: '07',
-    name: 'Coral Bell Flora Bonsai',
-    subtitle: 'Twin Blooming Lilies in Woven Basket Pot',
-    category: 'sculpture',
-    categoryLabel: 'Sculptural Plant',
-    tagline: 'A self-standing potted floral centerpiece blooming with twin coral bell lilies.',
+    id: 'product-11',
+    slug: 'lily-flower-pot',
+    number: '12',
+    name: 'Lily Flower Pot',
+    subtitle: 'Handcrafted Blooming Lily in Woven Pot',
+    category: 'botanical',
+    categoryLabel: 'Flowers',
+    tagline: 'A self-standing handmade crochet lily flower in a charming woven pot.',
     description:
-      'A centerpiece sculpture featuring two blooming coral-pink lilies with intricate yellow stamen, arching green leaves, and a realistic dark chocolate crochet soil mound encased inside a ribbed caramel yarn pot.',
-    material: 'Natural Cotton, Jute Core & Weighted Ceramic Beads',
+      'A handmade crochet lily flower pot featuring blooming lilies with delicate stamen, vibrant green leaves, and a textured crochet pot base.',
+    material: '100% Fine Combed Cotton Yarn & Organic Fill',
     palette: ['#F37A68', '#427A3A', '#B57C4F', '#392220'],
-    dimensions: 'H 22 cm × W 16 cm × D 14 cm',
-    weight: '210 g',
-    stitchCount: '2,400 hand stitches',
-    craftTime: '14 hours per sculpture',
+    dimensions: '20 cm',
+    weight: '50 g',
+    stitchCount: '1,800 hand stitches',
+    craftTime: '4.0 hours per piece',
     originalImage: '/images/products/product-07/hero.jpg',
     heroImage: '/images/products/product-07/hero.jpg',
     featured: true,
     gallery: [
       {
         type: 'front',
-        label: 'Full Potted Composition',
-        src: '/images/products/product-07/hero.jpg',
-        alt: 'Handcrafted Coral Bell Lily Bonsai plant in crochet pot',
-        description: 'Three-dimensional floral arch with textured woven basket base.'
+        label: '01',
+        src: '/images/products/product-07/front.jpg',
+        alt: 'Handmade crochet Lily Flower Pot front view'
       },
       {
-        type: 'texture',
-        label: 'Woven Basket Texture',
-        src: '/images/brand/yarn_macro.jpg',
-        alt: 'Macro texture of basket pot crochet stitches',
-        description: 'Thick heavy-gauge ribbed crochet creating a sturdy, tactile pot vessel.'
-      }
-    ],
+        type: 'detail',
+        label: '02',
+        src: '/images/products/product-07/angled.jpg',
+        alt: 'Handmade crochet Lily Flower Pot angled perspective'
+      },
+      {
+        type: 'detail',
+        label: '03',
+        src: '/images/products/product-07/top.jpg',
+        alt: 'Handmade crochet Lily Flower Pot top overhead view'
+      },
+      {
+        type: 'detail',
+        label: '04',
+        src: '/images/products/product-07/lifestyle.jpg',
+        alt: 'Handmade crochet Lily Flower Pot styled on wooden desk decor placement'
+      }],
     details: {
-      dimensions: 'Height: 220mm | Pot Diameter: 110mm | Flower Span: 160mm',
-      process: 'Complex multi-component assembly: 12 hand-crocheted petal segments, 2 stamen cores, 4 leaves, weighted basket pot.',
+      dimensions: 'Height: 20 cm | Weight: 50 g',
+      process: 'Hand-crocheted blooming lily flowers with 1,800 precision stitches, soft organic fill, and woven pot base.',
       story:
-        'The crowning sculpture of the Kurush Atelier collection. Weighted with organic clay beads inside the base so it remains stable on desks, consoles, and bedside tables.',
-      fiberOrigin: 'Fair-trade natural dyed cotton and plant fibers.',
-      careInstructions: 'Keep in dry interior spaces. Avoid moisture.'
+        'Crafted to bring everlasting botanical charm and warmth to desks, shelves, and bedside tables with delicate floral realism.',
+      fiberOrigin: '100% fine combed cotton yarn and natural fibers.',
+      careInstructions: 'Keep in dry interior spaces. Gently dust with a soft dry cloth.'
     },
-    price: '₹499',
-    edition: 'Limited Studio Series (Signed)'
+    price: '₹349',
+    edition: 'Botanical Heritage Collection'
+  },
+  {
+    id: 'product-12',
+    slug: 'jasmine-hair-ornament',
+    number: '13',
+    name: 'Jasmine Hair Ornament',
+    subtitle: 'Handmade Crochet Jasmine Floral Hair Adornment (Gajra / Veni)',
+    category: 'wearable',
+    categoryLabel: 'Hair Accessories',
+    tagline: 'A delicate handmade crochet jasmine hair ornament, perfect for adding an elegant floral touch to traditional, festive, or everyday hairstyles.',
+    description:
+      'A delicate handmade crochet jasmine hair ornament, perfect for adding an elegant floral touch to traditional, festive, or everyday hairstyles.',
+    material: '100% Fine Combed Mercerized Cotton Yarn',
+    palette: ['#FFFFFF', '#4A7C36', '#FAF6F0'],
+    colors: [],
+    variants: [],
+    dimensions: '30 cm',
+    weight: '20 g',
+    stitchCount: '1,500 hand stitches',
+    craftTime: '4.0 hours per piece',
+    originalImage: '/images/products/product-08/hero.jpg',
+    heroImage: '/images/products/product-08/hero.jpg',
+    featured: true,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/product-08/front.jpg',
+        alt: 'Handmade crochet Jasmine Hair Ornament S-curve layout'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/product-08/coiled.jpg',
+        alt: 'Handmade crochet Jasmine Hair Ornament coiled garland ring'
+      },
+      {
+        type: 'detail',
+        label: '03',
+        src: '/images/products/product-08/lifestyle.jpg',
+        alt: 'Handmade crochet Jasmine Hair Ornament styled on elegant hair bun preview'
+      },
+      {
+        type: 'detail',
+        label: '04',
+        src: '/images/products/product-08/detail.jpg',
+        alt: 'Macro stitch texture of delicate white crochet jasmine petals and green calyx'
+      }],
+    details: {
+      dimensions: 'Length: 30 cm | Weight: 20 g',
+      process: 'Hand-crocheted clusters of 1,500 delicate jasmine flower stitches interwoven on a flexible green yarn foundation cord.',
+      story:
+        'Inspired by traditional Indian fresh flower gajras and venis, this everlasting crochet hair ornament adds subtle elegance, festive beauty, and timeless floral charm to buns, braids, and open hairstyles without withering.',
+      fiberOrigin: '100% hypoallergenic organic combed cotton yarn from ethical mills.',
+      careInstructions: 'Store flat or gently coiled in a dry box. Spot clean gently with a soft dry or slightly damp cloth.'
+    },
+    price: '₹349',
+    edition: 'Atelier Wearable Collection'
+  },
+  {
+    id: 'product-14',
+    slug: 'tulip-headband-yellow',
+    number: '14',
+    name: 'Tulip Headband - Yellow',
+    subtitle: 'Sunny Yellow Row Tulip Crochet Headband',
+    category: 'wearable',
+    categoryLabel: 'Hair Accessories',
+    tagline: 'A handcrafted white band featuring a continuous row of sunny yellow pop-up tulip buds and floral tassel ties.',
+    description:
+      'A radiant handmade white crochet headband featuring a continuous row of small, bright sunny yellow pop-up tulip buds aligned along emerald green leafy stitches, finished with flexible braided tie strings and delicate flower tassels.',
+    material: '100% Fine Combed Cotton Yarn & Braided Tie Strings',
+    palette: ['#E6A117', '#4A7C36', '#FAF6F0'],
+    colors: ['#E6A117'],
+    dimensions: 'Band Length: 28 cm (+ adjustable ties)',
+    weight: '9 g',
+    stitchCount: '650 hand stitches',
+    craftTime: '1.2 hours per piece',
+    originalImage: '/images/products/tulip-headband/yellow_hero.jpg',
+    heroImage: '/images/products/tulip-headband/yellow_hero.jpg',
+    featured: false,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/tulip-headband/yellow_hero.jpg',
+        alt: 'Handmade crochet Yellow Tulip Headband with aligned tulip row and floral ties'
+      }],
+    details: {
+      dimensions: 'Band Length: 28 cm | Tie Length: 25 cm (each side) | Width: 2.8 cm | Weight: 9 g',
+      process: 'Hand-crocheted white cotton base band with a continuous row of sculpted yellow pop-up tulip blossoms, leafy green base stitches, and dual flower tassel braided tie cords.',
+      story: 'Crafted with a cheerful row of small golden-yellow tulips that bring warm sunny radiance and botanical charm to any hairstyle.',
+      fiberOrigin: '100% fine combed cotton yarn in sunny marigold yellow, emerald green, and crisp white.',
+      careInstructions: 'Spot clean gently with a soft dry or slightly damp cloth. Air dry flat.'
+    },
+    price: '₹149',
+    edition: 'Atelier Wearable Collection'
+  },
+  {
+    id: 'product-15',
+    slug: 'tulip-headband-pink',
+    number: '15',
+    name: 'Tulip Headband - Pink',
+    subtitle: 'Vibrant Pink Row Tulip Crochet Headband',
+    category: 'wearable',
+    categoryLabel: 'Hair Accessories',
+    tagline: 'A handcrafted white band featuring a continuous row of bright pink pop-up tulip buds and floral tassel ties.',
+    description:
+      'A charming handmade white crochet headband featuring a continuous row of small, vivid pink pop-up tulip buds aligned along emerald green leafy stitches, finished with flexible braided tie strings and delicate flower tassels.',
+    material: '100% Fine Combed Cotton Yarn & Braided Tie Strings',
+    palette: ['#E85D75', '#4A7C36', '#FAF6F0'],
+    colors: ['#E85D75'],
+    dimensions: 'Band Length: 28 cm (+ adjustable ties)',
+    weight: '9 g',
+    stitchCount: '650 hand stitches',
+    craftTime: '1.2 hours per piece',
+    originalImage: '/images/products/tulip-headband/pink_hero.jpg',
+    heroImage: '/images/products/tulip-headband/pink_hero.jpg',
+    featured: false,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/tulip-headband/pink_hero.jpg',
+        alt: 'Handmade crochet Pink Tulip Row Headband full view with flower ties'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/tulip-headband/pink_close.jpg',
+        alt: 'Close-up row of small crochet pink tulip buds and green leaves'
+      },
+      {
+        type: 'detail',
+        label: '03',
+        src: '/images/products/tulip-headband/pink_preview.jpg',
+        alt: 'Handmade crochet Pink Tulip Headband styled preview'
+      }],
+    details: {
+      dimensions: 'Band Length: 28 cm | Tie Length: 25 cm each | Weight: 9 g',
+      process: 'Hand-crocheted white base band with a continuous row of raised puff-stitch pink tulips, green leafy bases, and dual flower-tipped tie cords.',
+      story: 'Designed with a playful row of blooming miniature tulips that bring cheerful spring vitality and delicate floral charm to any hairstyle.',
+      fiberOrigin: '100% fine combed cotton yarn in rose blossom pink, emerald green, and natural ivory.',
+      careInstructions: 'Spot clean gently with mild detergent. Air dry flat.'
+    },
+    price: '₹149',
+    edition: 'Atelier Wearable Collection'
+  },
+  {
+    id: 'product-16',
+    slug: 'tulip-headband-light-pink',
+    number: '16',
+    name: 'Tulip Headband - Light Pink',
+    subtitle: 'Pastel Baby Pink Row Tulip Crochet Headband',
+    category: 'wearable',
+    categoryLabel: 'Hair Accessories',
+    tagline: 'A handcrafted white band featuring a continuous row of delicate light baby pink pop-up tulip buds and floral tassel ties.',
+    description:
+      'A dreamy handmade white crochet headband featuring a dense, neat row of small pastel baby pink pop-up tulip buds bordered by emerald green leaf stitches, finished with flexible braided tie cords and miniature flower tassels.',
+    material: '100% Fine Combed Cotton Yarn & Braided Tie Strings',
+    palette: ['#F5A9B8', '#4A7C36', '#FAF6F0'],
+    colors: ['#F5A9B8'],
+    dimensions: 'Band Length: 28 cm (+ adjustable ties)',
+    weight: '9 g',
+    stitchCount: '650 hand stitches',
+    craftTime: '1.2 hours per piece',
+    originalImage: '/images/products/tulip-headband/ltpink_hero.jpg',
+    heroImage: '/images/products/tulip-headband/ltpink_hero.jpg',
+    featured: false,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/tulip-headband/ltpink_hero.jpg',
+        alt: 'Handmade crochet Light Pink Tulip Row Headband full view with flower ties'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/tulip-headband/ltpink_close.jpg',
+        alt: 'Close-up row of small crochet light pink tulip buds and green leaves'
+      },
+      {
+        type: 'detail',
+        label: '03',
+        src: '/images/products/tulip-headband/ltpink_preview.jpg',
+        alt: 'Handmade crochet Light Pink Tulip Headband styled preview'
+      }],
+    details: {
+      dimensions: 'Band Length: 28 cm | Tie Length: 25 cm each | Weight: 9 g',
+      process: 'Hand-crocheted white base band featuring a continuous linear row of raised puff-stitch baby pink tulips, emerald green leaf bases, and dual flower-tipped tie cords.',
+      story: 'Crafted with a row of delicate miniature baby pink tulips that evoke soft morning blossoms, lending a gentle romantic accent to any hairstyle.',
+      fiberOrigin: '100% fine combed cotton yarn in pastel baby pink, emerald green, and natural ivory.',
+      careInstructions: 'Spot clean gently with a damp muslin cloth. Air dry flat.'
+    },
+    price: '₹149',
+    edition: 'Atelier Wearable Collection'
+  },
+  {
+    id: 'product-17',
+    slug: 'cat-paw-keychain',
+    number: '17',
+    name: 'Cat Paw Keychain',
+    subtitle: 'Handmade Crochet Cat Paw Key Adornment',
+    category: 'charm',
+    categoryLabel: 'Keychain',
+    tagline: 'A cute handmade crochet cat paw keychain, perfect for cat lovers and a fun addition to your everyday accessories.',
+    description:
+      'A cute handmade crochet cat paw keychain, perfect for cat lovers and a fun addition to your everyday accessories. Handcrafted with soft hypoallergenic cotton yarn featuring plush 3D pink paw pads and durable silver alloy keyring.',
+    material: '100% Fine Combed Cotton Yarn & Silver Alloy Keyring',
+    palette: ['#F7A8B8', '#FBF8F8', '#8E8E93', '#392220'],
+    dimensions: '6.5cm x 7.5cm',
+    weight: '15 g',
+    stitchCount: '370 hand stitches',
+    craftTime: '2.0 hours per piece',
+    originalImage: '/images/products/cat-paw/hero.jpg',
+    heroImage: '/images/products/cat-paw/hero.jpg',
+    featured: true,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/cat-paw/top.jpg',
+        alt: 'Handmade crochet Cat Paw Keychain top view'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/cat-paw/bottom.jpg',
+        alt: 'Handmade crochet Cat Paw Keychain bottom view'
+      },
+      {
+        type: 'detail',
+        label: '03',
+        src: '/images/products/cat-paw/lifestyle.jpg',
+        alt: 'Handmade crochet Cat Paw Keychain on backpack zipper preview'
+      }],
+    details: {
+      dimensions: 'Width: 6.5 cm | Height: 7.5 cm | Weight: 15 g',
+      process: 'Hand-crocheted 3D sculpted paw shape with 370 individual stitches, dimensional pink toe pads, and reinforced silver alloy split keyring.',
+      story:
+        'A playful and endearing handmade accessory for cat enthusiasts, bringing soft tactile comfort and whimsy to bags, keys, and backpacks.',
+      fiberOrigin: '100% hypoallergenic organic combed cotton yarn in cloud white, gentle grey, and petal pink.',
+      careInstructions: 'Spot clean gently with a damp cloth and mild soap. Air dry flat away from direct heat.',
+      hardware: 'Polished silver nickel-free alloy split keyring with sturdy link chain'
+    },
+    price: '₹139',
+    edition: 'Atelier Open Edition'
+  },
+  {
+    id: 'product-18',
+    slug: 'puppy-paw-keychain',
+    number: '18',
+    name: 'Puppy Paw Keychain',
+    subtitle: 'Handmade Crochet Puppy Paw Key Adornment',
+    category: 'charm',
+    categoryLabel: 'Keychain',
+    tagline: 'A cute handmade crochet puppy paw keychain, perfect for dog lovers and adding a playful touch to your everyday accessories.',
+    description:
+      'A cute handmade crochet puppy paw keychain, perfect for dog lovers and adding a playful touch to your everyday accessories. Handcrafted with warm cream and rich brown cotton yarn with raised toe pads and sturdy silver hardware.',
+    material: '100% Fine Combed Cotton Yarn & Silver Alloy Keyring',
+    palette: ['#D4A373', '#5E3023', '#FBF8F8', '#392220'],
+    dimensions: '6.5cm x 7.5cm',
+    weight: '15 g',
+    stitchCount: '370 hand stitches',
+    craftTime: '2.0 hours per piece',
+    originalImage: '/images/products/puppy-paw/hero.jpg',
+    heroImage: '/images/products/puppy-paw/hero.jpg',
+    featured: true,
+    gallery: [
+      {
+        type: 'side',
+        label: '01',
+        src: '/images/products/puppy-paw/side.jpg',
+        alt: 'Handmade crochet Puppy Paw Keychain side view'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/puppy-paw/bottom.jpg',
+        alt: 'Handmade crochet Puppy Paw Keychain bottom view'
+      },
+      {
+        type: 'detail',
+        label: '03',
+        src: '/images/products/puppy-paw/lifestyle.jpg',
+        alt: 'Handmade crochet Puppy Paw Keychain styled with keys preview'
+      }],
+    details: {
+      dimensions: 'Width: 6.5 cm | Height: 7.5 cm | Weight: 15 g',
+      process: 'Hand-crocheted dimensional puppy paw structure with 370 precision stitches, chocolate brown pad insets, and reinforced link chain.',
+      story:
+        'Designed for dog lovers who appreciate handmade warmth. Perfectly weighted and ultra-soft to keep with daily essentials.',
+      fiberOrigin: '100% fine combed cotton yarn in biscuit cream and earthy chocolate brown.',
+      careInstructions: 'Spot clean gently with a damp muslin cloth. Air dry flat.',
+      hardware: 'Polished silver nickel-free alloy split keyring with sturdy link chain'
+    },
+    price: '₹139',
+    edition: 'Atelier Open Edition'
+  },
+  {
+    id: 'product-19',
+    slug: 'daisy-flower-keychain',
+    number: '19',
+    name: 'Daisy Flower Keychain',
+    subtitle: 'Handmade Crochet Daisy Blossom Key Adornment',
+    category: 'charm',
+    categoryLabel: 'Keychain',
+    tagline: 'A cheerful handmade crochet daisy flower keychain, perfect for adding a bright floral touch to your everyday accessories.',
+    description:
+      'A cheerful handmade crochet daisy flower keychain, perfect for adding a bright floral touch to your everyday accessories. Handcrafted with pristine white cotton petals around a sunny yellow pollen floret and botanical leaf.',
+    material: '100% Fine Combed Cotton Yarn & Silver Alloy Keyring',
+    palette: ['#FFFFFF', '#EBB02D', '#3B6E32', '#FAF6F0'],
+    dimensions: '6.5cm x 6.5cm',
+    weight: '14 g',
+    stitchCount: '370 hand stitches',
+    craftTime: '2.0 hours per piece',
+    originalImage: '/images/products/daisy-keychain/hero.jpg',
+    heroImage: '/images/products/daisy-keychain/hero.jpg',
+    featured: true,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/daisy-keychain/top.jpg',
+        alt: 'Handmade crochet Daisy Flower Keychain top view'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/daisy-keychain/bottom.jpg',
+        alt: 'Handmade crochet Daisy Flower Keychain bottom view'
+      },
+      {
+        type: 'detail',
+        label: '03',
+        src: '/images/products/daisy-keychain/lifestyle.jpg',
+        alt: 'Handmade crochet Daisy Flower Keychain clipped on tote bag preview'
+      }],
+    details: {
+      dimensions: 'Diameter: 6.5 cm | Weight: 14 g',
+      process: 'Hand-crocheted radiating white petals around a domed yellow center floret with 370 stitches and leaf attachment.',
+      story:
+        'A pocket-sized ray of sunshine. The daisy keychain carries carefree botanical optimism wherever your journeys take you.',
+      fiberOrigin: '100% hypoallergenic organic combed cotton yarn in ivory white, chamomile yellow, and leaf green.',
+      careInstructions: 'Spot clean with a damp cloth and mild soap. Air dry in shade.',
+      hardware: 'Polished silver nickel-free alloy split keyring with sturdy link chain'
+    },
+    price: '₹139',
+    edition: 'Atelier Open Edition'
+  },
+  {
+    id: 'product-20',
+    slug: 'blue-butterfly-hair-bow-clip',
+    number: '20',
+    name: 'Blue Butterfly Hair Bow Clip',
+    subtitle: 'Handmade Pastel Blue Butterfly Hair Clip',
+    category: 'wearable',
+    categoryLabel: 'Hair Accessories',
+    tagline: 'A delicate handmade crochet blue butterfly hair bow clip, perfect for adding a whimsical aesthetic to any hairstyle.',
+    description:
+      'A delicate handmade crochet blue butterfly hair bow clip, crafted with layered pastel blue wings and fine stitchwork on a secure alligator clip.',
+    material: '100% Fine Combed Cotton Yarn & Nickel-Free Alligator Hair Clip',
+    palette: ['#8ECAE6', '#219EBC', '#FFFFFF', '#FAF6F0'],
+    colors: ['#8ECAE6'],
+    dimensions: '7cm x 5cm',
+    weight: '4 g',
+    stitchCount: '400 hand stitches',
+    craftTime: '1.0 hour per piece',
+    originalImage: '/images/products/blue-butterfly-clip/hero.jpg',
+    heroImage: '/images/products/blue-butterfly-clip/hero.jpg',
+    featured: true,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/blue-butterfly-clip/front.jpg',
+        alt: 'Handmade crochet Blue Butterfly Hair Bow Clip front view'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/blue-butterfly-clip/angle.jpg',
+        alt: 'Handmade crochet Blue Butterfly Hair Bow Clip angled detail'
+      },
+      {
+        type: 'detail',
+        label: '03',
+        src: '/images/products/blue-butterfly-clip/lifestyle.jpg',
+        alt: 'Handmade crochet Blue Butterfly Hair Bow Clip styled in hair preview'
+      }],
+    details: {
+      dimensions: '7cm x 5cm | Weight: 4 g',
+      process: 'Handcrafted with 400 micro stitches forming sculpted 3D butterfly wings securely mounted on a non-slip alligator clip.',
+      story:
+        'Inspired by graceful fluttering butterflies, bringing effortless charm and vintage handcrafted warmth to everyday hairstyles.',
+      fiberOrigin: '100% fine combed cotton yarn in pastel sky blue and soft ivory.',
+      careInstructions: 'Spot clean gently with a damp cloth. Keep dry to preserve clip grip.',
+      hardware: 'Polished silver nickel-free alligator hair clip'
+    },
+    price: '₹119',
+    edition: 'Atelier Wearable Collection'
+  },
+  {
+    id: 'product-21',
+    slug: 'pink-butterfly-hair-bow-clip',
+    number: '21',
+    name: 'Pink Butterfly Hair Bow Clip',
+    subtitle: 'Handmade Blossom Pink Butterfly Hair Clip',
+    category: 'wearable',
+    categoryLabel: 'Hair Accessories',
+    tagline: 'A lovely handmade crochet pink butterfly hair bow clip, designed to bring a romantic touch to your hair.',
+    description:
+      'A lovely handmade crochet pink butterfly hair bow clip, crafted with double-layered blush pink wings and delicate stitchwork on a secure alligator clip.',
+    material: '100% Fine Combed Cotton Yarn & Nickel-Free Alligator Hair Clip',
+    palette: ['#FFB5A7', '#FCD5CE', '#FFFFFF', '#FAF6F0'],
+    colors: ['#FFB5A7'],
+    dimensions: '7cm x 5cm',
+    weight: '4 g',
+    stitchCount: '400 hand stitches',
+    craftTime: '1.0 hour per piece',
+    originalImage: '/images/products/pink-butterfly-clip/hero.jpg',
+    heroImage: '/images/products/pink-butterfly-clip/hero.jpg',
+    featured: true,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/pink-butterfly-clip/front.jpg',
+        alt: 'Handmade crochet Pink Butterfly Hair Bow Clip front view'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/pink-butterfly-clip/angle.jpg',
+        alt: 'Handmade crochet Pink Butterfly Hair Bow Clip angled detail'
+      },
+      {
+        type: 'detail',
+        label: '03',
+        src: '/images/products/pink-butterfly-clip/lifestyle.jpg',
+        alt: 'Handmade crochet Pink Butterfly Hair Bow Clip styled in hair preview'
+      }],
+    details: {
+      dimensions: '7cm x 5cm | Weight: 4 g',
+      process: 'Handcrafted with 400 micro stitches forming sculpted 3D butterfly wings securely mounted on a non-slip alligator clip.',
+      story:
+        'Capturing romantic floral springtime vibes, adding a sweet and graceful accent to buns, braids, or loose waves.',
+      fiberOrigin: '100% fine combed cotton yarn in blossom pink and tender rose.',
+      careInstructions: 'Spot clean gently with a damp cloth. Keep dry to preserve clip grip.',
+      hardware: 'Polished silver nickel-free alligator hair clip'
+    },
+    price: '₹119',
+    edition: 'Atelier Wearable Collection'
+  },
+  {
+    id: 'product-22',
+    slug: 'rose-flower',
+    number: '22',
+    name: 'Rose Flower',
+    subtitle: 'Handmade Crimson Red Rose Flower',
+    category: 'botanical',
+    categoryLabel: 'Flowers',
+    tagline: 'A beautiful handmade crochet rose flower, perfect for gifting, decoration, and creating everlasting floral arrangements.',
+    description:
+      'A beautiful handmade crochet rose flower, perfect for gifting, decoration, and creating everlasting floral arrangements.',
+    material: '100% Fine Combed Cotton Yarn & Flexible Floral Stem',
+    palette: ['#B91C1C', '#15803D', '#166534', '#FAF6F0'],
+    colors: ['#B91C1C'],
+    dimensions: '25 cm',
+    weight: '11 g',
+    stitchCount: '600 hand stitches',
+    craftTime: '1.5 hours per piece',
+    originalImage: '/images/products/rose-flower/hero.jpg',
+    heroImage: '/images/products/rose-flower/hero.jpg',
+    featured: true,
+    gallery: [
+      {
+        type: 'front',
+        label: '01',
+        src: '/images/products/rose-flower/front.jpg',
+        alt: 'Handmade crochet Rose Flower front view'
+      },
+      {
+        type: 'detail',
+        label: '02',
+        src: '/images/products/rose-flower/top.jpg',
+        alt: 'Handmade crochet Rose Flower top view petal detail'
+      },
+      {
+        type: 'detail',
+        label: '03',
+        src: '/images/products/rose-flower/angle.jpg',
+        alt: 'Handmade crochet Rose Flower stem and leaf detail'
+      }],
+    details: {
+      dimensions: 'Length: 25 cm | Weight: 11 g',
+      process: 'Handcrafted with 600 individual micro stitches forming sculpted spiral petals and a flexible stem with dual crochet leaves.',
+      story:
+        'A timeless symbol of love and beauty, hand-crocheted in rich crimson red yarn to bloom forever without wilting.',
+      fiberOrigin: '100% fine combed cotton yarn in deep scarlet red and forest green.',
+      careInstructions: 'Gently dust with a soft dry cloth. Keep away from excessive moisture to maintain structural form.'
+    },
+    price: '₹139',
+    edition: 'Botanical Heritage Collection'
   }
 ];

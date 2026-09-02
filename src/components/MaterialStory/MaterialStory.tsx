@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { siteContent } from '../../data/content';
 import { FiberCanvas } from './FiberCanvas';
-import { ArrowRight, Activity, Play, Pause, RotateCcw } from 'lucide-react';
+import { ArrowRight, Activity } from 'lucide-react';
 
 const STAGE_DURATION_MS = 4500; // 4.5 seconds per evolution phase
 
 export const MaterialStory: React.FC = () => {
   const [activeStageIndex, setActiveStageIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying] = useState(true);
   const [isInView, setIsInView] = useState(false);
   const [stageProgress, setStageProgress] = useState(0);
 
@@ -17,6 +17,7 @@ export const MaterialStory: React.FC = () => {
 
   const stages = siteContent.materialStory.stages;
   const currentStage = stages[activeStageIndex];
+
 
   // IntersectionObserver to detect when section is in viewport
   useEffect(() => {
@@ -87,11 +88,6 @@ export const MaterialStory: React.FC = () => {
     startTimeRef.current = null;
   };
 
-  const togglePlayPause = () => {
-    setIsPlaying((prev) => !prev);
-    startTimeRef.current = null;
-  };
-
   return (
     <section
       ref={sectionRef}
@@ -120,44 +116,6 @@ export const MaterialStory: React.FC = () => {
           <p className="text-[#3D2B1F]/75 text-base md:text-lg leading-relaxed italic">
             {siteContent.materialStory.subtitle}
           </p>
-
-          {/* Autoplay Status & Playback Controls Pill */}
-          <div className="pt-2 flex items-center justify-center gap-3">
-            <button
-              type="button"
-              onClick={togglePlayPause}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F7F5F2] hover:bg-[#3D2B1F] text-[#3D2B1F] hover:text-[#FDFCFB] border border-[#3D2B1F]/15 transition-all duration-300 text-[9.5px] uppercase tracking-[0.2em] font-semibold shadow-sm"
-              style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-              title={isPlaying ? 'Pause auto-evolution' : 'Resume auto-evolution'}
-            >
-              {isPlaying && isInView ? (
-                <>
-                  <Pause size={11} className="text-[#D4A373]" />
-                  <span>Autoplay Active</span>
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4A373] opacity-75" />
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#D4A373]" />
-                  </span>
-                </>
-              ) : (
-                <>
-                  <Play size={11} className="text-[#3D2B1F]" />
-                  <span>Autoplay Paused</span>
-                </>
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleSelectStage(0)}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white hover:bg-[#F7F5F2] text-[#3D2B1F]/70 hover:text-[#3D2B1F] border border-[#3D2B1F]/10 transition-colors text-[9px] uppercase tracking-[0.18em] font-semibold"
-              style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-              title="Reset to Phase 01"
-            >
-              <RotateCcw size={10} />
-              <span>Reset</span>
-            </button>
-          </div>
         </div>
 
         {/* Interactive Step Selector Stepper with Dynamic Progress Indicator */}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { products } from '../../data/products';
 import { Product } from '../../types/product';
 import { ProductCard } from './ProductCard';
-import { LayoutGrid, GalleryHorizontal, Filter } from 'lucide-react';
+import { LayoutGrid, GalleryHorizontal } from 'lucide-react';
 
 interface ProductGalleryProps {
   onSelectProduct: (product: Product) => void;
@@ -15,21 +15,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
   savedProductIds,
   onToggleSave
 }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [layoutMode, setLayoutMode] = useState<'editorial' | 'grid'>('editorial');
-
-  const categories = [
-    { id: 'all', label: 'All Works', count: products.length },
-    { id: 'charm', label: 'Key Adornments', count: products.filter((p) => p.category === 'charm').length },
-    { id: 'botanical', label: 'Botanical Stems', count: products.filter((p) => p.category === 'botanical').length },
-    { id: 'wearable', label: 'Wearable Accents', count: products.filter((p) => p.category === 'wearable').length },
-    { id: 'sculpture', label: 'Potted Sculptures', count: products.filter((p) => p.category === 'sculpture').length }
-  ];
-
-  const filteredProducts =
-    selectedCategory === 'all'
-      ? products
-      : products.filter((p) => p.category === selectedCategory);
 
   return (
     <section id="works" className="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto text-[#3D2B1F]">
@@ -83,54 +69,24 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
         </div>
       </div>
 
-      {/* Filter Category Chips */}
-      <div data-lenis-prevent className="py-8 flex items-center gap-2 overflow-x-auto no-scrollbar">
-        <span className="text-[10px] uppercase tracking-[0.25em] text-[#3D2B1F]/50 mr-2 hidden sm:inline-flex items-center gap-1 font-medium" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          <Filter size={11} /> Filter:
-        </span>
-        {categories.map((cat) => (
-          <button
-            key={cat.id}
-            onClick={() => setSelectedCategory(cat.id)}
-            className={`px-4 sm:px-5 py-2 rounded-full text-[10px] uppercase tracking-[0.18em] whitespace-nowrap transition-all duration-300 border flex items-center gap-1.5 ${
-              selectedCategory === cat.id
-                ? 'bg-[#3D2B1F] text-[#FDFCFB] border-[#3D2B1F] shadow-sm font-semibold'
-                : 'bg-white text-[#3D2B1F]/70 border-[#3D2B1F]/15 hover:border-[#3D2B1F]/40 hover:text-[#3D2B1F]'
-            }`}
-            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-          >
-            <span>{cat.label}</span>
-            <span className={`text-[9px] px-1.5 py-0.2 rounded-full ${
-              selectedCategory === cat.id ? 'bg-white/20 text-[#FDFCFB]' : 'bg-[#3D2B1F]/10 text-[#3D2B1F]'
-            }`}>
-              {cat.count}
-            </span>
-          </button>
-        ))}
-      </div>
-
       {/* Product Display Gallery */}
       <div
-        className={`grid gap-8 md:gap-10 lg:gap-12 pt-4 items-stretch ${
-          layoutMode === 'editorial' && selectedCategory === 'all'
+        className={`grid gap-8 md:gap-10 lg:gap-12 pt-10 items-stretch ${
+          layoutMode === 'editorial'
             ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-            : filteredProducts.length === 1
-            ? 'grid-cols-1 max-w-xl mx-auto'
-            : filteredProducts.length === 2
-            ? 'grid-cols-1 sm:grid-cols-2 max-w-4xl mx-auto'
             : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
         }`}
       >
-        {filteredProducts.map((product, index) => (
+        {products.map((product, index) => (
           <ProductCard
             key={product.id}
             product={product}
             index={index}
-            totalItems={filteredProducts.length}
+            totalItems={products.length}
             onSelect={onSelectProduct}
             isSaved={savedProductIds.includes(product.id)}
             onToggleSave={onToggleSave}
-            layout={selectedCategory === 'all' ? layoutMode : 'grid'}
+            layout={layoutMode}
           />
         ))}
       </div>
@@ -142,7 +98,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
             Custom Atelier Studio
           </div>
           <h4 className="font-editorial text-2xl md:text-3xl text-[#3D2B1F]">
-            Bespoke Commissions &amp; Custom Sizing
+            Bespoke Inquiries &amp; Custom Acquisitions
           </h4>
           <p className="text-xs text-[#3D2B1F]/70 max-w-xl font-sans">
             Seeking custom plant fiber selections, personalized botanicals, or architectural textile installations?
@@ -150,7 +106,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
         </div>
         <button
           onClick={() => onSelectProduct(products[0])}
-          className="bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB] px-7 py-3.5 rounded-full text-[10px] uppercase tracking-[0.25em] font-medium whitespace-nowrap transition-all duration-300 shadow-sm"
+          className="bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB] px-7 py-3.5 rounded-full text-[10px] uppercase tracking-[0.25em] font-medium whitespace-nowrap transition-all duration-300 shadow-sm cursor-pointer"
           style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
         >
           Consult Atelier
@@ -159,3 +115,5 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
     </section>
   );
 };
+
+

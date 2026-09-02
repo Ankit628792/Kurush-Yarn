@@ -3,20 +3,28 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Product, ProductAngle } from '../../types/product';
 import { LazyImage } from '../Common/LazyImage';
-import { Sparkles, Eye, RotateCw, ZoomIn, Compass, Layers } from 'lucide-react';
+import { ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface AngleGalleryProps {
   product: Product;
   scrollerRef?: React.RefObject<HTMLDivElement | null>;
+  activeImageIndex?: number;
+  onImageIndexChange?: (idx: number) => void;
 }
 
-export const AngleGallery: React.FC<AngleGalleryProps> = ({ product, scrollerRef }) => {
-  const [selectedAngleIndex, setSelectedAngleIndex] = useState(0);
+export const AngleGallery: React.FC<AngleGalleryProps> = ({
+  product,
+  scrollerRef,
+  activeImageIndex,
+  onImageIndexChange
+}) => {
+  const [internalImageIndex, setInternalImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
-  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const selectedImageIndex = activeImageIndex !== undefined ? activeImageIndex : internalImageIndex;
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const viewportRef = useRef<HTMLDivElement | null>(null);
@@ -24,29 +32,28 @@ export const AngleGallery: React.FC<AngleGalleryProps> = ({ product, scrollerRef
   const imageStackRef = useRef<HTMLDivElement | null>(null);
   const imagesRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const gallery = product.gallery || [];
-  const currentAngle: ProductAngle = gallery[selectedAngleIndex] || gallery[0] || {
-    type: 'front',
-    label: 'Studio View',
-    src: product.heroImage || product.originalImage,
-    alt: product.name
-  };
+  const gallery = (product.gallery || []).filter((item) => item.type !== 'texture' && !item.src.includes('yarn_macro'));
 
-  // Setup GSAP ScrollTrigger for parallax depth and scroll-driven sequence
+  // Reset index when product changes
+  useEffect(() => {
+    setInternalImageIndex(0);
+    setIsZoomed(false);
+  }, [product.id]);
+
+  // Setup GSAP ScrollTrigger for subtle parallax depth
   useEffect(() => {
     if (!containerRef.current || !viewportRef.current || gallery.length === 0) return;
 
     const scroller = scrollerRef?.current || window;
 
     const ctx = gsap.context(() => {
-      // 1. Subtle parallax depth shift on background watermark
       if (parallaxBgRef.current) {
         gsap.fromTo(
           parallaxBgRef.current,
-          { y: 30, opacity: 0.2 },
+          { y: 20, opacity: 0.2 },
           {
-            y: -30,
-            opacity: 0.5,
+            y: -20,
+            opacity: 0.4,
             ease: 'none',
             scrollTrigger: {
               trigger: containerRef.current,
@@ -58,58 +65,20 @@ export const AngleGallery: React.FC<AngleGalleryProps> = ({ product, scrollerRef
           }
         );
       }
-
-      // 2. Cinematic container subtle tilt/travel parallax
-      if (viewportRef.current) {
-        gsap.fromTo(
-          viewportRef.current,
-          { y: 0, scale: 1 },
-          {
-            y: -15,
-            ease: 'power1.out',
-            scrollTrigger: {
-              trigger: containerRef.current,
-              scroller: scroller,
-              start: 'top center',
-              end: 'bottom top',
-              scrub: 1
-            }
-          }
-        );
-      }
-
-      // 3. Scroll-driven angle transition timeline if scroller is present
-      if (scrollerRef?.current && gallery.length > 1) {
-        ScrollTrigger.create({
-          trigger: scrollerRef.current.querySelector('main') || containerRef.current,
-          scroller: scrollerRef.current,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 0.5,
-          onUpdate: (self) => {
-            setScrollProgress(self.progress);
-            // Map scroll progress (0 to 1) to gallery angle indices
-            const index = Math.min(
-              gallery.length - 1,
-              Math.floor(self.progress * gallery.length)
-            );
-            setSelectedAngleIndex((prev) => (prev !== index && !isZoomed ? index : prev));
-          }
-        });
-      }
     }, containerRef);
 
-    // Refresh triggers on setup
     ScrollTrigger.refresh();
 
     return () => {
       ctx.revert();
     };
-  }, [gallery.length, scrollerRef, isZoomed]);
+  }, [gallery.length, scrollerRef]);
 
-  // Handle manual angle switch with smooth GSAP animation
-  const handleSelectAngle = (idx: number) => {
-    setSelectedAngleIndex(idx);
+  const handleSelectImage = (idx: number) => {
+    setInternalImageIndex(idx);
+    if (onImageIndexChange) {
+      onImageIndexChange(idx);
+    }
     setIsZoomed(false);
 
     if (imageStackRef.current) {
@@ -117,11 +86,23 @@ export const AngleGallery: React.FC<AngleGalleryProps> = ({ product, scrollerRef
       if (activeEl) {
         gsap.fromTo(
           activeEl,
-          { opacity: 0.4, scale: 1.04, filter: 'blur(4px)' },
-          { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.6, ease: 'power2.out' }
+          { opacity: 0.4, scale: 1.03 },
+          { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }
         );
       }
     }
+  };
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const nextIdx = (selectedImageIndex - 1 + gallery.length) % gallery.length;
+    handleSelectImage(nextIdx);
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const nextIdx = (selectedImageIndex + 1) % gallery.length;
+    handleSelectImage(nextIdx);
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -133,28 +114,27 @@ export const AngleGallery: React.FC<AngleGalleryProps> = ({ product, scrollerRef
   };
 
   return (
-    <div ref={containerRef} className="space-y-6 select-none">
-      {/* Main Studio Viewport with Cinematic Parallax Sequence */}
+    <div ref={containerRef} className="space-y-4 select-none">
+      {/* Main Studio Image Viewport */}
       <div
         ref={viewportRef}
-        className="relative aspect-square w-full rounded-3xl overflow-hidden bg-[#F7F5F2] border border-[#3D2B1F]/20 shadow-[0_20px_50px_rgba(61,43,31,0.08)] group will-change-transform"
+        className="relative aspect-square w-full rounded-3xl overflow-hidden bg-[#F7F5F2] border border-[#3D2B1F]/15 shadow-[0_20px_50px_rgba(61,43,31,0.08)] group will-change-transform"
       >
-        {/* Parallax Background Artisan Watermark & Grid */}
+        {/* Parallax Background Watermark */}
         <div
           ref={parallaxBgRef}
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden"
         >
           <span
-            className="font-editorial text-[12vw] lg:text-[7vw] font-bold text-[#3D2B1F]/[0.04] tracking-tight uppercase select-none leading-none"
+            className="font-editorial text-[12vw] lg:text-[7vw] font-bold text-[#3D2B1F]/[0.03] tracking-tight uppercase select-none leading-none"
             style={{ fontFamily: 'Georgia, "Playfair Display", serif' }}
           >
             {product.number ? `No. ${product.number}` : 'Kurush'}
           </span>
-          <div className="absolute inset-0 bg-[radial-gradient(#3D2B1F_1px,transparent_1px)] [background-size:24px_24px] opacity-10" />
         </div>
 
-        {/* Stacked Image Sequence with Smooth Crossfade & Parallax Zoom */}
+        {/* Stacked Image Sequence */}
         <div
           ref={imageStackRef}
           onMouseMove={handleMouseMove}
@@ -163,23 +143,23 @@ export const AngleGallery: React.FC<AngleGalleryProps> = ({ product, scrollerRef
             isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'
           }`}
         >
-          {gallery.map((angle, idx) => {
-            const isActive = selectedAngleIndex === idx;
+          {gallery.map((img, idx) => {
+            const isActive = selectedImageIndex === idx;
             return (
               <div
                 key={idx}
                 ref={(el) => {
                   imagesRef.current[idx] = el;
                 }}
-                className={`absolute inset-0 w-full h-full transition-all duration-700 ease-out ${
+                className={`absolute inset-0 w-full h-full transition-all duration-500 ease-out ${
                   isActive
                     ? 'opacity-100 scale-100 z-10 pointer-events-auto'
                     : 'opacity-0 scale-105 z-0 pointer-events-none'
                 }`}
               >
                 <LazyImage
-                  src={angle.src}
-                  alt={angle.alt}
+                  src={img.src}
+                  alt={img.alt || product.name}
                   aspectRatio="aspect-square"
                   style={{
                     transformOrigin: `${mousePos.x}% ${mousePos.y}%`,
@@ -192,111 +172,79 @@ export const AngleGallery: React.FC<AngleGalleryProps> = ({ product, scrollerRef
           })}
         </div>
 
-        {/* Top-Left: Parallax Sequence Badge */}
-        <div className="absolute top-4 left-4 pointer-events-none z-20 flex items-center gap-2">
-          <span
-            className="bg-[#FFFFFF]/90 backdrop-blur-md text-[#3D2B1F] text-[9px] uppercase tracking-[0.25em] font-semibold px-3 py-1.5 rounded-full border border-[#3D2B1F]/15 shadow-sm flex items-center gap-2"
-            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-          >
-            <Compass size={12} className="text-[#3D2B1F] animate-spin-slow" />
-            <span>{currentAngle.label}</span>
-          </span>
-          <span
-            className="hidden sm:inline-flex bg-[#3D2B1F] text-[#FDFCFB] text-[8px] uppercase tracking-[0.2em] font-semibold px-2.5 py-1 rounded-full shadow-sm"
-            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-          >
-            0{selectedAngleIndex + 1} / 0{gallery.length}
-          </span>
-        </div>
-
-        {/* Bottom-Left: Scroll-driven Sequence Progression Bar */}
-        <div className="absolute bottom-4 left-4 z-20 pointer-events-none flex items-center gap-1.5 bg-[#FFFFFF]/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#3D2B1F]/15 shadow-sm">
-          <Layers size={11} className="text-[#3D2B1F]/70" />
-          <div className="flex items-center gap-1">
-            {gallery.map((_, idx) => (
-              <div
-                key={idx}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  selectedAngleIndex === idx
-                    ? 'w-5 bg-[#3D2B1F]'
-                    : 'w-1.5 bg-[#3D2B1F]/20'
-                }`}
-              />
-            ))}
+        {/* Top-Left: Image Counter Badge */}
+        {gallery.length > 1 && (
+          <div className="absolute top-4 left-4 pointer-events-none z-20">
+            <span
+              className="bg-[#FFFFFF]/90 backdrop-blur-md text-[#3D2B1F] text-[9px] uppercase tracking-[0.2em] font-semibold px-3 py-1.5 rounded-full border border-[#3D2B1F]/15 shadow-sm"
+              style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+            >
+              0{selectedImageIndex + 1} / 0{gallery.length}
+            </span>
           </div>
-        </div>
+        )}
 
-        {/* Bottom-Right: Inspect Stitches Zoom Trigger */}
+        {/* Next / Prev Navigation Arrows */}
+        {gallery.length > 1 && !isZoomed && (
+          <>
+            <button
+              type="button"
+              onClick={handlePrev}
+              aria-label="Previous image"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#3D2B1F] shadow-md border border-[#3D2B1F]/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 hover:scale-105 active:scale-95"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              aria-label="Next image"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#3D2B1F] shadow-md border border-[#3D2B1F]/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 hover:scale-105 active:scale-95"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </>
+        )}
+
+        {/* Bottom-Right: Zoom Control */}
         <button
           type="button"
           onClick={(e) => {
             e.stopPropagation();
             setIsZoomed(!isZoomed);
           }}
-          className="absolute bottom-4 right-4 z-20 bg-[#FFFFFF]/90 hover:bg-[#FFFFFF] text-[#3D2B1F] text-[9px] uppercase tracking-[0.2em] font-semibold px-3.5 py-2 rounded-full border border-[#3D2B1F]/15 shadow-sm flex items-center gap-1.5 transition-all duration-200 active:scale-95"
+          className="absolute bottom-4 right-4 z-20 bg-[#FFFFFF]/90 hover:bg-[#FFFFFF] text-[#3D2B1F] text-[9px] uppercase tracking-[0.2em] font-semibold px-3 py-1.5 rounded-full border border-[#3D2B1F]/15 shadow-sm flex items-center gap-1.5 transition-all duration-200 active:scale-95"
           style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
         >
           <ZoomIn size={12} />
-          <span>{isZoomed ? 'Reset View' : 'Inspect Stitches'}</span>
+          <span>{isZoomed ? 'Reset' : 'Zoom'}</span>
         </button>
       </div>
 
-      {/* Interactive Angle Selector Thumbnails with Parallax Sequence Context */}
-      <div className="space-y-2.5">
-        <div
-          className="flex items-center justify-between text-[10px] text-[#3D2B1F]/70 uppercase tracking-wider font-semibold"
-          style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-        >
-          <span className="flex items-center gap-1.5">
-            <RotateCw size={12} className="text-[#3D2B1F]" /> Parallax Angle Sequence
-          </span>
-          <span className="text-[9px] font-mono text-[#3D2B1F]/60">
-            Scroll or Click to Shift Perspective
-          </span>
-        </div>
-
-        <div className="grid grid-cols-3 gap-3">
-          {gallery.map((angle, idx) => {
-            const isSelected = selectedAngleIndex === idx;
+      {/* Pure Image Thumbnails */}
+      {gallery.length > 1 && (
+        <div className="flex items-center gap-2.5 overflow-x-auto pb-1 pt-1 scrollbar-none">
+          {gallery.map((img, idx) => {
+            const isSelected = selectedImageIndex === idx;
             return (
               <button
                 key={idx}
                 type="button"
-                onClick={() => handleSelectAngle(idx)}
-                className={`p-2 rounded-2xl border text-left transition-all duration-300 flex items-center gap-2.5 relative group ${
+                onClick={() => handleSelectImage(idx)}
+                className={`relative flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 transition-all duration-200 ${
                   isSelected
-                    ? 'bg-white border-[#3D2B1F] shadow-sm ring-1 ring-[#3D2B1F]'
-                    : 'bg-[#F7F5F2] border-[#3D2B1F]/15 hover:border-[#3D2B1F]/40'
+                    ? 'border-[#3D2B1F] shadow-sm ring-2 ring-[#3D2B1F]/20 scale-[1.02]'
+                    : 'border-transparent opacity-65 hover:opacity-100 hover:border-[#3D2B1F]/30 bg-[#F7F5F2]'
                 }`}
               >
-                <div className="w-11 h-11 rounded-xl overflow-hidden bg-[#F7F5F2] flex-shrink-0 border border-[#3D2B1F]/10 relative">
-                  <LazyImage src={angle.src} alt={angle.alt} className="w-full h-full object-cover" />
-                  {isSelected && (
-                    <div className="absolute inset-0 border-2 border-[#3D2B1F] rounded-xl pointer-events-none" />
-                  )}
-                </div>
-                <div className="overflow-hidden min-w-0">
-                  <span
-                    className="text-[11px] font-semibold text-[#3D2B1F] block truncate"
-                    style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-                  >
-                    {angle.label}
-                  </span>
-                  <span className="text-[8.5px] uppercase tracking-wider text-[#3D2B1F]/60 block truncate">
-                    {angle.type}
-                  </span>
-                </div>
+                <LazyImage
+                  src={img.src}
+                  alt={img.alt || product.name}
+                  className="w-full h-full object-cover"
+                />
               </button>
             );
           })}
-        </div>
-      </div>
-
-      {/* Active Angle Dossier Note */}
-      {currentAngle.description && (
-        <div className="p-4 rounded-2xl bg-white border border-[#3D2B1F]/15 text-xs text-[#3D2B1F]/80 flex items-start gap-3 shadow-sm transition-all duration-300">
-          <Sparkles size={14} className="text-[#D4A373] flex-shrink-0 mt-0.5" />
-          <p className="font-sans leading-relaxed text-[#3D2B1F]/85">{currentAngle.description}</p>
         </div>
       )}
     </div>

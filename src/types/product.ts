@@ -15,18 +15,24 @@ export interface ProductAngle {
   description?: string;
 }
 
+export interface ProductVariant {
+  name: string;
+  images: string[];
+}
+
 export interface Product {
   id: string;
   slug: string;
   number: string;
   name: string;
   subtitle: string;
-  category: 'botanical' | 'charm' | 'wearable' | 'sculpture';
+  category: 'botanical' | 'charm' | 'wearable' | 'sculpture' | 'flowers' | string;
   categoryLabel: string;
   tagline: string;
   description: string;
   material: string;
   palette: string[];
+  colors?: string[];
   dimensions: string;
   weight: string;
   stitchCount: string;
@@ -34,6 +40,7 @@ export interface Product {
   originalImage: string;
   heroImage: string;
   gallery: ProductAngle[];
+  variants?: ProductVariant[];
   details: {
     dimensions: string;
     process: string;

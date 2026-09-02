@@ -104,15 +104,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 e.stopPropagation();
                 onToggleSave(product.id);
               }}
-              className={`pointer-events-auto p-2 rounded-full backdrop-blur-md transition-all duration-300 ${
+              className={`pointer-events-auto p-2.5 rounded-full backdrop-blur-md transition-all duration-300 transform active:scale-90 hover:scale-110 shadow-sm ${
                 isSaved
-                  ? 'bg-[#3D2B1F] text-white'
-                  : 'bg-[#FFFFFF]/80 text-[#3D2B1F] hover:bg-[#FFFFFF] hover:text-[#3D2B1F]'
+                  ? 'bg-[#3D2B1F] text-[#FDFCFB] border border-[#3D2B1F]'
+                  : 'bg-white/90 text-[#3D2B1F] hover:bg-white hover:text-[#D4A373] border border-[#3D2B1F]/10'
               }`}
-              title={isSaved ? 'Remove from saved' : 'Save to collection'}
-              aria-label={isSaved ? `Remove ${product.name} from saved pieces` : `Save ${product.name} to collection`}
+              title={isSaved ? 'Remove from favorites' : 'Save to favorites'}
+              aria-label={isSaved ? `Remove ${product.name} from saved favorites` : `Save ${product.name} to favorites`}
             >
-              <Heart size={13} className={isSaved ? 'fill-current' : ''} />
+              <Heart
+                size={14}
+                className={`transition-transform duration-200 ${
+                  isSaved ? 'fill-current text-[#FDFCFB]' : 'text-[#3D2B1F]'
+                }`}
+              />
             </button>
           )}
         </div>

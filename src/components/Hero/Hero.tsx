@@ -62,7 +62,7 @@ export const Hero: React.FC<HeroProps> = ({
           className="text-[10px] uppercase tracking-widest opacity-40 font-sans"
           style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontFamily: 'Helvetica, Arial, sans-serif' }}
         >
-          Atelier Collection 2024–2025
+          Handcrafted Collection
         </div>
         <div
           className="text-[10px] uppercase tracking-widest opacity-40 font-sans"
@@ -200,16 +200,8 @@ export const Hero: React.FC<HeroProps> = ({
           </button>
         </div>
 
-        {/* Right Status */}
-        <div className="col-span-1 text-center sm:text-right flex flex-col sm:items-end">
-          <div className="text-[10px] uppercase tracking-[0.2em] opacity-40 mb-1" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-            Production Status
-          </div>
-          <div className="flex items-center justify-center sm:justify-end space-x-2">
-            <div className="w-1.5 h-1.5 bg-[#D4A373] rounded-full"></div>
-            <span className="text-[11px] font-medium tracking-wide">Atelier Active</span>
-          </div>
-        </div>
+        {/* Right Status Spacer */}
+        <div className="col-span-1 hidden sm:block" />
       </div>
     </section>
   );

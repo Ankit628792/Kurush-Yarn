@@ -47,16 +47,16 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
           <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4">
             <button
               onClick={onOpenInquiry}
-              className="bg-[#FDFCFB] hover:bg-[#D4A373] text-[#3D2B1F] py-4 px-8 rounded-full text-[10px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 shadow-xl flex items-center justify-center gap-2"
+              className="bg-[#FDFCFB] hover:bg-[#D4A373] text-[#3D2B1F] py-4 px-8 rounded-full text-[10px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 shadow-xl flex items-center justify-center gap-2 cursor-pointer"
               style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
             >
-              <span>Commission via Instagram</span>
+              <span>Inquire on Instagram</span>
               <Sparkles size={13} />
             </button>
 
             <button
               onClick={scrollToTop}
-              className="border border-white/20 hover:border-white text-[#FDFCFB] py-4 px-8 rounded-full text-[10px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 flex items-center justify-center gap-2"
+              className="border border-white/20 hover:border-white text-[#FDFCFB] py-4 px-8 rounded-full text-[10px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
               style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
             >
               <span>Return to Top</span>
@@ -105,25 +105,25 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
             >
               <button
                 onClick={() => onNavigate('works')}
-                className="text-left hover:text-[#D4A373] transition-colors py-1"
+                className="text-left hover:text-[#D4A373] transition-colors py-1 cursor-pointer"
               >
                 All Works
               </button>
               <button
                 onClick={() => onNavigate('material')}
-                className="text-left hover:text-[#D4A373] transition-colors py-1"
+                className="text-left hover:text-[#D4A373] transition-colors py-1 cursor-pointer"
               >
                 Material Story
               </button>
               <button
                 onClick={() => onNavigate('process')}
-                className="text-left hover:text-[#D4A373] transition-colors py-1"
+                className="text-left hover:text-[#D4A373] transition-colors py-1 cursor-pointer"
               >
                 Atelier Process
               </button>
               <button
                 onClick={() => onNavigate('atelier')}
-                className="text-left hover:text-[#D4A373] transition-colors py-1"
+                className="text-left hover:text-[#D4A373] transition-colors py-1 cursor-pointer"
               >
                 Philosophy
               </button>
@@ -139,7 +139,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
               Studio Contact Medium
             </span>
             <p className="text-xs text-[#FDFCFB]/75 font-sans leading-relaxed">
-              We communicate and accept all custom inquiries, acquisitions, and commissions exclusively via Instagram Direct Message.
+              We communicate and accept all custom inquiries, acquisitions, and bespoke requests exclusively via Instagram Direct Message.
             </p>
 
             <a
@@ -171,21 +171,22 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
 
         {/* Bottom Legal & Provenance */}
         <div
-          className="pt-12 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] uppercase tracking-wider text-[#FDFCFB]/50"
+          className="pt-12 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] uppercase tracking-wider text-[#FDFCFB]/60 text-center md:text-left"
           style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
         >
           <div>
             © {new Date().getFullYear()} Kurush Yarn Atelier. All rights reserved. Handcrafted with devotion.
           </div>
-          <div className="flex items-center gap-2">
-            <span>Contact Medium:</span>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <span>Website Crafted &amp; Developed by</span>
             <a
-              href={footer.instagramUrl}
+              href="https://www.instagram.com/ankit_628792"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#D4A373] hover:underline font-semibold"
+              className="text-[#D4A373] hover:text-[#FDFCFB] hover:underline font-semibold transition-colors inline-flex items-center gap-1"
             >
-              {footer.instagramHandle} on Instagram
+              <span>Ankit Kumar</span>
+              <ArrowUpRight size={11} />
             </a>
           </div>
         </div>

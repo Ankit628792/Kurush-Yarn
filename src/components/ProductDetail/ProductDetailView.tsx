@@ -49,6 +49,33 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [copiedQuickLink, setCopiedQuickLink] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState<string>(
+    product.variants && product.variants.length > 0 ? product.variants[0].name : ''
+  );
+  const [activeGalleryIndex, setActiveGalleryIndex] = useState<number>(0);
+
+  // Sync selected variant when product changes
+  useEffect(() => {
+    if (product.variants && product.variants.length > 0) {
+      setSelectedVariant(product.variants[0].name);
+    } else {
+      setSelectedVariant('');
+    }
+    setActiveGalleryIndex(0);
+  }, [product.id]);
+
+  const handleSelectVariant = (variantName: string) => {
+    setSelectedVariant(variantName);
+    if (!product.variants || !product.gallery) return;
+    const targetVariant = product.variants.find((v) => v.name === variantName);
+    if (targetVariant && targetVariant.images.length > 0) {
+      const imgPath = targetVariant.images[0];
+      const matchIndex = product.gallery.findIndex((g) => g.src === imgPath);
+      if (matchIndex !== -1) {
+        setActiveGalleryIndex(matchIndex);
+      }
+    }
+  };
 
   // Dynamically update document head, OpenGraph, and Twitter tags for this product
   useProductSEO(product);
@@ -277,14 +304,14 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             <button
               type="button"
               onClick={() => onToggleSave(product.id)}
-              className={`p-2.5 rounded-full border transition-all cursor-pointer ${
+              className={`p-2.5 rounded-full border transition-all cursor-pointer transform active:scale-90 hover:scale-105 shadow-sm ${
                 isSaved
-                  ? 'bg-[#3D2B1F] text-white border-[#3D2B1F]'
+                  ? 'bg-[#3D2B1F] text-[#FDFCFB] border-[#3D2B1F]'
                   : 'bg-white text-[#3D2B1F] border-[#3D2B1F]/20 hover:border-[#3D2B1F]'
               }`}
-              title={isSaved ? 'Saved to Collection' : 'Save to Collection'}
+              title={isSaved ? 'Remove from favorites' : 'Add to favorites'}
             >
-              <Heart size={14} className={isSaved ? 'fill-current' : ''} />
+              <Heart size={14} className={isSaved ? 'fill-current text-[#FDFCFB]' : 'text-[#3D2B1F]'} />
             </button>
           )}
 
@@ -308,7 +335,22 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left Column: Multi-Angle Studio Gallery with Scroll-Driven Parallax Sequence */}
             <div className="lg:col-span-6 lg:sticky lg:top-24 z-10">
-              <AngleGallery product={product} scrollerRef={modalScrollerRef} />
+              <AngleGallery
+                product={product}
+                scrollerRef={modalScrollerRef}
+                activeImageIndex={activeGalleryIndex}
+                onImageIndexChange={(idx) => {
+                  setActiveGalleryIndex(idx);
+                  // Check if this image matches any variant
+                  if (product.variants && product.gallery && product.gallery[idx]) {
+                    const activeSrc = product.gallery[idx].src;
+                    const matchedVariant = product.variants.find((v) => v.images.includes(activeSrc));
+                    if (matchedVariant) {
+                      setSelectedVariant(matchedVariant.name);
+                    }
+                  }
+                }}
+              />
             </div>
 
             {/* Right Column: Editorial Dossier, Story, Craft Specifications */}
@@ -332,6 +374,46 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 {product.subtitle}
               </p>
             </div>
+
+            {/* Color Variant Selector (If Product Has Multiple Color Options) */}
+            {product.variants && product.variants.length > 0 && (
+              <div className="space-y-3 bg-white p-5 rounded-2xl border border-[#3D2B1F]/15 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] uppercase tracking-[0.25em] text-[#3D2B1F]/70 font-bold block" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
+                    Color Variant
+                  </span>
+                  <span className="text-xs font-semibold text-[#3D2B1F]">
+                    {selectedVariant || product.variants[0].name}
+                  </span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  {product.variants.map((v) => {
+                    const isSelected = selectedVariant === v.name;
+                    return (
+                      <button
+                        key={v.name}
+                        type="button"
+                        onClick={() => handleSelectVariant(v.name)}
+                        className={`px-4 py-2 rounded-xl text-xs font-medium transition-all duration-200 flex items-center gap-2.5 cursor-pointer border ${
+                          isSelected
+                            ? 'bg-[#3D2B1F] text-[#FDFCFB] border-[#3D2B1F] shadow-sm'
+                            : 'bg-[#F7F5F2] hover:bg-[#EFECE6] text-[#3D2B1F] border-[#3D2B1F]/15'
+                        }`}
+                      >
+                        {v.images[0] && (
+                          <img
+                            src={v.images[0]}
+                            alt={v.name}
+                            className="w-4 h-4 rounded-full object-cover border border-white/40"
+                          />
+                        )}
+                        <span>{v.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             {/* Narrative Story */}
             <div className="space-y-4">
@@ -448,11 +530,11 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               <button
                 type="button"
                 onClick={() => onToggleSave && onToggleSave(product.id)}
-                className="w-full sm:w-auto py-4 px-6 rounded-full border border-[#3D2B1F]/25 hover:border-[#3D2B1F] hover:bg-white text-[#3D2B1F] text-[10px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto py-4 px-6 rounded-full border border-[#3D2B1F]/25 hover:border-[#3D2B1F] hover:bg-white text-[#3D2B1F] text-[10px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-95"
                 style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
-                <Heart size={14} className={isSaved ? 'fill-[#3D2B1F] text-[#3D2B1F]' : ''} />
-                <span>{isSaved ? 'Saved in Collection' : 'Save Piece'}</span>
+                <Heart size={14} className={isSaved ? 'fill-[#3D2B1F] text-[#3D2B1F]' : 'text-[#3D2B1F]'} />
+                <span>{isSaved ? 'Favorited Piece' : 'Add to Favorites'}</span>
               </button>
             </div>
 

@@ -67,28 +67,21 @@ http://localhost:3000
 ├── public/
 │   ├── images/
 │   │   ├── brand/          # Brand textures and atelier studio assets
-│   │   └── products/       # Product image assets for all 7 catalog pieces
-│   │       ├── product-01/
-│   │       ├── product-02/
-│   │       ├── product-03/
-│   │       ├── product-04/
-│   │       ├── product-05/
-│   │       ├── product-06/
-│   │       └── product-07/
+│   │   └── products/       # Handcrafted collection product photography
 ├── src/
-│   ├── assets/             # Raw photography assets
+│   ├── assets/             # Studio assets & photography references
 │   ├── components/
 │   │   ├── Brand/          # Logo & Atelier emblem components
 │   │   ├── Common/         # Reusable ProductCard, LazyImage, InquiryModal, SavedDrawer
 │   │   ├── Footer/         # Atelier manifesto footer & Instagram channel links
 │   │   ├── Hero/           # Exhibition hero with 3D ambient simulation
-│   │   ├── Navigation/     # Sticky navigation with reduced motion toggle
-│   │   ├── ProductDetail/  # Full-screen multi-angle inspection modal
+│   │   ├── Navigation/     # Sticky navigation with saved works drawer
+│   │   ├── ProductDetail/  # Full-screen multi-angle inspection modal & social sharing
 │   │   ├── ProductGallery/ # Asymmetrical & grid collection visualizers
 │   │   └── ThreeScene/     # Three.js 3D yarn particle & strand canvas
 │   ├── data/
 │   │   ├── content.ts      # Site text, manifesto, and Instagram links
-│   │   └── products.ts     # Complete 7-piece product dataset
+│   │   └── products.ts     # Complete handcrafted product dataset
 │   ├── types/
 │   │   └── product.ts      # TypeScript interfaces and type definitions
 │   ├── App.tsx             # Main application orchestrator
