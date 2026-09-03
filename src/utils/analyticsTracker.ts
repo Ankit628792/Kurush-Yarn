@@ -272,7 +272,7 @@ class AnalyticsTrackerService {
     thumbnail?: string;
     customNotes?: string;
     isBespoke?: boolean;
-    channel?: 'whatsapp' | 'instagram' | 'direct';
+    channel?: 'instagram' | 'direct';
   }) {
     if (!this.currentVisitorId) this.init();
     const nowIso = new Date().toISOString();
@@ -288,7 +288,7 @@ class AnalyticsTrackerService {
       productThumbnail: data.thumbnail,
       customNotes: data.customNotes,
       isBespoke: !!data.isBespoke,
-      channel: data.channel || 'whatsapp',
+      channel: data.channel || 'instagram',
       status: 'new',
     };
 

@@ -1,4 +1,3 @@
-export { WhatsAppInquiryModal as InquiryModal } from '../Inquiry/whatsapp';
-export { WhatsAppInquiryModal } from '../Inquiry/whatsapp';
+export { InstagramInquiryModal as InquiryModal } from '../Inquiry/instagram';
 export { InstagramInquiryModal } from '../Inquiry/instagram';
-export type { WhatsAppInquiryModalProps as InquiryModalProps } from '../Inquiry/whatsapp';
+export type { InstagramInquiryModalProps as InquiryModalProps } from '../Inquiry/instagram';

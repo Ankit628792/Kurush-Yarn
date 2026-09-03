@@ -13,7 +13,7 @@ import { Footer } from './components/Footer/Footer';
 import { YarnCursor } from './components/Cursor/YarnCursor';
 import { CinematicIntro } from './components/Intro/CinematicIntro';
 import { ProductDetailView } from './components/ProductDetail/ProductDetailView';
-import { WhatsAppInquiryModal } from './components/Inquiry/whatsapp';
+import { InstagramInquiryModal } from './components/Inquiry/instagram';
 import { VisitorsAnalyticsView } from './components/Analytics/VisitorsAnalyticsView';
 import { AtelierPasskeyGate } from './components/Analytics/AtelierPasskeyGate';
 import { SavedDrawer } from './components/Common/SavedDrawer';
@@ -532,8 +532,8 @@ const AppContent: React.FC = () => {
         }}
       />
 
-      {/* WhatsApp Inquiry & Bespoke Acquisition Modal */}
-      <WhatsAppInquiryModal
+      {/* Instagram Inquiry & Bespoke Acquisition Modal */}
+      <InstagramInquiryModal
         isOpen={inquiryOpen}
         onClose={() => setInquiryOpen(false)}
         selectedProduct={selectedProduct}

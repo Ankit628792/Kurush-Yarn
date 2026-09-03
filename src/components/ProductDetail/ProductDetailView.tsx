@@ -20,7 +20,6 @@ import {
   Share2,
   Copy,
   Check,
-  MessageCircle,
   Pin,
   Twitter
 } from 'lucide-react';
@@ -212,12 +211,10 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
     }
   };
 
-  // Quick WhatsApp Share
-  const handleQuickWhatsApp = (e: React.MouseEvent) => {
+  // Quick Instagram Inquire
+  const handleQuickInstagram = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const shareUrl = getProductPieceUrl(product.slug);
-    const text = `🧶 Discover "${product.name}" (Piece No. ${product.number}) — Handcrafted crochet ${product.categoryLabel.toLowerCase()} by Kurush Yarn Atelier:\n\n${shareUrl}`;
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+    onInquire(product);
   };
 
   // Quick Pinterest Share
@@ -519,12 +516,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               <button
                 type="button"
                 onClick={() => onInquire(product)}
-                className="w-full sm:w-auto flex-1 bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB] py-4 px-8 rounded-full text-[10px] uppercase tracking-[0.25em] font-medium transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto flex-1 bg-[#3D2B1F] hover:bg-[#2A1D15] text-[#FDFCFB] py-4 px-8 rounded-full text-[10px] uppercase tracking-[0.25em] font-medium transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer"
                 style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
-                <MessageCircle size={15} />
-                <span>Inquire</span>
-                <Sparkles size={12} />
+                <Instagram size={15} />
+                <span>Inquire on Instagram</span>
+                <Sparkles size={12} className="text-[#D4A373]" />
               </button>
 
               <button
@@ -581,16 +578,16 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   )}
                 </button>
 
-                {/* 2. Direct WhatsApp Button */}
+                {/* 2. Direct Instagram Inquire Button */}
                 <button
                   type="button"
-                  onClick={handleQuickWhatsApp}
-                  className="py-2.5 px-3.5 rounded-xl bg-[#FAF7F2] hover:bg-[#25D366]/10 text-[#128C7E] border border-[#3D2B1F]/15 hover:border-[#25D366] text-[10px] uppercase tracking-wider font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
+                  onClick={handleQuickInstagram}
+                  className="py-2.5 px-3.5 rounded-xl bg-[#FAF7F2] hover:bg-[#E1306C]/10 text-[#C13584] border border-[#3D2B1F]/15 hover:border-[#E1306C] text-[10px] uppercase tracking-wider font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
                   style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-                  title="Share directly via WhatsApp"
+                  title="Inquire directly on Instagram"
                 >
-                  <MessageCircle size={14} />
-                  <span>WhatsApp</span>
+                  <Instagram size={14} />
+                  <span>Instagram</span>
                 </button>
 
                 {/* 3. Direct Pinterest Button */}

@@ -3,6 +3,7 @@ import {
   Users,
   Eye,
   MessageCircle,
+  Instagram,
   TrendingUp,
   ArrowLeft,
   Search,
@@ -366,17 +367,17 @@ export const VisitorsAnalyticsView: React.FC<VisitorsAnalyticsViewProps> = ({
               <span className="text-[10px] uppercase tracking-[0.2em] font-semibold">
                 Studio Inquiries
               </span>
-              <MessageCircle size={18} className="text-[#128C7E]" />
+              <Instagram size={18} className="text-[#C13584]" />
             </div>
             <div>
               <div
-                className="font-editorial text-3xl sm:text-4xl text-[#128C7E]"
+                className="font-editorial text-3xl sm:text-4xl text-[#C13584]"
                 style={{ fontFamily: 'Georgia, "Playfair Display", serif' }}
               >
                 {stats.totalInquiries}
               </div>
               <div className="text-[11px] text-[#3D2B1F]/60 mt-1 font-sans">
-                via WhatsApp (+91 87966 45605)
+                via Instagram (@kurush.yarn)
               </div>
             </div>
           </div>
@@ -811,10 +812,10 @@ export const VisitorsAnalyticsView: React.FC<VisitorsAnalyticsViewProps> = ({
           <section id="inquiries-feed-section" className="space-y-4">
             {filteredInquiries.length === 0 ? (
               <div className="p-12 text-center bg-[#FDFCFB] border border-[#3D2B1F]/15 rounded-2xl">
-                <MessageCircle size={32} className="mx-auto text-[#128C7E]/40 mb-3" />
+                <Instagram size={32} className="mx-auto text-[#E1306C]/40 mb-3" />
                 <h3 className="text-base font-semibold text-[#3D2B1F]">No inquiries logged yet</h3>
                 <p className="text-xs text-[#3D2B1F]/60 mt-1">
-                  Inquiries initiated through the WhatsApp modal (+91 87966 45605) appear here automatically.
+                  Inquiries initiated through the Instagram modal (@kurush.yarn) appear here automatically.
                 </p>
               </div>
             ) : (
@@ -828,8 +829,8 @@ export const VisitorsAnalyticsView: React.FC<VisitorsAnalyticsViewProps> = ({
                     {/* Top Row: Product, Visitor, and Timestamp */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#3D2B1F]/10 pb-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-[#128C7E]/10 text-[#075E54] flex items-center justify-center flex-shrink-0">
-                          <MessageCircle size={17} />
+                        <div className="w-9 h-9 rounded-full bg-[#E1306C]/10 text-[#C13584] flex items-center justify-center flex-shrink-0">
+                          <Instagram size={17} />
                         </div>
                         <div>
                           <div className="flex items-center gap-2">
@@ -865,15 +866,15 @@ export const VisitorsAnalyticsView: React.FC<VisitorsAnalyticsViewProps> = ({
                       </div>
                     ) : (
                       <div className="text-xs text-[#3D2B1F]/60 italic">
-                        Standard availability and acquisition inquiry initiated via WhatsApp.
+                        Standard availability and acquisition inquiry initiated via Instagram.
                       </div>
                     )}
 
                     {/* Bottom: Channel details & Status Controls */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1 text-xs">
                       <div className="flex items-center gap-3 text-[#3D2B1F]/60">
-                        <span className="font-semibold text-[#075E54] uppercase text-[10px] tracking-wider">
-                          WhatsApp Inquiry (+91 87966 45605)
+                        <span className="font-semibold text-[#C13584] uppercase text-[10px] tracking-wider">
+                          Instagram Inquiry (@kurush.yarn)
                         </span>
                         <span>·</span>
                         <span>{inq.device}</span>

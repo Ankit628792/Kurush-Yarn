@@ -6,7 +6,7 @@ interface AtelierPasskeyGateProps {
   onReturnHome: () => void;
 }
 
-const VALID_PASSKEYS = ['kurush', '879664', '8796645605', 'atelier', 'ankit'];
+const VALID_PASSKEYS = ['kurush', 'atelier', 'ankit'];
 
 export const AtelierPasskeyGate: React.FC<AtelierPasskeyGateProps> = ({
   onUnlock,
@@ -97,7 +97,7 @@ export const AtelierPasskeyGate: React.FC<AtelierPasskeyGateProps> = ({
                   setInputKey(e.target.value);
                   setError(false);
                 }}
-                placeholder="Enter passkey (e.g. kurush)"
+                placeholder="Enter passkey"
                 className={`w-full bg-[#FAF7F2] border text-sm text-[#3D2B1F] rounded-xl px-4 py-3 pr-11 focus:outline-none transition-all ${
                   error
                     ? 'border-rose-400 ring-2 ring-rose-100 bg-rose-50/40'
@@ -115,7 +115,7 @@ export const AtelierPasskeyGate: React.FC<AtelierPasskeyGateProps> = ({
             </div>
             {error && (
               <p className="text-[11px] text-rose-600 mt-1.5 animate-in fade-in duration-150">
-                Invalid passkey. Hint: use atelier name <span className="font-semibold">kurush</span>.
+                Invalid passkey.
               </p>
             )}
           </div>

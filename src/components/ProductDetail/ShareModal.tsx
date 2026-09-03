@@ -9,7 +9,6 @@ import {
   Share2,
   Copy,
   Check,
-  MessageCircle,
   Pin,
   Twitter,
   Facebook,
@@ -407,13 +406,15 @@ Explore the exhibition: ${shareUrl}
   // Direct Social Platform Links & Handlers
   const platformLinks = [
     {
-      name: 'WhatsApp',
-      icon: MessageCircle,
-      color: 'hover:bg-[#25D366]/10 hover:border-[#25D366] text-[#128C7E]',
-      badge: 'Chat / Status',
+      name: 'Instagram',
+      icon: Instagram,
+      color: 'hover:bg-[#E1306C]/10 hover:border-[#E1306C] text-[#C13584]',
+      badge: 'DM / Story',
       action: () => {
-        const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText}\n\n${shareUrl}`)}`;
-        window.open(url, '_blank', 'noopener,noreferrer');
+        if (typeof navigator !== 'undefined' && navigator.clipboard) {
+          navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+        }
+        window.open('https://ig.me/m/kurush.yarn', '_blank', 'noopener,noreferrer');
       }
     },
     {

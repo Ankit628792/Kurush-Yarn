@@ -1,30 +1,105 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { products } from '../../../data/products';
-import { siteContent } from '../../../data/content';
-import { X, Instagram, Copy, Check, ArrowUpRight, Sparkles } from 'lucide-react';
+import { getProductPieceUrl } from '../../../utils/url';
+import { X, Instagram, Copy, Check, Sparkles, ExternalLink, Send } from 'lucide-react';
 import { InstagramInquiryModalProps } from './types';
-import { buildInstagramInquiryText, getInstagramHandle, getInstagramUrl } from './instagramUtils';
+import { analyticsTracker } from '../../../utils/analyticsTracker';
+import {
+  buildInstagramInquiryText,
+  buildInstagramSavedInquiryText,
+  getInstagramHandle,
+  getInstagramUrl,
+  getInstagramDmUrl,
+} from './instagramUtils';
 
 export const InstagramInquiryModal: React.FC<InstagramInquiryModalProps> = ({
   isOpen,
   onClose,
-  selectedProduct
+  selectedProduct,
+  savedProducts = [],
 }) => {
-  const [selectedPieceName, setSelectedPieceName] = useState(
-    selectedProduct ? selectedProduct.name : 'Bespoke Custom Creation'
+  const [selectedPieceId, setSelectedPieceId] = useState<string>(
+    selectedProduct ? selectedProduct.id : savedProducts.length > 0 ? 'saved-collection' : 'bespoke'
   );
-  const [copied, setCopied] = useState(false);
+  const [customNotes, setCustomNotes] = useState<string>('');
+  const [copied, setCopied] = useState<boolean>(false);
+
+  // Sync state when selectedProduct or isOpen changes
+  useEffect(() => {
+    if (selectedProduct) {
+      setSelectedPieceId(selectedProduct.id);
+    } else if (savedProducts.length > 0) {
+      setSelectedPieceId('saved-collection');
+    } else {
+      setSelectedPieceId('bespoke');
+    }
+    setCustomNotes('');
+    setCopied(false);
+  }, [selectedProduct, savedProducts, isOpen]);
 
   if (!isOpen) return null;
 
-  const instagramUrl = getInstagramUrl();
+  const currentProduct = products.find((p) => p.id === selectedPieceId);
   const instagramHandle = getInstagramHandle();
-  const inquiryText = buildInstagramInquiryText(selectedPieceName);
+  const instagramProfileUrl = getInstagramUrl();
+  const instagramDmUrl = getInstagramDmUrl();
+
+  // Compute live Instagram draft message
+  let inquiryText = '';
+  if (selectedPieceId === 'saved-collection' && savedProducts.length > 0) {
+    inquiryText = buildInstagramSavedInquiryText(savedProducts);
+  } else if (selectedPieceId === 'bespoke' || !currentProduct) {
+    inquiryText = buildInstagramInquiryText({
+      productName: 'Bespoke Custom Creation',
+      isBespoke: true,
+      customNotes,
+    });
+  } else {
+    inquiryText = buildInstagramInquiryText({
+      productName: currentProduct.name,
+      price: currentProduct.price,
+      productSlug: currentProduct.slug,
+      productUrl: getProductPieceUrl(currentProduct.slug),
+      customNotes,
+    });
+  }
+
+  const logInquiry = () => {
+    try {
+      analyticsTracker.trackInquiry({
+        productName: currentProduct
+          ? currentProduct.name
+          : selectedPieceId === 'saved-collection'
+          ? 'Saved Collection Inquiry'
+          : 'Bespoke Custom Creation',
+        productSlug: currentProduct?.slug,
+        price: currentProduct?.price,
+        thumbnail: currentProduct?.heroImage || currentProduct?.originalImage,
+        customNotes,
+        isBespoke: selectedPieceId === 'bespoke',
+        channel: 'instagram',
+      });
+    } catch (e) {
+      console.warn('Could not log inquiry:', e);
+    }
+  };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(inquiryText);
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(inquiryText);
+    }
     setCopied(true);
+    logInquiry();
     setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleOpenInstagram = () => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(inquiryText);
+    }
+    setCopied(true);
+    logInquiry();
+    window.open(instagramDmUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -54,7 +129,7 @@ export const InstagramInquiryModal: React.FC<InstagramInquiryModalProps> = ({
               style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
             >
               <Sparkles size={11} className="text-[#D4A373]" />
-              <span>Studio Inquiries &amp; Custom Acquisitions</span>
+              <span>Studio Inquiries &amp; Acquisitions</span>
             </div>
             <h2
               className="font-editorial text-xl sm:text-2xl text-[#3D2B1F] tracking-tight"
@@ -63,7 +138,7 @@ export const InstagramInquiryModal: React.FC<InstagramInquiryModalProps> = ({
               Inquire on Instagram
             </h2>
             <p className="text-[11px] sm:text-xs text-[#3D2B1F]/70 mt-0.5 font-sans leading-relaxed">
-              All bespoke orders, acquisitions, and inquiries can be received and managed through our Instagram direct messages.
+              Connect directly with our atelier artisans on Instagram Direct Message for availability, bespoke commissions, and acquisitions.
             </p>
           </div>
 
@@ -92,27 +167,51 @@ export const InstagramInquiryModal: React.FC<InstagramInquiryModalProps> = ({
               Piece of Interest / Creation Type
             </label>
             <select
-              value={selectedPieceName}
-              onChange={(e) => setSelectedPieceName(e.target.value)}
+              value={selectedPieceId}
+              onChange={(e) => setSelectedPieceId(e.target.value)}
               className="w-full bg-white border border-[#3D2B1F]/20 rounded-xl px-4 py-2.5 text-xs text-[#3D2B1F] focus:outline-none focus:border-[#3D2B1F] shadow-xs font-sans cursor-pointer"
             >
-              <option value="Bespoke Custom Creation">Bespoke Custom Creation (New Handcrafted Design)</option>
+              {savedProducts.length > 0 && (
+                <option value="saved-collection">
+                  ✦ Curated Saved Selection ({savedProducts.length} Pieces)
+                </option>
+              )}
+              <option value="bespoke">
+                Bespoke Custom Creation (New Handcrafted Design)
+              </option>
               {products.map((p) => (
-                <option key={p.id} value={p.name}>
+                <option key={p.id} value={p.id}>
                   {p.name} ({p.price})
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Inquiry Message Template Preview */}
+          {/* Optional Custom Notes Input */}
+          <div className="space-y-1.5">
+            <label
+              className="block text-[10px] uppercase tracking-wider text-[#3D2B1F]/70 font-semibold"
+              style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+            >
+              Custom Sizing / Requests (Optional)
+            </label>
+            <input
+              type="text"
+              value={customNotes}
+              onChange={(e) => setCustomNotes(e.target.value)}
+              placeholder="e.g., Long stem length, custom color combination, gift presentation..."
+              className="w-full bg-white border border-[#3D2B1F]/20 rounded-xl px-4 py-2 text-xs text-[#3D2B1F] placeholder:text-[#3D2B1F]/40 focus:outline-none focus:border-[#3D2B1F] shadow-xs font-sans"
+            />
+          </div>
+
+          {/* Message Preview */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label
                 className="text-[10px] uppercase tracking-wider text-[#3D2B1F]/70 font-semibold"
                 style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
-                Direct Message Draft
+                Instagram DM Message Draft
               </label>
               <button
                 type="button"
@@ -121,48 +220,43 @@ export const InstagramInquiryModal: React.FC<InstagramInquiryModalProps> = ({
                 style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
                 {copied ? <Check size={11} className="text-green-700" /> : <Copy size={11} />}
-                <span>{copied ? 'Copied to Clipboard' : 'Copy Message'}</span>
+                <span>{copied ? 'Copied to Clipboard' : 'Copy Text'}</span>
               </button>
             </div>
 
             <div
               data-lenis-prevent
-              className="p-3.5 bg-white border border-[#3D2B1F]/15 rounded-xl text-xs text-[#3D2B1F]/85 font-sans leading-relaxed shadow-xs italic whitespace-pre-line max-h-36 overflow-y-auto overscroll-contain"
+              className="p-3.5 bg-white border border-[#3D2B1F]/15 rounded-xl text-xs text-[#3D2B1F]/85 font-sans leading-relaxed shadow-xs whitespace-pre-line max-h-36 overflow-y-auto overscroll-contain"
               style={{ WebkitOverflowScrolling: 'touch' }}
             >
-              &ldquo;{inquiryText}&rdquo;
+              {inquiryText}
             </div>
           </div>
 
-          {/* Primary Action Button: Instagram DM */}
+          {/* Primary Action Button: Open Instagram DM */}
           <div className="space-y-3 pt-1">
-            <a
-              href={instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => {
-                navigator.clipboard.writeText(inquiryText);
-              }}
-              className="w-full bg-[#3D2B1F] hover:bg-[#2A1D15] text-[#FDFCFB] py-3.5 px-6 rounded-full text-[10px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 flex items-center justify-center gap-2 shadow-md cursor-pointer"
+            <button
+              type="button"
+              onClick={handleOpenInstagram}
+              className="w-full bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:opacity-95 text-[#FDFCFB] py-3.5 px-6 rounded-full text-[10px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg cursor-pointer"
               style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
             >
-              <Instagram size={14} />
+              <Instagram size={15} />
               <span>Message on Instagram ({instagramHandle})</span>
-              <ArrowUpRight size={13} />
-            </a>
+              <Send size={13} />
+            </button>
 
-            <div className="text-center">
-              <span className="text-[10px] text-[#3D2B1F]/60 font-sans">
-                Official Account:{' '}
-                <a
-                  href={instagramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-[#3D2B1F] underline hover:text-[#D4A373] transition-colors cursor-pointer"
-                >
-                  instagram.com/kurush.yarn
-                </a>
-              </span>
+            <div className="text-center flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-[10px] text-[#3D2B1F]/60 font-sans">
+              <span>Atelier Concierge:</span>
+              <a
+                href={instagramProfileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-[#3D2B1F] hover:text-[#D4A373] hover:underline inline-flex items-center gap-1 cursor-pointer"
+              >
+                <span>{instagramHandle}</span>
+                <ExternalLink size={10} />
+              </a>
             </div>
           </div>
         </div>
@@ -170,3 +264,4 @@ export const InstagramInquiryModal: React.FC<InstagramInquiryModalProps> = ({
     </div>
   );
 };
+

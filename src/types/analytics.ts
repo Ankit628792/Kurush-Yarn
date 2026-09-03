@@ -19,7 +19,7 @@ export interface VisitorInquiryRecord {
   productThumbnail?: string;
   customNotes?: string;
   isBespoke: boolean;
-  channel: 'whatsapp' | 'instagram' | 'direct';
+  channel: 'instagram' | 'direct';
   status: 'new' | 'contacted' | 'fulfilled';
 }
 
@@ -58,7 +58,7 @@ export interface InquiryFeedItem {
   productThumbnail?: string;
   customNotes?: string;
   isBespoke: boolean;
-  channel: 'whatsapp' | 'instagram' | 'direct';
+  channel: 'instagram' | 'direct';
   device: string;
   location: string;
   status: 'new' | 'contacted' | 'fulfilled';
