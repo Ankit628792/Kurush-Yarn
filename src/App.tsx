@@ -14,16 +14,53 @@ import { YarnCursor } from './components/Cursor/YarnCursor';
 import { CinematicIntro } from './components/Intro/CinematicIntro';
 import { ProductDetailView } from './components/ProductDetail/ProductDetailView';
 import { WhatsAppInquiryModal } from './components/Inquiry/whatsapp';
+import { VisitorsAnalyticsView } from './components/Analytics/VisitorsAnalyticsView';
+import { AtelierPasskeyGate } from './components/Analytics/AtelierPasskeyGate';
 import { SavedDrawer } from './components/Common/SavedDrawer';
 import { ErrorBoundary } from './components/Common/ErrorBoundary';
 import { useSEO } from './hooks/useSEO';
 import { Product } from './types/product';
 import { products } from './data/products';
+import { analyticsTracker } from './utils/analyticsTracker';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const isVisitorsRoute = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  const path = (window.location.pathname || '').toLowerCase();
+  const search = new URLSearchParams(window.location.search);
+  const hash = (window.location.hash || '').toLowerCase();
+  return (
+    path.startsWith('/visitors') ||
+    path.startsWith('/analytics') ||
+    path.startsWith('/audience') ||
+    search.get('route') === 'visitors' ||
+    search.get('route') === 'analytics' ||
+    search.get('view') === 'visitors' ||
+    search.get('view') === 'analytics' ||
+    hash === '#visitors' ||
+    hash === '#analytics'
+  );
+};
+
+const checkInitialAuth = (): boolean => {
+  try {
+    if (typeof window === 'undefined') return false;
+    if (sessionStorage.getItem('kurush_analytics_auth') === 'unlocked') return true;
+    const search = new URLSearchParams(window.location.search);
+    const key = (search.get('key') || search.get('admin') || search.get('pass') || '').toLowerCase();
+    return ['kurush', '879664', '8796645605', 'atelier', 'ankit'].includes(key);
+  } catch {
+    return false;
+  }
+};
+
 const AppContent: React.FC = () => {
-  const [introFinished, setIntroFinished] = useState(false);
+  const [currentRoute, setCurrentRoute] = useState<'home' | 'visitors'>(() =>
+    isVisitorsRoute() ? 'visitors' : 'home'
+  );
+  const [isAnalyticsUnlocked, setIsAnalyticsUnlocked] = useState<boolean>(() => checkInitialAuth());
+  const [introFinished, setIntroFinished] = useState(() => isVisitorsRoute());
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [savedDrawerOpen, setSavedDrawerOpen] = useState(false);
@@ -36,6 +73,77 @@ const AppContent: React.FC = () => {
     }
   });
   const [activeSection, setActiveSection] = useState<string>('hero');
+
+  // Handle browser popstate (back/forward navigation)
+  useEffect(() => {
+    const handlePopState = () => {
+      const isVis = isVisitorsRoute();
+      setCurrentRoute(isVis ? 'visitors' : 'home');
+      if (isVis) {
+        setIntroFinished(true);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Track product views for audience and catalog intelligence
+  useEffect(() => {
+    if (selectedProduct) {
+      analyticsTracker.trackProductView(selectedProduct);
+    }
+  }, [selectedProduct]);
+
+  // Global secret shortcut for atelier owner: Ctrl+Shift+A or Cmd+Shift+A
+  useEffect(() => {
+    const handleGlobalShortcuts = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        setCurrentRoute((prev) => {
+          const next = prev === 'visitors' ? 'home' : 'visitors';
+          if (next === 'visitors') {
+            setIntroFinished(true);
+            try {
+              window.history.pushState({ route: 'visitors' }, '', '/visitors');
+            } catch {
+              window.location.hash = 'visitors';
+            }
+          } else {
+            try {
+              window.history.pushState(null, '', '/');
+            } catch {
+              window.location.hash = '';
+            }
+          }
+          return next;
+        });
+      }
+    };
+    window.addEventListener('keydown', handleGlobalShortcuts);
+    return () => window.removeEventListener('keydown', handleGlobalShortcuts);
+  }, []);
+
+  const navigateToRoute = (route: 'home' | 'visitors') => {
+    setCurrentRoute(route);
+    if (route === 'visitors') {
+      setSelectedProduct(null);
+      setIntroFinished(true);
+      try {
+        window.history.pushState({ route: 'visitors' }, '', '/visitors');
+      } catch {
+        // Fallback for sandboxed history
+        window.location.hash = 'visitors';
+      }
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    } else {
+      try {
+        window.history.pushState(null, '', '/');
+      } catch {
+        window.location.hash = '';
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   // Deep-link initial resolver: Check URL parameters or hash on mount for shared piece
   useEffect(() => {
@@ -136,7 +244,7 @@ const AppContent: React.FC = () => {
     const lenis = lenisRef.current;
     if (!lenis) return;
 
-    if (selectedProduct || inquiryOpen || savedDrawerOpen || !introFinished) {
+    if (selectedProduct || inquiryOpen || savedDrawerOpen || !introFinished || currentRoute === 'visitors') {
       lenis.stop();
     } else {
       lenis.start();
@@ -145,13 +253,13 @@ const AppContent: React.FC = () => {
         mainContainerRef.current.focus({ preventScroll: true });
       }
     }
-  }, [selectedProduct, inquiryOpen, savedDrawerOpen, introFinished]);
+  }, [selectedProduct, inquiryOpen, savedDrawerOpen, introFinished, currentRoute]);
 
   // Full keyboard navigation support for smooth scrolling (Arrow keys, PageUp/Down, Space, Home, End)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // If a modal or drawer is open, or intro is showing, allow native/modal keydown
-      if (selectedProduct || inquiryOpen || savedDrawerOpen || !introFinished) {
+      // If a modal or drawer is open, or intro is showing, or on analytics route, allow native keydown
+      if (selectedProduct || inquiryOpen || savedDrawerOpen || !introFinished || currentRoute === 'visitors') {
         return;
       }
 
@@ -265,6 +373,52 @@ const AppContent: React.FC = () => {
     setInquiryOpen(true);
   };
 
+  if (currentRoute === 'visitors') {
+    return (
+      <div
+        id="visitors-analytics-viewport"
+        className="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden bg-[#FAF7F2] text-[#3D2B1F] selection:bg-[#3D2B1F] selection:text-[#FAF7F2]"
+        data-lenis-prevent="true"
+        style={{
+          WebkitOverflowScrolling: 'touch',
+          overscrollBehavior: 'contain',
+        }}
+      >
+        {/* Subtle Noise Canvas Overlay */}
+        <div className="noise-overlay" aria-hidden="true" />
+
+        {/* Trailing Yarn Cursor on Desktop */}
+        <YarnCursor />
+
+        {!isAnalyticsUnlocked ? (
+          <AtelierPasskeyGate
+            onUnlock={() => setIsAnalyticsUnlocked(true)}
+            onReturnHome={() => navigateToRoute('home')}
+          />
+        ) : (
+          <ErrorBoundary isolateSection sectionName="Visitors & Acquisition Intelligence">
+            <VisitorsAnalyticsView
+              onBackToCatalog={() => navigateToRoute('home')}
+              onLock={() => {
+                try {
+                  sessionStorage.removeItem('kurush_analytics_auth');
+                } catch {}
+                setIsAnalyticsUnlocked(false);
+              }}
+              onSelectProduct={(slug) => {
+                const target = products.find((p) => p.slug === slug || p.id === slug);
+                if (target) {
+                  setSelectedProduct(target);
+                  navigateToRoute('home');
+                }
+              }}
+            />
+          </ErrorBoundary>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div
       ref={mainContainerRef}
@@ -341,6 +495,7 @@ const AppContent: React.FC = () => {
           setSelectedProduct(null);
           setInquiryOpen(true);
         }}
+        onOpenAnalytics={() => navigateToRoute('visitors')}
       />
 
       {/* Cinematic Product Detail View Modal */}

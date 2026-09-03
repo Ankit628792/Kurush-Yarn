@@ -6,10 +6,29 @@ import { ArrowUp, Instagram, ArrowUpRight, Sparkles } from 'lucide-react';
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
   onOpenInquiry: () => void;
+  onOpenAnalytics?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry, onOpenAnalytics }) => {
   const footer = siteContent.footer;
+  const [secretClicks, setSecretClicks] = React.useState(0);
+  const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleSecretCopyrightClick = () => {
+    setSecretClicks((prev) => {
+      const next = prev + 1;
+      if (next >= 3) {
+        if (onOpenAnalytics) onOpenAnalytics();
+        return 0;
+      }
+      return next;
+    });
+
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      setSecretClicks(0);
+    }, 1200);
+  };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -174,7 +193,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
           className="pt-12 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] uppercase tracking-wider text-[#FDFCFB]/60 text-center md:text-left"
           style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
         >
-          <div>
+          <div
+            onClick={handleSecretCopyrightClick}
+            className="cursor-default select-none transition-colors hover:text-[#FDFCFB]/80"
+            title="Kurush Atelier"
+          >
             © {new Date().getFullYear()} Kurush Yarn Atelier. All rights reserved. Handcrafted with devotion.
           </div>
           <div className="flex flex-wrap items-center justify-center gap-2">

@@ -3,6 +3,7 @@ import { products } from '../../../data/products';
 import { getProductPieceUrl } from '../../../utils/url';
 import { X, MessageCircle, Copy, Check, Sparkles, ExternalLink } from 'lucide-react';
 import { WhatsAppInquiryModalProps } from './types';
+import { analyticsTracker } from '../../../utils/analyticsTracker';
 import {
   buildWhatsAppInquiryText,
   buildWhatsAppSavedInquiryText,
@@ -64,14 +65,32 @@ export const WhatsAppInquiryModal: React.FC<WhatsAppInquiryModalProps> = ({
   const displayNumber = getWhatsAppDisplayNumber();
   const rawNumber = getWhatsAppNumber();
 
+  const logInquiry = () => {
+    try {
+      analyticsTracker.trackInquiry({
+        productName: currentProduct ? currentProduct.name : selectedPieceId === 'saved-collection' ? 'Saved Collection Inquiry' : 'Bespoke Custom Creation',
+        productSlug: currentProduct?.slug,
+        price: currentProduct?.price,
+        thumbnail: currentProduct?.heroImage || currentProduct?.originalImage,
+        customNotes,
+        isBespoke: selectedPieceId === 'bespoke',
+        channel: 'whatsapp'
+      });
+    } catch (e) {
+      console.warn('Could not log inquiry:', e);
+    }
+  };
+
   const handleCopy = () => {
     navigator.clipboard.writeText(inquiryText);
     setCopied(true);
+    logInquiry();
     setTimeout(() => setCopied(false), 2500);
   };
 
   const handleOpenWhatsApp = () => {
     navigator.clipboard.writeText(inquiryText);
+    logInquiry();
     window.open(whatsAppUrl, '_blank', 'noopener,noreferrer');
   };
 

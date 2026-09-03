@@ -15,7 +15,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenInquiry,
   activeSection,
   savedCount,
-  onOpenSaved
+  onOpenSaved,
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
