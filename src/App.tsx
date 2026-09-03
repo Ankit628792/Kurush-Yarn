@@ -13,7 +13,7 @@ import { Footer } from './components/Footer/Footer';
 import { YarnCursor } from './components/Cursor/YarnCursor';
 import { CinematicIntro } from './components/Intro/CinematicIntro';
 import { ProductDetailView } from './components/ProductDetail/ProductDetailView';
-import { InquiryModal } from './components/Common/InquiryModal';
+import { WhatsAppInquiryModal } from './components/Inquiry/whatsapp';
 import { SavedDrawer } from './components/Common/SavedDrawer';
 import { ErrorBoundary } from './components/Common/ErrorBoundary';
 import { useSEO } from './hooks/useSEO';
@@ -377,11 +377,12 @@ const AppContent: React.FC = () => {
         }}
       />
 
-      {/* Inquiry & Bespoke Commission Modal */}
-      <InquiryModal
+      {/* WhatsApp Inquiry & Bespoke Acquisition Modal */}
+      <WhatsAppInquiryModal
         isOpen={inquiryOpen}
         onClose={() => setInquiryOpen(false)}
         selectedProduct={selectedProduct}
+        savedProducts={products.filter((p) => savedProductIds.includes(p.id))}
       />
     </div>
   );

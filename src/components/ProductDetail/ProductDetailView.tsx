@@ -522,8 +522,8 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 className="w-full sm:w-auto flex-1 bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB] py-4 px-8 rounded-full text-[10px] uppercase tracking-[0.25em] font-medium transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer"
                 style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
-                <Instagram size={14} />
-                <span>Inquire on Instagram (@kurush.yarn)</span>
+                <MessageCircle size={15} />
+                <span>Inquire</span>
                 <Sparkles size={12} />
               </button>
 

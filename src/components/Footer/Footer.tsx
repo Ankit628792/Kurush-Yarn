@@ -50,7 +50,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
               className="bg-[#FDFCFB] hover:bg-[#D4A373] text-[#3D2B1F] py-4 px-8 rounded-full text-[10px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 shadow-xl flex items-center justify-center gap-2 cursor-pointer"
               style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
             >
-              <span>Inquire on Instagram</span>
+              <span>Inquire</span>
               <Sparkles size={13} />
             </button>
 

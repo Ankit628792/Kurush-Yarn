@@ -107,5 +107,7 @@ export interface SiteContent {
     subtext: string;
     instagramUrl: string;
     instagramHandle: string;
+    whatsappNumber?: string;
+    whatsappDisplay?: string;
   };
 }

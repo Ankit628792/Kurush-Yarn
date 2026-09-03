@@ -2,7 +2,7 @@ import React from 'react';
 import { Product } from '../../types/product';
 import { products } from '../../data/products';
 import { LazyImage } from './LazyImage';
-import { X, Trash2, ShoppingBag, Sparkles, Instagram, Heart, ArrowRight } from 'lucide-react';
+import { X, Trash2, ShoppingBag, Sparkles, MessageCircle, Heart, ArrowRight } from 'lucide-react';
 
 interface SavedDrawerProps {
   isOpen: boolean;
@@ -159,11 +159,11 @@ export const SavedDrawer: React.FC<SavedDrawerProps> = ({
                   onClose();
                   onOpenInquiry();
                 }}
-                className="w-full bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB] py-4 rounded-full text-[10px] uppercase tracking-[0.25em] font-semibold transition-all flex items-center justify-center gap-2 shadow-md"
+                className="w-full bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB] py-4 rounded-full text-[10px] uppercase tracking-[0.25em] font-semibold transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer"
                 style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
-                <Instagram size={14} />
-                <span>Inquire on Instagram ({savedProducts.length} Saved)</span>
+                <MessageCircle size={14} />
+                <span>Inquire</span>
                 <Sparkles size={12} />
               </button>
             </div>

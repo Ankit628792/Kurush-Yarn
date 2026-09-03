@@ -131,6 +131,8 @@ export const siteContent: SiteContent = {
     statementLine2: 'Reimagined digitally.',
     subtext: 'A permanent digital exhibition of handcrafted textile sculptures, botanicals, and wearable adornments.',
     instagramUrl: 'https://www.instagram.com/kurush.yarn',
-    instagramHandle: '@kurush.yarn'
+    instagramHandle: '@kurush.yarn',
+    whatsappNumber: '+918796645605',
+    whatsappDisplay: '+91 87966 45605'
   }
 };

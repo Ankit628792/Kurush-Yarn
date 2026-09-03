@@ -113,9 +113,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Inquire CTA Button */}
           <button
             onClick={onOpenInquiry}
-            className="hidden sm:inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB] px-5 py-2.5 rounded-full transition-all duration-300 font-medium shadow-sm"
+            className="hidden sm:inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB] px-5 py-2.5 rounded-full transition-all duration-300 font-medium shadow-sm cursor-pointer"
           >
-            <span>Instagram / Inquire</span>
+            <span>Inquire</span>
             <Sparkles size={11} className="opacity-80" />
           </button>
 
@@ -168,9 +168,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setMobileMenuOpen(false);
                 onOpenInquiry();
               }}
-              className="mt-2 text-center text-[10px] uppercase tracking-[0.2em] bg-[#3D2B1F] text-[#FDFCFB] py-3.5 rounded-full font-medium"
+              className="mt-2 text-center text-[10px] uppercase tracking-[0.2em] bg-[#3D2B1F] text-[#FDFCFB] py-3.5 rounded-full font-medium cursor-pointer"
             >
-              Inquire via Instagram (@kurush.yarn)
+              Inquire
             </button>
           </div>
         </div>
