@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { useGalleryImagePreloader } from '../ProductGallery/GalleryImagePreloader';
 
 interface CinematicIntroProps {
   onComplete: () => void;
@@ -11,6 +12,7 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
   const textRef = useRef<HTMLDivElement | null>(null);
   const taglineRef = useRef<HTMLDivElement | null>(null);
   const [isSkipped, setIsSkipped] = useState(false);
+  const preloadStats = useGalleryImagePreloader();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -155,13 +157,31 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
         </div>
 
         {/* Subtitle */}
-        <div ref={taglineRef} className="mt-3">
+        <div ref={taglineRef} className="mt-3 flex flex-col items-center">
           <p
             className="text-[10px] uppercase tracking-[0.25em] text-[#3D2B1F]/60 font-semibold"
             style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             Future Craft Atelier
           </p>
+
+          {/* Textile Imagery Preload Monitor */}
+          <div className="mt-4 flex flex-col items-center gap-1.5 opacity-75">
+            <div className="w-28 h-[1.5px] bg-[#3D2B1F]/10 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-[#6E3F3A] transition-all duration-300 ease-out"
+                style={{ width: `${Math.max(10, preloadStats.progress)}%` }}
+              />
+            </div>
+            <span
+              className="text-[8.5px] uppercase tracking-[0.2em] text-[#3D2B1F]/50 font-medium"
+              style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+            >
+              {preloadStats.isComplete
+                ? `Textile Archive Ready (${preloadStats.total})`
+                : `Weaving Fiber Archive · ${preloadStats.progress}%`}
+            </span>
+          </div>
         </div>
 
         {/* Skip hint */}

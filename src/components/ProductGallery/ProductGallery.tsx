@@ -3,6 +3,7 @@ import { products } from '../../data/products';
 import { Product } from '../../types/product';
 import { ProductCard } from './ProductCard';
 import { LayoutGrid, GalleryHorizontal } from 'lucide-react';
+import { GalleryImagePreloader } from './GalleryImagePreloader';
 
 interface ProductGalleryProps {
   onSelectProduct: (product: Product) => void;
@@ -37,8 +38,10 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
           </p>
         </div>
 
-        {/* View Switcher Controls */}
-        <div className="flex items-center gap-3">
+        {/* View Switcher Controls & Image Buffer Status */}
+        <div className="flex flex-wrap items-center gap-3">
+          <GalleryImagePreloader showIndicator indicatorVariant="minimal" />
+
           <div className="bg-[#3D2B1F]/5 p-1 rounded-full flex items-center border border-[#3D2B1F]/15">
             <button
               onClick={() => setLayoutMode('editorial')}

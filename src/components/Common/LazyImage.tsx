@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Sparkles } from 'lucide-react';
+import { isImageCached } from '../../utils/imagePreloader';
 
 export interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
@@ -25,12 +26,20 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   decoding = 'async',
   ...props
 }) => {
-  const [isInView, setIsInView] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const initiallyCached = isImageCached(src);
+  const [isInView, setIsInView] = useState(initiallyCached);
+  const [isLoaded, setIsLoaded] = useState(initiallyCached);
   const [hasError, setHasError] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    // If image is already cached via preloader, ensure state is updated
+    if (isImageCached(src)) {
+      setIsInView(true);
+      setIsLoaded(true);
+      return;
+    }
+
     // If IntersectionObserver is not supported, load immediately
     if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
       setIsInView(true);

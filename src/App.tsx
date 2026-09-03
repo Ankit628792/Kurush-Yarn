@@ -12,6 +12,8 @@ import { AtelierSection } from './components/Atelier/AtelierSection';
 import { Footer } from './components/Footer/Footer';
 import { YarnCursor } from './components/Cursor/YarnCursor';
 import { CinematicIntro } from './components/Intro/CinematicIntro';
+import { GalleryImagePreloader } from './components/ProductGallery/GalleryImagePreloader';
+import { BackToTop } from './components/Navigation/BackToTop';
 import { ProductDetailView } from './components/ProductDetail/ProductDetailView';
 import { InstagramInquiryModal } from './components/Inquiry/instagram';
 import { VisitorsAnalyticsView } from './components/Analytics/VisitorsAnalyticsView';
@@ -362,6 +364,15 @@ const AppContent: React.FC = () => {
     }
   };
 
+  const handleScrollToTop = () => {
+    const lenis = lenisRef.current;
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const handleToggleSave = (productId: string) => {
     setSavedProductIds((prev) =>
       prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
@@ -435,6 +446,9 @@ const AppContent: React.FC = () => {
       {/* Trailing Yarn Cursor on Desktop */}
       <YarnCursor />
 
+      {/* Lightweight background preloader for high-resolution textile imagery */}
+      <GalleryImagePreloader />
+
       {/* Cinematic Intro (runs once, instantly skippable) */}
       {!introFinished && (
         <CinematicIntro onComplete={() => setIntroFinished(true)} />
@@ -450,6 +464,7 @@ const AppContent: React.FC = () => {
         activeSection={activeSection}
         savedCount={savedProductIds.length}
         onOpenSaved={() => setSavedDrawerOpen(true)}
+        introFinished={introFinished}
       />
 
       {/* Main Content Sections with Isolated Error Boundaries */}
@@ -460,6 +475,7 @@ const AppContent: React.FC = () => {
             onExploreClick={() => handleNavigate('works')}
             onSelectProduct={(p) => setSelectedProduct(p)}
             onMaterialClick={() => handleNavigate('material')}
+            introFinished={introFinished}
           />
         </ErrorBoundary>
 
@@ -497,6 +513,11 @@ const AppContent: React.FC = () => {
         }}
         onOpenAnalytics={() => navigateToRoute('visitors')}
       />
+
+      {/* Subtle Floating Back to Top Button */}
+      {introFinished && (
+        <BackToTop onScrollToTop={handleScrollToTop} />
+      )}
 
       {/* Cinematic Product Detail View Modal */}
       {selectedProduct && !inquiryOpen && (

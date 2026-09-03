@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { Logo } from '../Brand/Logo';
 import { Menu, X, Sparkles, Heart } from 'lucide-react';
 
@@ -8,6 +9,7 @@ interface NavbarProps {
   activeSection: string;
   savedCount: number;
   onOpenSaved: () => void;
+  introFinished?: boolean;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -16,6 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   activeSection,
   savedCount,
   onOpenSaved,
+  introFinished = true,
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -45,8 +48,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+    <motion.header
+      initial={{ opacity: 0, y: -18 }}
+      animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: -18 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className={`fixed top-0 left-0 right-0 z-40 transition-[background-color,border-color,padding,box-shadow] duration-500 ${
         scrolled
           ? 'bg-[#FDFCFB]/90 backdrop-blur-md border-b border-[#3D2B1F]/10 py-4 shadow-[0_4px_20px_rgba(61,43,31,0.03)]'
           : 'bg-transparent py-7'
@@ -54,9 +60,12 @@ export const Navbar: React.FC<NavbarProps> = ({
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Brand Stamp & Name matching Bold Typography */}
-        <button
+        <motion.button
           onClick={() => handleLinkClick('hero')}
-          className="flex items-center gap-3 text-left group focus:outline-none"
+          initial={{ opacity: 0, x: -16 }}
+          animate={introFinished ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          className="flex items-center gap-3 text-left group focus:outline-none cursor-pointer"
         >
           <Logo size="sm" />
           <div className="flex flex-col">
@@ -64,15 +73,18 @@ export const Navbar: React.FC<NavbarProps> = ({
               Kurush Yarn
             </span>
           </div>
-        </button>
+        </motion.button>
 
         {/* Desktop Nav Links */}
         <nav className="hidden md:flex items-center space-x-8 text-[10px] tracking-[0.2em] font-medium uppercase" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          {navLinks.map((link) => (
-            <button
+          {navLinks.map((link, idx) => (
+            <motion.button
               key={link.id}
               onClick={() => handleLinkClick(link.id)}
-              className={`transition-all duration-300 py-1 relative ${
+              initial={{ opacity: 0, y: -10 }}
+              animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.18 + idx * 0.07 }}
+              className={`transition-all duration-300 py-1 relative cursor-pointer ${
                 activeSection === link.id
                   ? 'text-[#3D2B1F] font-bold opacity-100'
                   : 'text-[#3D2B1F]/70 hover:opacity-100 hover:text-[#3D2B1F]'
@@ -82,16 +94,21 @@ export const Navbar: React.FC<NavbarProps> = ({
               {activeSection === link.id && (
                 <span className="absolute -bottom-1 left-0 right-0 h-[1.5px] bg-[#3D2B1F]" />
               )}
-            </button>
+            </motion.button>
           ))}
         </nav>
 
         {/* Right Utility Buttons */}
-        <div className="flex items-center gap-3 md:gap-4">
+        <motion.div
+          initial={{ opacity: 0, x: 16 }}
+          animate={introFinished ? { opacity: 1, x: 0 } : { opacity: 0, x: 16 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.38 }}
+          className="flex items-center gap-3 md:gap-4"
+        >
           {/* Saved Pieces / Favorite Works */}
           <button
             onClick={onOpenSaved}
-            className="relative p-2.5 rounded-full text-[#3D2B1F] hover:bg-[#3D2B1F]/5 transition-all flex items-center justify-center group"
+            className="relative p-2.5 rounded-full text-[#3D2B1F] hover:bg-[#3D2B1F]/5 transition-all flex items-center justify-center group cursor-pointer"
             title="Favorite Exhibition Works"
             aria-label="View saved favorite exhibition works"
           >
@@ -122,12 +139,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Mobile Hamburger Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#3D2B1F] focus:outline-none"
+            className="md:hidden p-2 text-[#3D2B1F] focus:outline-none cursor-pointer"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-        </div>
+        </motion.div>
       </div>
 
       {/* Mobile Drawer */}
@@ -175,6 +192,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
       )}
-    </header>
+    </motion.header>
   );
 };

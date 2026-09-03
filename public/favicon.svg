@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Outer Circular Stroke with brand terracotta tone -->
+  <circle cx="100" cy="100" r="94" stroke="#6E3F3A" stroke-width="6" />
+  <!-- Inner subtle concentric guideline -->
+  <circle cx="100" cy="100" r="86" stroke="#6E3F3A" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.4" />
+
+  <!-- Stylized organic lettering based on Kurush Yarn handwriting -->
+  <g fill="#392220">
+    <!-- Top curve text: KURUSH hint -->
+    <path d="M45 78 C45 60 55 52 70 52 C85 52 92 62 92 75 C92 88 84 96 72 96 C56 96 45 88 45 78 Z" fill="#6E3F3A" opacity="0.18" />
+    
+    <!-- Handwritten K / S / Y curve silhouette representation -->
+    <path
+      d="M 52 64 Q 60 48, 78 52 Q 95 56, 92 72 Q 88 88, 68 85 Q 52 82, 52 64 Z"
+      fill="#392220"
+    />
+    <path
+      d="M 98 56 Q 112 48, 126 58 Q 138 68, 132 84 Q 124 96, 108 92 Q 94 88, 98 56 Z"
+      fill="#392220"
+    />
+    <path
+      d="M 60 114 Q 72 100, 94 104 Q 116 108, 114 126 Q 110 144, 88 142 Q 62 138, 60 114 Z"
+      fill="#6E3F3A"
+    />
+    <path
+      d="M 118 108 Q 132 98, 146 110 Q 158 122, 150 138 Q 140 152, 122 148 Q 106 142, 118 108 Z"
+      fill="#392220"
+    />
+    
+    <!-- Organic yarn dot accents -->
+    <circle cx="152" cy="82" r="7" fill="#6E3F3A" />
+    <circle cx="74" cy="154" r="4" fill="#8A5A54" />
+  </g>
+</svg>
