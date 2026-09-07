@@ -20,7 +20,7 @@ import { VisitorsAnalyticsView } from './components/Analytics/VisitorsAnalyticsV
 import { AtelierPasskeyGate } from './components/Analytics/AtelierPasskeyGate';
 import { SavedDrawer } from './components/Common/SavedDrawer';
 import { ErrorBoundary } from './components/Common/ErrorBoundary';
-import { useSEO } from './hooks/useSEO';
+import { usePageSEO } from './hooks/useSEO';
 import { Product } from './types/product';
 import { products } from './data/products';
 import { analyticsTracker } from './utils/analyticsTracker';
@@ -205,8 +205,8 @@ const AppContent: React.FC = () => {
   const lenisRef = useRef<Lenis | null>(null);
   const mainContainerRef = useRef<HTMLDivElement | null>(null);
 
-  // Initialize global SEO meta tags
-  useSEO();
+  // Dynamically update document title, meta tags & schema based on the active route, section, and product
+  usePageSEO({ route: currentRoute, section: activeSection, product: selectedProduct });
 
   // Initialize Lenis Smooth Scrolling with GSAP ScrollTrigger synchronization
   useEffect(() => {

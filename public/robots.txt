@@ -1,0 +1,6 @@
+# Kurush Yarn Atelier Robots Policy
+User-agent: *
+Allow: /
+Disallow: /visitors
+
+Sitemap: https://kurush-yarn.web.app/sitemap.xml
