@@ -16,7 +16,7 @@ import { products } from '../src/data/products';
 // Configurable base URL (via environment variable APP_URL or canonical default)
 const BASE_URL = (
   process.env.APP_URL ||
-  'https://kurush-yarn.web.app'
+  'https://kurush-yarn.vercel.app'
 ).replace(/\/+$/, '');
 
 const TODAY = new Date().toISOString().split('T')[0];
