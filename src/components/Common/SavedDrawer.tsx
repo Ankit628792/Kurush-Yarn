@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { Product } from '../../types/product';
 import { products } from '../../data/products';
 import { LazyImage } from './LazyImage';
@@ -151,22 +152,32 @@ export const SavedDrawer: React.FC<SavedDrawerProps> = ({
             )}
           </div>
 
-          {/* Footer Action */}
+          {/* Footer Action with entry animation fading along with translation */}
           {savedProducts.length > 0 && (
-            <div className="pt-6 border-t border-[#3D2B1F]/15 space-y-3">
-              <button
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="pt-6 border-t border-[#3D2B1F]/15 space-y-3"
+            >
+              <motion.button
+                whileHover={{ scale: 1.025, y: -2 }}
+                whileTap={{ scale: 0.975 }}
                 onClick={() => {
                   onClose();
                   onOpenInquiry();
                 }}
-                className="w-full bg-[#3D2B1F] hover:bg-[#2A1D15] text-[#FDFCFB] py-4 rounded-full text-[10px] uppercase tracking-[0.25em] font-semibold transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                className="w-full relative overflow-hidden bg-[#3D2B1F] hover:bg-[#2A1D15] text-[#FDFCFB] py-4 rounded-full text-[10px] uppercase tracking-[0.25em] font-semibold transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-xl cursor-pointer group"
                 style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
-                <Instagram size={14} />
-                <span>Inquire on Instagram</span>
-                <Sparkles size={12} className="text-[#D4A373]" />
-              </button>
-            </div>
+                {/* Subtle animated light sweep on hover */}
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
+
+                <Instagram size={14} className="group-hover:rotate-12 transition-transform duration-300" />
+                <span className="relative z-10">Inquire on Instagram</span>
+                <Sparkles size={12} className="text-[#D4A373] animate-pulse" />
+              </motion.button>
+            </motion.div>
           )}
         </div>
       </div>

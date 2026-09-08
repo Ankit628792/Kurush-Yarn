@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Logo } from '../Brand/Logo';
 import { Menu, X, Sparkles, Heart } from 'lucide-react';
@@ -22,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,11 +38,31 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navLinks = [
-    { id: 'works', label: 'Work' },
-    { id: 'material', label: 'Material' },
-    { id: 'process', label: 'Process' },
-    { id: 'atelier', label: 'About' }
+    { id: 'works', label: 'Work', path: '/works' },
+    { id: 'material', label: 'Material', path: '/material' },
+    { id: 'process', label: 'Process', path: '/process' },
+    { id: 'atelier', label: 'About', path: '/about' }
   ];
+
+  const isLinkActive = (linkId: string) => {
+    const pathname = location.pathname;
+    if (pathname === '/') {
+      return activeSection === linkId;
+    }
+    if (linkId === 'works' && (pathname.startsWith('/works') || pathname.startsWith('/product') || pathname.startsWith('/piece') || pathname.startsWith('/gallery'))) {
+      return true;
+    }
+    if (linkId === 'material' && pathname.startsWith('/material')) {
+      return true;
+    }
+    if (linkId === 'process' && pathname.startsWith('/process')) {
+      return true;
+    }
+    if (linkId === 'atelier' && (pathname.startsWith('/about') || pathname.startsWith('/atelier'))) {
+      return true;
+    }
+    return false;
+  };
 
   const handleLinkClick = (id: string) => {
     setMobileMenuOpen(false);
@@ -77,25 +99,28 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Desktop Nav Links */}
         <nav className="hidden md:flex items-center space-x-8 text-[10px] tracking-[0.2em] font-medium uppercase" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          {navLinks.map((link, idx) => (
-            <motion.button
-              key={link.id}
-              onClick={() => handleLinkClick(link.id)}
-              initial={{ opacity: 0, y: -10 }}
-              animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.18 + idx * 0.07 }}
-              className={`transition-all duration-300 py-1 relative cursor-pointer ${
-                activeSection === link.id
-                  ? 'text-[#3D2B1F] font-bold opacity-100'
-                  : 'text-[#3D2B1F]/70 hover:opacity-100 hover:text-[#3D2B1F]'
-              }`}
-            >
-              {link.label}
-              {activeSection === link.id && (
-                <span className="absolute -bottom-1 left-0 right-0 h-[1.5px] bg-[#3D2B1F]" />
-              )}
-            </motion.button>
-          ))}
+          {navLinks.map((link, idx) => {
+            const active = isLinkActive(link.id);
+            return (
+              <motion.button
+                key={link.id}
+                onClick={() => handleLinkClick(link.id)}
+                initial={{ opacity: 0, y: -10 }}
+                animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.18 + idx * 0.07 }}
+                className={`transition-all duration-300 py-1 relative cursor-pointer ${
+                  active
+                    ? 'text-[#3D2B1F] font-bold opacity-100'
+                    : 'text-[#3D2B1F]/70 hover:opacity-100 hover:text-[#3D2B1F]'
+                }`}
+              >
+                {link.label}
+                {active && (
+                  <span className="absolute -bottom-1 left-0 right-0 h-[1.5px] bg-[#3D2B1F]" />
+                )}
+              </motion.button>
+            );
+          })}
         </nav>
 
         {/* Right Utility Buttons */}
@@ -151,17 +176,20 @@ export const Navbar: React.FC<NavbarProps> = ({
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#FDFCFB] border-b border-[#3D2B1F]/15 px-6 py-6 shadow-xl animate-in slide-in-from-top-2 duration-300">
           <div className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => handleLinkClick(link.id)}
-                className={`text-left text-xs uppercase tracking-[0.2em] py-2.5 border-b border-[#3D2B1F]/10 ${
-                  activeSection === link.id ? 'text-[#3D2B1F] font-bold' : 'text-[#3D2B1F]/70'
-                }`}
-              >
-                {link.label}
-              </button>
-            ))}
+            {navLinks.map((link) => {
+              const active = isLinkActive(link.id);
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => handleLinkClick(link.id)}
+                  className={`text-left text-xs uppercase tracking-[0.2em] py-2.5 border-b border-[#3D2B1F]/10 ${
+                    active ? 'text-[#3D2B1F] font-bold' : 'text-[#3D2B1F]/70'
+                  }`}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
 
             {/* Mobile Saved Favorites Shortcut */}
             <button

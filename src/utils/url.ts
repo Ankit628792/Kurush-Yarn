@@ -33,8 +33,7 @@ export function getBasePath(): string {
  */
 export function getProductPieceUrl(slug: string): string {
   const origin = getAppOrigin();
-  const basePath = getBasePath();
-  return `${origin}${basePath}?piece=${encodeURIComponent(slug)}`;
+  return `${origin}/product/${encodeURIComponent(slug)}`;
 }
 
 /**

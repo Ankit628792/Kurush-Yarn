@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { motion } from 'motion/react';
 import gsap from 'gsap';
 import { Product } from '../../types/product';
 import { AngleGallery } from './AngleGallery';
@@ -511,29 +512,41 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               </div>
             </div>
 
-            {/* Action CTA Buttons */}
-            <div className="pt-4 flex flex-col sm:flex-row items-center gap-4">
-              <button
+            {/* Action CTA Buttons with fading along with translation entry animation */}
+            <motion.div
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="pt-4 flex flex-col sm:flex-row items-center gap-4"
+            >
+              <motion.button
                 type="button"
+                whileHover={{ scale: 1.025, y: -2 }}
+                whileTap={{ scale: 0.975 }}
                 onClick={() => onInquire(product)}
-                className="w-full sm:w-auto flex-1 bg-[#3D2B1F] hover:bg-[#2A1D15] text-[#FDFCFB] py-4 px-8 rounded-full text-[10px] uppercase tracking-[0.25em] font-medium transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto flex-1 relative overflow-hidden bg-[#3D2B1F] hover:bg-[#2A1D15] text-[#FDFCFB] py-4 px-8 rounded-full text-[10px] uppercase tracking-[0.25em] font-medium transition-all duration-300 shadow-md hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer group"
                 style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
-                <Instagram size={15} />
-                <span>Inquire on Instagram</span>
-                <Sparkles size={12} className="text-[#D4A373]" />
-              </button>
+                {/* Subtle animated light sweep on hover */}
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
 
-              <button
+                <Instagram size={15} className="group-hover:rotate-12 transition-transform duration-300" />
+                <span className="relative z-10">Inquire on Instagram</span>
+                <Sparkles size={12} className="text-[#D4A373] animate-pulse" />
+              </motion.button>
+
+              <motion.button
                 type="button"
+                whileHover={{ scale: 1.025, y: -2 }}
+                whileTap={{ scale: 0.975 }}
                 onClick={() => onToggleSave && onToggleSave(product.id)}
-                className="w-full sm:w-auto py-4 px-6 rounded-full border border-[#3D2B1F]/25 hover:border-[#3D2B1F] hover:bg-white text-[#3D2B1F] text-[10px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-95"
+                className="w-full sm:w-auto py-4 px-6 rounded-full border border-[#3D2B1F]/25 hover:border-[#3D2B1F] hover:bg-white text-[#3D2B1F] text-[10px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                 style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
               >
                 <Heart size={14} className={isSaved ? 'fill-[#3D2B1F] text-[#3D2B1F]' : 'text-[#3D2B1F]'} />
                 <span>{isSaved ? 'Favorited Piece' : 'Add to Favorites'}</span>
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
 
             {/* Social Media Sharing & Deep Link Bar */}
             <div className="p-5 rounded-2xl bg-white border border-[#3D2B1F]/15 shadow-sm space-y-3">

@@ -348,7 +348,7 @@ export function getPageSEOForSection(sectionId: string): SEOConfig {
         title: 'Collection & Handcrafted Works | Kurush Yarn Atelier',
         description:
           'Explore our complete archive of 22 artisanal crochet pieces, botanical flower stems, miniature adornments, and tactile fiber sculptures.',
-        canonical: `${origin}/#works`,
+        canonical: `${origin}/works`,
         image: '/images/products/product-07/hero.jpg',
         type: 'website',
         keywords: [
@@ -365,7 +365,7 @@ export function getPageSEOForSection(sectionId: string): SEOConfig {
         title: 'Material Philosophy & Fiber Provenance | Kurush Yarn Atelier',
         description:
           'Discover our commitment to natural fibers: combed mercerized cotton, fine merino roving, and hypoallergenic fill ethically sourced for heirloom longevity.',
-        canonical: `${origin}/#material`,
+        canonical: `${origin}/material`,
         image: '/images/products/product-03/hero.jpg',
         type: 'website',
         keywords: [
@@ -381,7 +381,7 @@ export function getPageSEOForSection(sectionId: string): SEOConfig {
         title: 'Artisanal Technique & Meditative Craft Process | Kurush Yarn Atelier',
         description:
           'From filament tensioning to mathematical stitch calculations and botanical steam shaping. An inside look into our slow crochet process.',
-        canonical: `${origin}/#process`,
+        canonical: `${origin}/process`,
         image: '/images/products/product-10/hero.jpg',
         type: 'website',
         keywords: [
@@ -393,11 +393,12 @@ export function getPageSEOForSection(sectionId: string): SEOConfig {
       };
 
     case 'atelier':
+    case 'about':
       return {
         title: 'The Atelier & Craft Philosophy | Kurush Yarn',
         description:
           'Crafted with mindful intention at Kurush Yarn Atelier. Discover the convergence of ancestral needlecraft and modern tactile aesthetics.',
-        canonical: `${origin}/#atelier`,
+        canonical: `${origin}/about`,
         image: '/images/products/product-01/hero.jpg',
         type: 'website',
         keywords: [
@@ -406,6 +407,17 @@ export function getPageSEOForSection(sectionId: string): SEOConfig {
           'handcrafted fiber art',
           'textile design philosophy'
         ]
+      };
+
+    case 'saved':
+      return {
+        title: 'Saved Collection & Curated Favorites | Kurush Yarn Atelier',
+        description:
+          'View your personally saved and bookmarked textile pieces from Kurush Yarn Atelier, ready for bespoke acquisition or direct inquiry.',
+        canonical: `${origin}/saved`,
+        image: '/images/products/product-07/hero.jpg',
+        type: 'website',
+        keywords: ['saved crochet pieces', 'curated wishlist', 'kurush favorites']
       };
 
     case 'hero':

@@ -57,25 +57,25 @@ function generateSitemap(): void {
       priority: '1.0'
     },
     {
-      loc: `${BASE_URL}/#works`,
+      loc: `${BASE_URL}/works`,
       lastmod: TODAY,
       changefreq: 'weekly',
       priority: '0.9'
     },
     {
-      loc: `${BASE_URL}/#material`,
+      loc: `${BASE_URL}/material`,
       lastmod: TODAY,
       changefreq: 'monthly',
       priority: '0.8'
     },
     {
-      loc: `${BASE_URL}/#process`,
+      loc: `${BASE_URL}/process`,
       lastmod: TODAY,
       changefreq: 'monthly',
       priority: '0.8'
     },
     {
-      loc: `${BASE_URL}/#atelier`,
+      loc: `${BASE_URL}/about`,
       lastmod: TODAY,
       changefreq: 'monthly',
       priority: '0.8'
@@ -85,12 +85,18 @@ function generateSitemap(): void {
       lastmod: TODAY,
       changefreq: 'weekly',
       priority: '0.5'
+    },
+    {
+      loc: `${BASE_URL}/saved`,
+      lastmod: TODAY,
+      changefreq: 'weekly',
+      priority: '0.6'
     }
   );
 
   // 2. All 22 Handcrafted Textile Pieces
   for (const product of products) {
-    const pieceUrl = `${BASE_URL}/?piece=${encodeURIComponent(product.slug)}`;
+    const pieceUrl = `${BASE_URL}/product/${encodeURIComponent(product.slug)}`;
     
     // Collect images for Google Image Sitemap
     const images: SitemapUrlEntry['images'] = [];

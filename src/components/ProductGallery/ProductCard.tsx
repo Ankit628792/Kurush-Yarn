@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Product } from '../../types/product';
 import { LazyImage } from '../Common/LazyImage';
 import { ArrowUpRight, Heart, Sparkles, Layers } from 'lucide-react';
@@ -63,9 +64,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       ? 'aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/10] lg:aspect-[16/10.5]'
       : 'aspect-square md:aspect-[4/4.6] lg:aspect-[4/4.8]';
 
-  const handleClick = () => {
+  const navigate = useNavigate();
+
+  const handleClick = (e: React.MouseEvent) => {
+    // Prevent routing if clicking save heart button
+    if ((e.target as HTMLElement).closest('button')) return;
+
     if (onSelect) {
       onSelect(product);
+    } else {
+      navigate(`/product/${product.slug}`);
     }
   };
 

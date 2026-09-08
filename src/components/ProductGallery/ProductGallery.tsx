@@ -9,20 +9,21 @@ interface ProductGalleryProps {
   onSelectProduct: (product: Product) => void;
   savedProductIds: string[];
   onToggleSave: (productId: string) => void;
+  onOpenInquiry?: (product?: Product) => void;
 }
 
 export const ProductGallery: React.FC<ProductGalleryProps> = ({
   onSelectProduct,
   savedProductIds,
-  onToggleSave
+  onToggleSave,
+  onOpenInquiry
 }) => {
   const [layoutMode, setLayoutMode] = useState<'editorial' | 'grid'>('editorial');
 
   return (
     <section id="works" className="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto text-[#3D2B1F]">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 border-b border-[#3D2B1F]/15">
-        <div className="space-y-3 max-w-2xl">
+        <div className="space-y-3 max-w-2xl pb-5">
           <div className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-[#3D2B1F]/60 font-semibold" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
             <span>01 / Permanent Collection</span>
             <span className="w-6 h-px bg-[#3D2B1F]/30" />
@@ -36,12 +37,11 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
           <p className="text-[#3D2B1F]/75 text-base md:text-lg leading-relaxed italic">
             Every piece is an individual sculptural dialogue between organic fiber tension and human time.
           </p>
+          <GalleryImagePreloader showIndicator indicatorVariant="minimal" />
         </div>
 
-        {/* View Switcher Controls & Image Buffer Status */}
-        <div className="flex flex-wrap items-center gap-3">
-          <GalleryImagePreloader showIndicator indicatorVariant="minimal" />
-
+        {/* View Switcher Controls  */}
+        <div className="flex justify-end pb-5 border-b border-[#3D2B1F]/15 ">
           <div className="bg-[#3D2B1F]/5 p-1 rounded-full flex items-center border border-[#3D2B1F]/15">
             <button
               onClick={() => setLayoutMode('editorial')}
@@ -66,11 +66,10 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
               title="Standard Grid View"
             >
               <LayoutGrid size={14} />
-              <span className="hidden sm:inline text-[10px] font-medium tracking-[0.15em]" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>Catalog ({products.length})</span>
+              <span className="hidden sm:inline text-[10px] font-medium tracking-[0.15em]" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>Catalog</span>
             </button>
           </div>
         </div>
-      </div>
 
       {/* Product Display Gallery */}
       <div
@@ -108,7 +107,11 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
           </p>
         </div>
         <button
-          onClick={() => onSelectProduct(products[0])}
+          onClick={() => {
+            if (onOpenInquiry) {
+              onOpenInquiry();
+            }
+          }}
           className="bg-[#3D2B1F] hover:bg-[#3D2B1F]/85 text-[#FDFCFB] px-7 py-3.5 rounded-full text-[10px] uppercase tracking-[0.25em] font-medium whitespace-nowrap transition-all duration-300 shadow-sm cursor-pointer"
           style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
         >
