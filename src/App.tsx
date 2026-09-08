@@ -21,6 +21,7 @@ import { AtelierPasskeyGate } from './components/Analytics/AtelierPasskeyGate';
 import { SavedDrawer } from './components/Common/SavedDrawer';
 import { ErrorBoundary } from './components/Common/ErrorBoundary';
 import { usePageSEO } from './hooks/useSEO';
+import { useGalleryWalkthroughAnimation } from './hooks/useGalleryWalkthroughAnimation';
 import { Product } from './types/product';
 import { products } from './data/products';
 import { analyticsTracker } from './utils/analyticsTracker';
@@ -207,6 +208,9 @@ const AppContent: React.FC = () => {
 
   // Dynamically update document title, meta tags & schema based on the active route, section, and product
   usePageSEO({ route: currentRoute, section: activeSection, product: selectedProduct });
+
+  // Curated gallery walkthrough GSAP section entrance animations
+  useGalleryWalkthroughAnimation({ enabled: introFinished, currentRoute, selectedProduct });
 
   // Initialize Lenis Smooth Scrolling with GSAP ScrollTrigger synchronization
   useEffect(() => {

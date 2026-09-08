@@ -35,7 +35,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry, onOpe
   };
 
   return (
-    <footer className="relative bg-[#3D2B1F] text-[#FDFCFB] pt-24 pb-12 px-6 md:px-12 overflow-hidden select-none border-t border-white/10">
+    <footer id="footer" className="relative bg-[#3D2B1F] text-[#FDFCFB] pt-24 pb-12 px-6 md:px-12 overflow-hidden select-none border-t border-white/10">
       {/* Decorative Large Background Circular Motif Ring */}
       <div className="absolute -bottom-48 -right-48 w-96 h-96 md:w-[600px] md:h-[600px] rounded-full border border-white/5 pointer-events-none" />
 
