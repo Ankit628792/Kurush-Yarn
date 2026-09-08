@@ -13,10 +13,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { products } from '../src/data/products';
 
-// Configurable base URL (via environment variable or canonical default)
+// Configurable base URL (via environment variable APP_URL or canonical default)
 const BASE_URL = (
-  process.env.SITE_URL ||
-  process.env.VITE_SITE_URL ||
+  process.env.APP_URL ||
   'https://kurush-yarn.web.app'
 ).replace(/\/+$/, '');
 

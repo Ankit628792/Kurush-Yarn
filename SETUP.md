@@ -97,11 +97,11 @@ http://localhost:3000
 
 ## ⚙️ Environment Configuration
 
-The application is structured as a client-side digital exhibition. If you introduce custom server-side API integrations (such as Google GenAI endpoints), create a `.env` file based on `.env.example`:
+The application is structured as a client-side digital exhibition. You can optionally configure the canonical deployment URL in `.env` based on `.env.example`:
 
 ```env
 # .env.example
-GEMINI_API_KEY=
+APP_URL=
 ```
 
 ---

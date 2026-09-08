@@ -15,6 +15,9 @@ export function getAppOrigin(): string {
       return `${protocol}//${hostname}${port ? `:${port}` : ''}`;
     }
   }
+  if (typeof import.meta !== 'undefined' && import.meta.env) {
+    return import.meta.env.APP_URL || '';
+  }
   return '';
 }
 
