@@ -58,3 +58,15 @@ export function getCanonicalPageUrl(): string {
   }
   return getAppOrigin();
 }
+
+/**
+ * Atelier Instagram Social Channel Helpers
+ */
+export function getInstagramHandle(): string {
+  return '@kurush.yarn';
+}
+
+export function getInstagramUrl(): string {
+  return 'https://www.instagram.com/kurush.yarn';
+}
+

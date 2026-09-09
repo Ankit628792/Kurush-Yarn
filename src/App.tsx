@@ -27,6 +27,7 @@ import { AboutPage } from './pages/AboutPage';
 import { SavedPage } from './pages/SavedPage';
 import { VisitorsPage } from './pages/VisitorsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { ErrorPage } from './pages/ErrorPage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -454,8 +455,25 @@ const AppContent: React.FC = () => {
           <Route path="/visitors" element={<VisitorsPage />} />
           <Route path="/analytics" element={<VisitorsPage />} />
 
+          {/* Dedicated Error & Exception Routes */}
+          <Route
+            path="/error"
+            element={<ErrorPage onOpenInquiry={() => handleOpenInquiry()} />}
+          />
+          <Route
+            path="/500"
+            element={<ErrorPage onOpenInquiry={() => handleOpenInquiry()} />}
+          />
+
           {/* 404 Not Found Page */}
-          <Route path="*" element={<NotFoundPage />} />
+          <Route
+            path="/404"
+            element={<NotFoundPage onOpenInquiry={() => handleOpenInquiry()} />}
+          />
+          <Route
+            path="*"
+            element={<NotFoundPage onOpenInquiry={() => handleOpenInquiry()} />}
+          />
         </Routes>
       </main>
 
@@ -506,11 +524,11 @@ const AppContent: React.FC = () => {
 
 export const App: React.FC = () => {
   return (
-    <ErrorBoundary>
-      <BrowserRouter>
+    <BrowserRouter>
+      <ErrorBoundary>
         <AppContent />
-      </BrowserRouter>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </BrowserRouter>
   );
 };
 
