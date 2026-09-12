@@ -11,12 +11,15 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import dotenv from 'dotenv';
 import { products } from '../src/data/products';
 
-// Configurable base URL (via environment variable APP_URL or canonical default)
+// Load environment variables from .env if present
+dotenv.config();
+
+// Configurable base URL (via environment variable APP_URL)
 const BASE_URL = (
-  process.env.APP_URL ||
-  'https://kurush-yarn.vercel.app'
+  process.env.APP_URL
 ).replace(/\/+$/, '');
 
 const TODAY = new Date().toISOString().split('T')[0];
@@ -44,7 +47,11 @@ function escapeXml(unsafe: string): string {
 
 function generateSitemap(): void {
   console.log('🧶 [Sitemap Generator] Initializing sitemap generation for Kurush Yarn Atelier...');
-  console.log(`🌐 [Sitemap Generator] Base URL: ${BASE_URL}`);
+  if (!BASE_URL) {
+    console.warn('⚠️ [Sitemap Generator] Notice: APP_URL environment variable is not set. Sitemap will be generated with relative paths.');
+  } else {
+    console.log(`🌐 [Sitemap Generator] Base URL (from APP_URL env): ${BASE_URL}`);
+  }
 
   const entries: SitemapUrlEntry[] = [];
 
@@ -91,6 +98,18 @@ function generateSitemap(): void {
       lastmod: TODAY,
       changefreq: 'weekly',
       priority: '0.6'
+    },
+    {
+      loc: `${BASE_URL}/license`,
+      lastmod: TODAY,
+      changefreq: 'monthly',
+      priority: '0.4'
+    },
+    {
+      loc: `${BASE_URL}/privacy`,
+      lastmod: TODAY,
+      changefreq: 'monthly',
+      priority: '0.4'
     }
   );
 

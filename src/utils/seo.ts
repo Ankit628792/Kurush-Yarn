@@ -35,7 +35,7 @@ export const DEFAULT_SITE_SEO: SEOConfig = {
     'A soft-futuristic digital exhibition for handcrafted textile objects created using Kurush and yarn. Explore bespoke crochet flora, adornments, and fiber sculptures.',
   image: '/images/products/product-07/hero.jpg',
   type: 'website',
-  canonical: getAppOrigin() || 'https://kurush-yarn.web.app/',
+  canonical: getAppOrigin(),
   brand: 'Kurush Yarn Atelier',
   author: 'Kurush Yarn Atelier',
   robots: 'index, follow',
@@ -258,7 +258,7 @@ export function updateDocumentSEO(config: Partial<SEOConfig> = {}): void {
         {
           '@type': 'WebSite',
           '@id': `${origin}/#website`,
-          url: origin || 'https://kurush-yarn.web.app',
+          url: origin,
           name: brand,
           description: DEFAULT_SITE_SEO.description,
           inLanguage: 'en-US'
@@ -267,7 +267,7 @@ export function updateDocumentSEO(config: Partial<SEOConfig> = {}): void {
           '@type': 'ArtGallery',
           '@id': `${origin}/#gallery`,
           name: brand,
-          url: origin || 'https://kurush-yarn.web.app',
+          url: origin,
           image,
           description
         }

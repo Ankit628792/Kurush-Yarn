@@ -1,5 +1,6 @@
 import { siteContent } from '../../../data/content';
 import { Product } from '../../../types/product';
+import { getProductPieceUrl } from '../../../utils/url';
 import { InstagramInquiryOptions } from './types';
 
 /**
@@ -60,8 +61,7 @@ export function buildInstagramInquiryText(
   if (productUrl) {
     text += `\nPiece Reference: ${productUrl}`;
   } else if (productSlug) {
-    const origin = typeof window !== 'undefined' ? window.location.origin : '';
-    text += `\nPiece Reference: ${origin}/product/${productSlug}`;
+    text += `\nPiece Reference: ${getProductPieceUrl(productSlug)}`;
   }
 
   if (customNotes && customNotes.trim()) {
@@ -80,9 +80,8 @@ export function buildInstagramSavedInquiryText(products: Product[]): string {
     return buildInstagramInquiryText({ productName: 'Bespoke Custom Creation', isBespoke: true });
   }
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : '';
   const lines = products.map((p, idx) => {
-    const link = `${origin}/product/${p.slug}`;
+    const link = getProductPieceUrl(p.slug);
     return `${idx + 1}. ${p.name} (${p.price})\n   Reference: ${link}`;
   });
 

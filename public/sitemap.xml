@@ -4,49 +4,61 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/works</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/material</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/process</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/about</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/visitors</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/saved</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/license</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/privacy</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/oreo-biscuit-keychain</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -67,7 +79,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/sunflower-keychain</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -93,7 +105,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/pink-tulip-flower-bulb</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -114,7 +126,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/peach-tulip-flower-bulb</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -130,7 +142,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/bloomed-tulip-flower</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -176,7 +188,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/bloomed-tulip-blue</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -192,7 +204,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/bloomed-tulip-deep-pink</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -208,7 +220,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/bloomed-tulip-purple</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -224,7 +236,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/bloomed-tulip-sky-blue</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -240,7 +252,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/meadow-daisy-flower-stem</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -261,7 +273,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/papillon-magenta-hair-bows</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -272,7 +284,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/lily-flower-pot</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -303,7 +315,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/jasmine-hair-ornament</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -334,7 +346,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/tulip-headband-yellow</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -345,7 +357,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/tulip-headband-pink</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -366,7 +378,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/tulip-headband-light-pink</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -387,7 +399,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/cat-paw-keychain</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -413,7 +425,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/puppy-paw-keychain</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -439,7 +451,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/daisy-flower-keychain</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -465,7 +477,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/blue-butterfly-hair-bow-clip</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -491,7 +503,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/pink-butterfly-hair-bow-clip</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -517,7 +529,7 @@
   </url>
   <url>
     <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/rose-flower</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>

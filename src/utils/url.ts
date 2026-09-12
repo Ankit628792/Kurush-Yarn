@@ -1,23 +1,34 @@
 /**
  * Dynamic URL & Domain Utilities
  * Dynamically resolves application origins, canonical deep links, and asset paths
- * from `window.location.origin` across all environments.
+ * using the configured APP_URL environment variable, falling back
+ * to dynamic browser window.location.origin.
  */
 
 export function getAppOrigin(): string {
+  // 1. Prefer explicitly configured APP_URL environment variable
+  const envUrl = (
+    (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.APP_URL) ||
+    (typeof process !== 'undefined' && process.env && process.env.APP_URL) ||
+    ''
+  ).trim();
+
+  if (envUrl) {
+    return envUrl.replace(/\/+$/, '');
+  }
+
+  // 2. Dynamic fallback in browser environment
   if (typeof window !== 'undefined' && window.location) {
     if (window.location.origin && window.location.origin !== 'null') {
-      return window.location.origin;
+      return window.location.origin.replace(/\/+$/, '');
     }
     // Fallback if origin is not directly set (e.g. older environments or edge cases)
     const { protocol, hostname, port } = window.location;
     if (protocol && hostname) {
-      return `${protocol}//${hostname}${port ? `:${port}` : ''}`;
+      return `${protocol}//${hostname}${port ? `:${port}` : ''}`.replace(/\/+$/, '');
     }
   }
-  if (typeof import.meta !== 'undefined' && import.meta.env) {
-    return import.meta.env.APP_URL || '';
-  }
+
   return '';
 }
 
@@ -50,13 +61,16 @@ export function getAbsoluteAssetUrl(assetPath: string): string {
 }
 
 /**
- * Returns the current canonical page URL dynamically
+ * Returns the current canonical page URL dynamically derived from APP_URL and current route
  */
 export function getCanonicalPageUrl(): string {
+  const origin = getAppOrigin();
   if (typeof window !== 'undefined' && window.location) {
-    return window.location.href;
+    const pathname = window.location.pathname || '';
+    const search = window.location.search || '';
+    return `${origin}${pathname}${search}`;
   }
-  return getAppOrigin();
+  return origin;
 }
 
 /**

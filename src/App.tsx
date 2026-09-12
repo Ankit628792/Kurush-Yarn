@@ -63,62 +63,6 @@ const AppContent: React.FC = () => {
   });
 
   const [activeSection, setActiveSection] = useState<string>('hero');
-  const [shouldSimulateError, setShouldSimulateError] = useState(false);
-
-  // Handle fallback query parameters for routing and simulation
-  useEffect(() => {
-    try {
-      const searchParams = new URLSearchParams(location.search);
-      
-      // Error simulation check
-      if (searchParams.get('simulate-error') === 'true' || searchParams.get('error') === 'true') {
-        setShouldSimulateError(true);
-        return;
-      }
-
-      const pieceParam = searchParams.get('piece') || searchParams.get('product');
-      if (pieceParam) {
-        const found = products.find(
-          (p) =>
-            p.slug.toLowerCase() === pieceParam.toLowerCase() ||
-            p.id.toLowerCase() === pieceParam.toLowerCase() ||
-            p.number === pieceParam
-        );
-        if (found) {
-          navigate(`/product/${found.slug}`, { replace: true });
-          return;
-        }
-      }
-
-      // Route / view query params for environments without rewrite config
-      const routeParam = searchParams.get('route') || searchParams.get('view');
-      if (routeParam) {
-        const cleanRoute = routeParam.toLowerCase();
-        if (cleanRoute === 'visitors' || cleanRoute === 'analytics') {
-          navigate('/visitors', { replace: true });
-          return;
-        } else if (cleanRoute === '404' || cleanRoute === 'notfound') {
-          navigate('/404', { replace: true });
-          return;
-        } else if (cleanRoute === 'error' || cleanRoute === '500') {
-          navigate('/error', { replace: true });
-          return;
-        } else if (cleanRoute === 'license') {
-          navigate('/license', { replace: true });
-          return;
-        } else if (cleanRoute === 'privacy') {
-          navigate('/privacy', { replace: true });
-          return;
-        }
-      }
-    } catch (e) {
-      console.warn('Could not parse query parameters', e);
-    }
-  }, [location.search, navigate]);
-
-  if (shouldSimulateError) {
-    throw new Error('Simulated Atelier Visual Loom Disruption. This is a demonstration of the Kurush Error Boundary and Error Page.');
-  }
 
   // Global secret shortcut for atelier owner: Ctrl+Shift+A or Cmd+Shift+A
   useEffect(() => {
@@ -256,60 +200,48 @@ const AppContent: React.FC = () => {
 
   const handleNavigate = (sectionId: string) => {
     if (sectionId === 'hero') {
-      if (location.pathname === '/') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        navigate('/');
-      }
+      navigate('/');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
     if (sectionId === 'works') {
-      if (location.pathname === '/') {
-        const el = document.getElementById('works');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-        else navigate('/works');
-      } else {
-        navigate('/works');
-      }
+      navigate('/works');
       return;
     }
 
     if (sectionId === 'material') {
-      if (location.pathname === '/') {
-        const el = document.getElementById('material');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-        else navigate('/material');
-      } else {
-        navigate('/material');
-      }
+      navigate('/material');
       return;
     }
 
     if (sectionId === 'process') {
-      if (location.pathname === '/') {
-        const el = document.getElementById('process');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-        else navigate('/process');
-      } else {
-        navigate('/process');
-      }
+      navigate('/process');
       return;
     }
 
     if (sectionId === 'atelier' || sectionId === 'about') {
-      if (location.pathname === '/') {
-        const el = document.getElementById('atelier');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-        else navigate('/about');
-      } else {
-        navigate('/about');
-      }
+      navigate('/about');
       return;
     }
 
     if (sectionId === 'visitors' || sectionId === 'analytics') {
       navigate('/visitors');
+      return;
+    }
+
+    if (sectionId === 'privacy') {
+      navigate('/privacy');
+      return;
+    }
+
+    if (sectionId === 'license') {
+      navigate('/license');
+      return;
+    }
+
+    if (sectionId === 'saved') {
+      navigate('/saved');
       return;
     }
   };

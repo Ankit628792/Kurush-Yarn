@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Product } from '../../types/product';
 import { products } from '../../data/products';
@@ -28,13 +29,14 @@ export const SavedDrawer: React.FC<SavedDrawerProps> = ({
 
   const savedProducts = products.filter((p) => savedIds.includes(p.id));
 
+  const navigate = useNavigate();
+
   const handleExplore = () => {
     onClose();
     if (onExploreWorks) {
       onExploreWorks();
     } else {
-      const el = document.getElementById('works');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      navigate('/works');
     }
   };
 
@@ -177,6 +179,15 @@ export const SavedDrawer: React.FC<SavedDrawerProps> = ({
                 <span className="relative z-10">Inquire on Instagram</span>
                 <Sparkles size={12} className="text-[#D4A373] animate-pulse" />
               </motion.button>
+
+              <Link
+                to="/saved"
+                onClick={onClose}
+                className="w-full text-center text-[10px] uppercase tracking-[0.2em] border border-[#3D2B1F]/20 hover:border-[#3D2B1F] text-[#3D2B1F] py-3 rounded-full font-medium transition-colors block cursor-pointer"
+                style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+              >
+                Open Saved Collection Page (/saved)
+              </Link>
             </motion.div>
           )}
         </div>

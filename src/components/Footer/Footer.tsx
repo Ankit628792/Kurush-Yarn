@@ -89,11 +89,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry, onOpe
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
           {/* Logo & Info */}
           <div className="md:col-span-4 space-y-5">
-            <div className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-3 group">
               <Logo size="md" />
               <div>
                 <span
-                  className="font-editorial text-2xl text-[#FDFCFB] block tracking-tight"
+                  className="font-editorial text-2xl text-[#FDFCFB] block tracking-tight group-hover:text-[#D4A373] transition-colors"
                   style={{ fontFamily: 'Georgia, "Playfair Display", serif' }}
                 >
                   KURUSH YARN
@@ -105,7 +105,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry, onOpe
                   Craft Atelier &amp; Exhibition
                 </span>
               </div>
-            </div>
+            </Link>
             <p className="text-xs text-[#FDFCFB]/70 leading-relaxed max-w-xs font-sans">
               Handcrafted textile sculptures, floral botanicals, and bespoke tactile adornments.
             </p>
@@ -123,30 +123,30 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry, onOpe
               className="grid grid-cols-2 gap-2.5 text-[11px] text-[#FDFCFB]/80 uppercase tracking-[0.2em] font-medium"
               style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
             >
-              <button
-                onClick={() => onNavigate('works')}
+              <Link
+                to="/works"
                 className="text-left hover:text-[#D4A373] transition-colors py-1 cursor-pointer"
               >
                 All Works
-              </button>
-              <button
-                onClick={() => onNavigate('material')}
+              </Link>
+              <Link
+                to="/material"
                 className="text-left hover:text-[#D4A373] transition-colors py-1 cursor-pointer"
               >
                 Material Story
-              </button>
-              <button
-                onClick={() => onNavigate('process')}
+              </Link>
+              <Link
+                to="/process"
                 className="text-left hover:text-[#D4A373] transition-colors py-1 cursor-pointer"
               >
                 Atelier Process
-              </button>
-              <button
-                onClick={() => onNavigate('atelier')}
+              </Link>
+              <Link
+                to="/about"
                 className="text-left hover:text-[#D4A373] transition-colors py-1 cursor-pointer"
               >
                 Philosophy
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -211,6 +211,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry, onOpe
               <span>•</span>
               <Link to="/privacy" className="hover:text-[#D4A373] transition-colors hover:underline">
                 Privacy Policy
+              </Link>
+              <span>•</span>
+              <Link to="/saved" className="hover:text-[#D4A373] transition-colors hover:underline">
+                Saved Works
+              </Link>
+              <span>•</span>
+              <Link to="/visitors" className="hover:text-[#D4A373] transition-colors hover:underline">
+                Visitors
               </Link>
             </div>
           </div>
