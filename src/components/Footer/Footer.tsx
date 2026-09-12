@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Logo } from '../Brand/Logo';
 import { siteContent } from '../../data/content';
 import { ArrowUp, Instagram, ArrowUpRight, Sparkles } from 'lucide-react';
@@ -190,16 +191,35 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry, onOpe
 
         {/* Bottom Legal & Provenance */}
         <div
-          className="pt-12 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] uppercase tracking-wider text-[#FDFCFB]/60 text-center md:text-left"
+          className="pt-12 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 text-[10px] uppercase tracking-wider text-[#FDFCFB]/60 text-center md:text-left"
           style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
         >
-          <div
-            onClick={handleSecretCopyrightClick}
-            className="cursor-default select-none transition-colors hover:text-[#FDFCFB]/80"
-            title="Kurush Atelier"
-          >
-            © {new Date().getFullYear()} Kurush Yarn Atelier. All rights reserved. Handcrafted with devotion.
+          <div className="space-y-2">
+            <div
+              onClick={handleSecretCopyrightClick}
+              className="cursor-default select-none transition-colors hover:text-[#FDFCFB]/80"
+              title="Kurush Atelier"
+            >
+              © {new Date().getFullYear()} Kurush Yarn Atelier. All rights reserved. Handcrafted with devotion.
+            </div>
+            
+            {/* Atelier Demonstration Fallback Triggers */}
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-[#FDFCFB]/40 text-[9px] tracking-widest">
+              <span className="text-[#D4A373]/70">Demonstration links:</span>
+              <Link to="/404" className="hover:text-[#D4A373] transition-colors hover:underline">
+                404 Room
+              </Link>
+              <span>•</span>
+              <Link to="/error" className="hover:text-[#D4A373] transition-colors hover:underline">
+                500 Error Screen
+              </Link>
+              <span>•</span>
+              <a href="/?error=true" className="hover:text-[#D4A373] transition-colors hover:underline">
+                Trigger Real Error
+              </a>
+            </div>
           </div>
+
           <div className="flex flex-wrap items-center justify-center gap-2">
             <span>Website Crafted &amp; Developed by</span>
             <a

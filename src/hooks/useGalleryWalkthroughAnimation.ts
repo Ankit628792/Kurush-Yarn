@@ -29,6 +29,7 @@ export function useGalleryWalkthroughAnimation({
     }
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isReturningVisit = typeof window !== 'undefined' && sessionStorage.getItem('kurush_intro_viewed') === 'true';
 
     // Primary curated exhibition chambers in chronological walkthrough order
     const sectionIds = ['works', 'material', 'process', 'atelier', 'footer'];
@@ -38,8 +39,8 @@ export function useGalleryWalkthroughAnimation({
         const el = document.getElementById(id);
         if (!el) return;
 
-        if (prefersReducedMotion) {
-          gsap.set(el, { opacity: 1, y: 0 });
+        if (prefersReducedMotion || isReturningVisit) {
+          gsap.set(el, { opacity: 1, y: 0, clearProps: 'all' });
           return;
         }
 

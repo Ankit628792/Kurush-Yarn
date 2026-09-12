@@ -29,6 +29,15 @@ export function isImageCached(url: string | undefined): boolean {
 }
 
 /**
+ * Register a successfully loaded image URL into the global cache
+ */
+export function registerLoadedImage(url: string | undefined): void {
+  if (url) {
+    globalPreloadCache.add(url);
+  }
+}
+
+/**
  * Get all current cached URLs
  */
 export function getCachedImages(): Set<string> {

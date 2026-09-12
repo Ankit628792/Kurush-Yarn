@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Sparkles } from 'lucide-react';
-import { isImageCached } from '../../utils/imagePreloader';
+import { isImageCached, registerLoadedImage } from '../../utils/imagePreloader';
 
 export interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
@@ -26,13 +26,28 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   decoding = 'async',
   ...props
 }) => {
-  const initiallyCached = isImageCached(src);
+  // Synchronous checks: if already in preloader memory OR already complete/naturalWidth > 0 in browser
+  const initiallyCached = (() => {
+    if (isImageCached(src)) return true;
+    if (typeof window !== 'undefined' && src) {
+      const img = new Image();
+      img.src = src;
+      return img.complete && img.naturalWidth > 0;
+    }
+    return false;
+  })();
+
   const [isInView, setIsInView] = useState(initiallyCached);
   const [isLoaded, setIsLoaded] = useState(initiallyCached);
   const [hasError, setHasError] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    // If already complete or cached, nothing to observe
+    if (initiallyCached) {
+      return;
+    }
+
     // If image is already cached via preloader, ensure state is updated
     if (isImageCached(src)) {
       setIsInView(true);
@@ -78,6 +93,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
 
   const handleImageLoad = () => {
     setIsLoaded(true);
+    registerLoadedImage(src);
   };
 
   const handleImageError = () => {

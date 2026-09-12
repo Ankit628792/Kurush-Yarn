@@ -61,11 +61,19 @@ const AppContent: React.FC = () => {
   });
 
   const [activeSection, setActiveSection] = useState<string>('hero');
+  const [shouldSimulateError, setShouldSimulateError] = useState(false);
 
-  // Handle legacy deep links: convert ?piece=... or ?product=... query parameters to /product/:slug route
+  // Handle fallback query parameters for routing and simulation
   useEffect(() => {
     try {
       const searchParams = new URLSearchParams(location.search);
+      
+      // Error simulation check
+      if (searchParams.get('simulate-error') === 'true' || searchParams.get('error') === 'true') {
+        setShouldSimulateError(true);
+        return;
+      }
+
       const pieceParam = searchParams.get('piece') || searchParams.get('product');
       if (pieceParam) {
         const found = products.find(
@@ -80,16 +88,29 @@ const AppContent: React.FC = () => {
         }
       }
 
-      // Legacy route query params
+      // Route / view query params for environments without rewrite config
       const routeParam = searchParams.get('route') || searchParams.get('view');
-      if (routeParam === 'visitors' || routeParam === 'analytics') {
-        navigate('/visitors', { replace: true });
-        return;
+      if (routeParam) {
+        const cleanRoute = routeParam.toLowerCase();
+        if (cleanRoute === 'visitors' || cleanRoute === 'analytics') {
+          navigate('/visitors', { replace: true });
+          return;
+        } else if (cleanRoute === '404' || cleanRoute === 'notfound') {
+          navigate('/404', { replace: true });
+          return;
+        } else if (cleanRoute === 'error' || cleanRoute === '500') {
+          navigate('/error', { replace: true });
+          return;
+        }
       }
     } catch (e) {
-      console.warn('Could not parse legacy query parameter', e);
+      console.warn('Could not parse query parameters', e);
     }
   }, [location.search, navigate]);
+
+  if (shouldSimulateError) {
+    throw new Error('Simulated Atelier Visual Loom Disruption. This is a demonstration of the Kurush Error Boundary and Error Page.');
+  }
 
   // Global secret shortcut for atelier owner: Ctrl+Shift+A or Cmd+Shift+A
   useEffect(() => {
