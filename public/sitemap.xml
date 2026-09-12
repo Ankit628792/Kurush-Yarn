@@ -3,552 +3,552 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/</loc>
+    <loc>https://kurush-yarn.vercel.app/</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/works</loc>
+    <loc>https://kurush-yarn.vercel.app/works</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/material</loc>
+    <loc>https://kurush-yarn.vercel.app/material</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/process</loc>
+    <loc>https://kurush-yarn.vercel.app/process</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/about</loc>
+    <loc>https://kurush-yarn.vercel.app/about</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/visitors</loc>
+    <loc>https://kurush-yarn.vercel.app/visitors</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/saved</loc>
+    <loc>https://kurush-yarn.vercel.app/saved</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/license</loc>
+    <loc>https://kurush-yarn.vercel.app/license</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/privacy</loc>
+    <loc>https://kurush-yarn.vercel.app/privacy</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/oreo-biscuit-keychain</loc>
+    <loc>https://kurush-yarn.vercel.app/product/oreo-biscuit-keychain</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-01/hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-01/hero.jpg</image:loc>
       <image:title>Oreo Biscuit Keychain — Piece No. 01 | Kurush Yarn</image:title>
       <image:caption>A cute handmade crochet Oreo biscuit keychain, perfect for adding a playful touch to your keys, bags, or backpacks. Handcrafted in 100% Mercerized Combed Cotton &amp; Alloy Keyring</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-01/angled.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-01/angled.jpg</image:loc>
       <image:title>Oreo Biscuit Keychain (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Oreo Biscuit Keychain</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-01/side.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-01/side.jpg</image:loc>
       <image:title>Oreo Biscuit Keychain (side) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Oreo Biscuit Keychain</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/sunflower-keychain</loc>
+    <loc>https://kurush-yarn.vercel.app/product/sunflower-keychain</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-02/hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-02/hero.jpg</image:loc>
       <image:title>Sunflower Keychain — Piece No. 02 | Kurush Yarn</image:title>
       <image:caption>A cheerful handmade crochet sunflower keychain, perfect for decorating your keys, bags, or backpacks. Handcrafted in 100% Mercerized Combed Cotton Yarn &amp; Silver Alloy Keyring</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-02/top.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-02/top.jpg</image:loc>
       <image:title>Sunflower Keychain (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Sunflower Keychain top view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-02/side.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-02/side.jpg</image:loc>
       <image:title>Sunflower Keychain (side) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Sunflower Keychain side view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-02/bottom.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-02/bottom.jpg</image:loc>
       <image:title>Sunflower Keychain (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Sunflower Keychain bottom view</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/pink-tulip-flower-bulb</loc>
+    <loc>https://kurush-yarn.vercel.app/product/pink-tulip-flower-bulb</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-03/pink_front.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-03/pink_front.jpg</image:loc>
       <image:title>Pink Tulip Flower Bulb — Piece No. 03 | Kurush Yarn</image:title>
       <image:caption>A handmade crochet pink tulip flower bulb, carefully crafted in soft petal pink cotton. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Organic Fill</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-03/pink_angled.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-03/pink_angled.jpg</image:loc>
       <image:title>Pink Tulip Flower Bulb (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Pink Tulip Flower Bulb angled view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-03/pink_grown.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-03/pink_grown.jpg</image:loc>
       <image:title>Pink Tulip Flower Bulb (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Pink Tulip Flower Bulb with blooming stem</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/peach-tulip-flower-bulb</loc>
+    <loc>https://kurush-yarn.vercel.app/product/peach-tulip-flower-bulb</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-03/peach_front.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-03/peach_front.jpg</image:loc>
       <image:title>Peach Tulip Flower Bulb — Piece No. 04 | Kurush Yarn</image:title>
       <image:caption>A handmade crochet peach tulip flower bulb in soft pastel peach-orange yarn with green stem. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Organic Fill</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-03/peach_angled.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-03/peach_angled.jpg</image:loc>
       <image:title>Peach Tulip Flower Bulb (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Peach Tulip Flower Bulb angled view</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/bloomed-tulip-flower</loc>
+    <loc>https://kurush-yarn.vercel.app/product/bloomed-tulip-flower</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/deep_pink_hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/deep_pink_hero.jpg</image:loc>
       <image:title>Bloomed Tulip Flower — Piece No. 05 | Kurush Yarn</image:title>
       <image:caption>A handmade crochet bloomed tulip flower, carefully crafted to showcase graceful open petals in rich artisan hues. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Flexible Wire Core</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/deep_pink_angle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/deep_pink_angle.jpg</image:loc>
       <image:title>Bloomed Tulip Flower (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Bloomed Tulip Flower - Deep Pink Angled</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/blue_hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/blue_hero.jpg</image:loc>
       <image:title>Bloomed Tulip Flower (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Bloomed Tulip Flower - Blue</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/blue_angle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/blue_angle.jpg</image:loc>
       <image:title>Bloomed Tulip Flower (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Bloomed Tulip Flower - Blue Angled</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/purple_hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/purple_hero.jpg</image:loc>
       <image:title>Bloomed Tulip Flower (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Bloomed Tulip Flower - Purple</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/purple_angle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/purple_angle.jpg</image:loc>
       <image:title>Bloomed Tulip Flower (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Bloomed Tulip Flower - Purple Angled</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/sky_blue_hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/sky_blue_hero.jpg</image:loc>
       <image:title>Bloomed Tulip Flower (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Bloomed Tulip Flower - Sky Blue</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/sky_blue_angle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/sky_blue_angle.jpg</image:loc>
       <image:title>Bloomed Tulip Flower (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Bloomed Tulip Flower - Sky Blue Angled</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/bloomed-tulip-blue</loc>
+    <loc>https://kurush-yarn.vercel.app/product/bloomed-tulip-blue</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/blue_hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/blue_hero.jpg</image:loc>
       <image:title>Bloomed Tulip - Blue — Piece No. 06 | Kurush Yarn</image:title>
       <image:caption>A vibrant royal blue handmade crochet bloomed tulip flower on bendable green stem. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Wire Core</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/blue_angle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/blue_angle.jpg</image:loc>
       <image:title>Bloomed Tulip - Blue (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Bloomed Tulip Flower Blue angled view</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/bloomed-tulip-deep-pink</loc>
+    <loc>https://kurush-yarn.vercel.app/product/bloomed-tulip-deep-pink</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/deep_pink_hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/deep_pink_hero.jpg</image:loc>
       <image:title>Bloomed Tulip - Deep Pink — Piece No. 07 | Kurush Yarn</image:title>
       <image:caption>A striking deep pink handmade crochet bloomed tulip flower with lush green foliage. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Wire Core</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/deep_pink_angle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/deep_pink_angle.jpg</image:loc>
       <image:title>Bloomed Tulip - Deep Pink (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Bloomed Tulip Flower Deep Pink angled view</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/bloomed-tulip-purple</loc>
+    <loc>https://kurush-yarn.vercel.app/product/bloomed-tulip-purple</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/purple_hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/purple_hero.jpg</image:loc>
       <image:title>Bloomed Tulip - Purple — Piece No. 08 | Kurush Yarn</image:title>
       <image:caption>An elegant purple handmade crochet bloomed tulip flower with fluted petal curves. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Wire Core</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/purple_angle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/purple_angle.jpg</image:loc>
       <image:title>Bloomed Tulip - Purple (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Bloomed Tulip Flower Purple angled view</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/bloomed-tulip-sky-blue</loc>
+    <loc>https://kurush-yarn.vercel.app/product/bloomed-tulip-sky-blue</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/sky_blue_hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/sky_blue_hero.jpg</image:loc>
       <image:title>Bloomed Tulip - Sky Blue — Piece No. 09 | Kurush Yarn</image:title>
       <image:caption>A gentle pastel sky blue handmade crochet bloomed tulip flower with fresh spring charm. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Wire Core</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/bloomed-tulip/sky_blue_angle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/bloomed-tulip/sky_blue_angle.jpg</image:loc>
       <image:title>Bloomed Tulip - Sky Blue (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Bloomed Tulip Flower Sky Blue angled view</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/meadow-daisy-flower-stem</loc>
+    <loc>https://kurush-yarn.vercel.app/product/meadow-daisy-flower-stem</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-04/front.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-04/front.jpg</image:loc>
       <image:title>Meadow Daisy Stem — Piece No. 10 | Kurush Yarn</image:title>
       <image:caption>Pure white fluted petals framing a dense textured yellow pollen dome with green stem and leaf. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Organic Fill</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-04/angled.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-04/angled.jpg</image:loc>
       <image:title>Meadow Daisy Stem (detail) — Kurush Yarn</image:title>
       <image:caption>Handcrafted Meadow Daisy Stem three-quarter angled view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-04/macro.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-04/macro.jpg</image:loc>
       <image:title>Meadow Daisy Stem (detail) — Kurush Yarn</image:title>
       <image:caption>Close-up macro detail of yellow daisy center and white petals</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/papillon-magenta-hair-bows</loc>
+    <loc>https://kurush-yarn.vercel.app/product/papillon-magenta-hair-bows</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-06/hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-06/hero.jpg</image:loc>
       <image:title>Papillon Hair Adornments (Set of 2) — Piece No. 11 | Kurush Yarn</image:title>
       <image:caption>Vibrant hot-pink sculptural butterflies adding kinetic textile charm to hairstyles. Handcrafted in Vibrant Magenta Mercerized Wool &amp; Alloy Clips</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/lily-flower-pot</loc>
+    <loc>https://kurush-yarn.vercel.app/product/lily-flower-pot</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-07/hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-07/hero.jpg</image:loc>
       <image:title>Lily Flower Pot — Piece No. 12 | Kurush Yarn</image:title>
       <image:caption>A self-standing handmade crochet lily flower in a charming woven pot. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Organic Fill</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-07/front.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-07/front.jpg</image:loc>
       <image:title>Lily Flower Pot (front) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Lily Flower Pot front view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-07/angled.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-07/angled.jpg</image:loc>
       <image:title>Lily Flower Pot (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Lily Flower Pot angled perspective</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-07/top.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-07/top.jpg</image:loc>
       <image:title>Lily Flower Pot (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Lily Flower Pot top overhead view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-07/lifestyle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-07/lifestyle.jpg</image:loc>
       <image:title>Lily Flower Pot (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Lily Flower Pot styled on wooden desk decor placement</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/jasmine-hair-ornament</loc>
+    <loc>https://kurush-yarn.vercel.app/product/jasmine-hair-ornament</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-08/hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-08/hero.jpg</image:loc>
       <image:title>Jasmine Hair Ornament — Piece No. 13 | Kurush Yarn</image:title>
       <image:caption>A delicate handmade crochet jasmine hair ornament, perfect for adding an elegant floral touch to traditional, festive, or everyday hairstyles. Handcrafted in 100% Fine Combed Mercerized Cotton Yarn</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-08/front.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-08/front.jpg</image:loc>
       <image:title>Jasmine Hair Ornament (front) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Jasmine Hair Ornament S-curve layout</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-08/coiled.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-08/coiled.jpg</image:loc>
       <image:title>Jasmine Hair Ornament (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Jasmine Hair Ornament coiled garland ring</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-08/lifestyle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-08/lifestyle.jpg</image:loc>
       <image:title>Jasmine Hair Ornament (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Jasmine Hair Ornament styled on elegant hair bun preview</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/product-08/detail.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/product-08/detail.jpg</image:loc>
       <image:title>Jasmine Hair Ornament (detail) — Kurush Yarn</image:title>
       <image:caption>Macro stitch texture of delicate white crochet jasmine petals and green calyx</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/tulip-headband-yellow</loc>
+    <loc>https://kurush-yarn.vercel.app/product/tulip-headband-yellow</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/tulip-headband/yellow_hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/tulip-headband/yellow_hero.jpg</image:loc>
       <image:title>Tulip Headband - Yellow — Piece No. 14 | Kurush Yarn</image:title>
       <image:caption>A handcrafted white band featuring a continuous row of sunny yellow pop-up tulip buds and floral tassel ties. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Braided Tie Strings</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/tulip-headband-pink</loc>
+    <loc>https://kurush-yarn.vercel.app/product/tulip-headband-pink</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/tulip-headband/pink_hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/tulip-headband/pink_hero.jpg</image:loc>
       <image:title>Tulip Headband - Pink — Piece No. 15 | Kurush Yarn</image:title>
       <image:caption>A handcrafted white band featuring a continuous row of bright pink pop-up tulip buds and floral tassel ties. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Braided Tie Strings</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/tulip-headband/pink_close.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/tulip-headband/pink_close.jpg</image:loc>
       <image:title>Tulip Headband - Pink (detail) — Kurush Yarn</image:title>
       <image:caption>Close-up row of small crochet pink tulip buds and green leaves</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/tulip-headband/pink_preview.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/tulip-headband/pink_preview.jpg</image:loc>
       <image:title>Tulip Headband - Pink (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Pink Tulip Headband styled preview</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/tulip-headband-light-pink</loc>
+    <loc>https://kurush-yarn.vercel.app/product/tulip-headband-light-pink</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/tulip-headband/ltpink_hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/tulip-headband/ltpink_hero.jpg</image:loc>
       <image:title>Tulip Headband - Light Pink — Piece No. 16 | Kurush Yarn</image:title>
       <image:caption>A handcrafted white band featuring a continuous row of delicate light baby pink pop-up tulip buds and floral tassel ties. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Braided Tie Strings</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/tulip-headband/ltpink_close.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/tulip-headband/ltpink_close.jpg</image:loc>
       <image:title>Tulip Headband - Light Pink (detail) — Kurush Yarn</image:title>
       <image:caption>Close-up row of small crochet light pink tulip buds and green leaves</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/tulip-headband/ltpink_preview.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/tulip-headband/ltpink_preview.jpg</image:loc>
       <image:title>Tulip Headband - Light Pink (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Light Pink Tulip Headband styled preview</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/cat-paw-keychain</loc>
+    <loc>https://kurush-yarn.vercel.app/product/cat-paw-keychain</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/cat-paw/hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/cat-paw/hero.jpg</image:loc>
       <image:title>Cat Paw Keychain — Piece No. 17 | Kurush Yarn</image:title>
       <image:caption>A cute handmade crochet cat paw keychain, perfect for cat lovers and a fun addition to your everyday accessories. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Silver Alloy Keyring</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/cat-paw/top.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/cat-paw/top.jpg</image:loc>
       <image:title>Cat Paw Keychain (front) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Cat Paw Keychain top view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/cat-paw/bottom.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/cat-paw/bottom.jpg</image:loc>
       <image:title>Cat Paw Keychain (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Cat Paw Keychain bottom view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/cat-paw/lifestyle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/cat-paw/lifestyle.jpg</image:loc>
       <image:title>Cat Paw Keychain (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Cat Paw Keychain on backpack zipper preview</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/puppy-paw-keychain</loc>
+    <loc>https://kurush-yarn.vercel.app/product/puppy-paw-keychain</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/puppy-paw/hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/puppy-paw/hero.jpg</image:loc>
       <image:title>Puppy Paw Keychain — Piece No. 18 | Kurush Yarn</image:title>
       <image:caption>A cute handmade crochet puppy paw keychain, perfect for dog lovers and adding a playful touch to your everyday accessories. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Silver Alloy Keyring</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/puppy-paw/side.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/puppy-paw/side.jpg</image:loc>
       <image:title>Puppy Paw Keychain (side) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Puppy Paw Keychain side view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/puppy-paw/bottom.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/puppy-paw/bottom.jpg</image:loc>
       <image:title>Puppy Paw Keychain (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Puppy Paw Keychain bottom view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/puppy-paw/lifestyle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/puppy-paw/lifestyle.jpg</image:loc>
       <image:title>Puppy Paw Keychain (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Puppy Paw Keychain styled with keys preview</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/daisy-flower-keychain</loc>
+    <loc>https://kurush-yarn.vercel.app/product/daisy-flower-keychain</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/daisy-keychain/hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/daisy-keychain/hero.jpg</image:loc>
       <image:title>Daisy Flower Keychain — Piece No. 19 | Kurush Yarn</image:title>
       <image:caption>A cheerful handmade crochet daisy flower keychain, perfect for adding a bright floral touch to your everyday accessories. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Silver Alloy Keyring</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/daisy-keychain/top.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/daisy-keychain/top.jpg</image:loc>
       <image:title>Daisy Flower Keychain (front) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Daisy Flower Keychain top view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/daisy-keychain/bottom.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/daisy-keychain/bottom.jpg</image:loc>
       <image:title>Daisy Flower Keychain (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Daisy Flower Keychain bottom view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/daisy-keychain/lifestyle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/daisy-keychain/lifestyle.jpg</image:loc>
       <image:title>Daisy Flower Keychain (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Daisy Flower Keychain clipped on tote bag preview</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/blue-butterfly-hair-bow-clip</loc>
+    <loc>https://kurush-yarn.vercel.app/product/blue-butterfly-hair-bow-clip</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/blue-butterfly-clip/hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/blue-butterfly-clip/hero.jpg</image:loc>
       <image:title>Blue Butterfly Hair Bow Clip — Piece No. 20 | Kurush Yarn</image:title>
       <image:caption>A delicate handmade crochet blue butterfly hair bow clip, perfect for adding a whimsical aesthetic to any hairstyle. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Nickel-Free Alligator Hair Clip</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/blue-butterfly-clip/front.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/blue-butterfly-clip/front.jpg</image:loc>
       <image:title>Blue Butterfly Hair Bow Clip (front) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Blue Butterfly Hair Bow Clip front view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/blue-butterfly-clip/angle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/blue-butterfly-clip/angle.jpg</image:loc>
       <image:title>Blue Butterfly Hair Bow Clip (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Blue Butterfly Hair Bow Clip angled detail</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/blue-butterfly-clip/lifestyle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/blue-butterfly-clip/lifestyle.jpg</image:loc>
       <image:title>Blue Butterfly Hair Bow Clip (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Blue Butterfly Hair Bow Clip styled in hair preview</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/pink-butterfly-hair-bow-clip</loc>
+    <loc>https://kurush-yarn.vercel.app/product/pink-butterfly-hair-bow-clip</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/pink-butterfly-clip/hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/pink-butterfly-clip/hero.jpg</image:loc>
       <image:title>Pink Butterfly Hair Bow Clip — Piece No. 21 | Kurush Yarn</image:title>
       <image:caption>A lovely handmade crochet pink butterfly hair bow clip, designed to bring a romantic touch to your hair. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Nickel-Free Alligator Hair Clip</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/pink-butterfly-clip/front.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/pink-butterfly-clip/front.jpg</image:loc>
       <image:title>Pink Butterfly Hair Bow Clip (front) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Pink Butterfly Hair Bow Clip front view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/pink-butterfly-clip/angle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/pink-butterfly-clip/angle.jpg</image:loc>
       <image:title>Pink Butterfly Hair Bow Clip (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Pink Butterfly Hair Bow Clip angled detail</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/pink-butterfly-clip/lifestyle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/pink-butterfly-clip/lifestyle.jpg</image:loc>
       <image:title>Pink Butterfly Hair Bow Clip (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Pink Butterfly Hair Bow Clip styled in hair preview</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/product/rose-flower</loc>
+    <loc>https://kurush-yarn.vercel.app/product/rose-flower</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/rose-flower/hero.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/rose-flower/hero.jpg</image:loc>
       <image:title>Rose Flower — Piece No. 22 | Kurush Yarn</image:title>
       <image:caption>A beautiful handmade crochet rose flower, perfect for gifting, decoration, and creating everlasting floral arrangements. Handcrafted in 100% Fine Combed Cotton Yarn &amp; Flexible Floral Stem</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/rose-flower/front.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/rose-flower/front.jpg</image:loc>
       <image:title>Rose Flower (front) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Rose Flower front view</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/rose-flower/top.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/rose-flower/top.jpg</image:loc>
       <image:title>Rose Flower (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Rose Flower top view petal detail</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/images/products/rose-flower/angle.jpg</image:loc>
+      <image:loc>https://kurush-yarn.vercel.app/images/products/rose-flower/angle.jpg</image:loc>
       <image:title>Rose Flower (detail) — Kurush Yarn</image:title>
       <image:caption>Handmade crochet Rose Flower stem and leaf detail</image:caption>
     </image:image>

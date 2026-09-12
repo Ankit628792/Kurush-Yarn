@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 Disallow: /visitors
 
-Sitemap: https://ais-dev-tjhvjvzlyei54jifum6fal-1030295253002.asia-southeast1.run.app/sitemap.xml
+Sitemap: https://kurush-yarn.vercel.app/sitemap.xml

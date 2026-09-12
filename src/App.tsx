@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -352,7 +352,7 @@ const AppContent: React.FC = () => {
             }
           />
 
-          {/* Dedicated Collection & Archive Routes */}
+          {/* Dedicated Collection & Archive Routes & Aliases */}
           <Route
             path="/works"
             element={
@@ -383,6 +383,10 @@ const AppContent: React.FC = () => {
               />
             }
           />
+          <Route path="/products" element={<Navigate to="/works" replace />} />
+          <Route path="/pieces" element={<Navigate to="/works" replace />} />
+          <Route path="/catalog" element={<Navigate to="/works" replace />} />
+          <Route path="/exhibition" element={<Navigate to="/works" replace />} />
 
           {/* Dedicated Material Story Route */}
           <Route path="/material" element={<MaterialPage />} />

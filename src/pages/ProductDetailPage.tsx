@@ -24,12 +24,19 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   // Find product by slug, id, or number
   const product = products.find((p) => {
     if (!slug) return false;
-    const cleanSlug = slug.toLowerCase();
+    let cleanSlug = '';
+    try {
+      cleanSlug = decodeURIComponent(slug).toLowerCase().trim().replace(/^\/+|\/+$/g, '');
+    } catch {
+      cleanSlug = slug.toLowerCase().trim();
+    }
     return (
       p.slug.toLowerCase() === cleanSlug ||
       p.id.toLowerCase() === cleanSlug ||
       p.number === cleanSlug ||
-      `piece-${p.number}` === cleanSlug
+      `piece-${p.number}` === cleanSlug ||
+      `piece-${parseInt(p.number, 10)}` === cleanSlug ||
+      parseInt(p.number, 10).toString() === cleanSlug
     );
   });
 
