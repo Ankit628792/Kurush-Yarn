@@ -1,4 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Solid atelier canvas background -->
+  <rect width="200" height="200" fill="#FDFCFB" />
+
   <!-- Outer Circular Stroke with brand terracotta tone -->
   <circle cx="100" cy="100" r="94" stroke="#6E3F3A" stroke-width="6" />
   <!-- Inner subtle concentric guideline -->

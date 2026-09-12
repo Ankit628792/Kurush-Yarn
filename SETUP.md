@@ -65,32 +65,47 @@ http://localhost:3000
 
 ```
 ├── public/
-│   ├── images/
-│   │   ├── brand/          # Brand textures and atelier studio assets
-│   │   └── products/       # Handcrafted collection product photography
+│   ├── _redirects          # Universal SPA static rewrite for Netlify / Cloudflare
+│   ├── favicon.svg         # Vector emblem & PWA application icon
+│   ├── logo.png            # Studio master brand asset
+│   ├── robots.txt          # SEO search engine crawlers directives
+│   ├── sitemap.xml         # XML Sitemap index
+│   └── images/
+│       ├── brand/          # Brand textures and atelier studio assets
+│       └── products/       # Handcrafted collection product photography
 ├── src/
 │   ├── assets/             # Studio assets & photography references
 │   ├── components/
+│   │   ├── Analytics/      # Passkey-gated visitor telemetry and interaction metrics
 │   │   ├── Brand/          # Logo & Atelier emblem components
 │   │   ├── Common/         # Reusable ProductCard, LazyImage, InquiryModal, SavedDrawer
 │   │   ├── Footer/         # Atelier manifesto footer & Instagram channel links
 │   │   ├── Hero/           # Exhibition hero with 3D ambient simulation
-│   │   ├── Navigation/     # Sticky navigation with saved works drawer
+│   │   ├── Navigation/     # Sticky navigation, PWA install CTA, route scrollers
 │   │   ├── ProductDetail/  # Full-screen multi-angle inspection modal & social sharing
 │   │   ├── ProductGallery/ # Asymmetrical & grid collection visualizers
+│   │   ├── PWA/            # Offline indicator & guided iOS/Desktop install triggers
 │   │   └── ThreeScene/     # Three.js 3D yarn particle & strand canvas
 │   ├── data/
 │   │   ├── content.ts      # Site text, manifesto, and Instagram links
 │   │   └── products.ts     # Complete handcrafted product dataset
+│   ├── hooks/
+│   │   ├── useGalleryWalkthroughAnimation.ts # Walkthrough animation hooks
+│   │   ├── useOnlineStatus.ts                # Real-time network monitor hook
+│   │   ├── usePWAInstall.ts                  # PWA install prompt & mode detection hook
+│   │   └── useSEO.ts                         # Dynamic page metadata & open graph tags
+│   ├── pages/              # Dedicated route views (Works, ProductDetail, Visitors, etc.)
 │   ├── types/
 │   │   └── product.ts      # TypeScript interfaces and type definitions
-│   ├── App.tsx             # Main application orchestrator
-│   ├── index.css           # Tailwind CSS directives and custom typography
-│   └── main.tsx            # React root mount
+│   ├── App.tsx             # Route orchestrator & smooth scroll coordinator
+│   ├── index.css           # Tailwind CSS v4 styling & typography rules
+│   ├── main.tsx            # React root & Service Worker auto-update initialization
+│   └── vite-env.d.ts       # Vite client & PWA client TypeScript declarations
+├── vercel.json             # Vercel SPA rewrite configuration
 ├── metadata.json           # Application metadata
 ├── package.json            # Dependencies and scripts
 ├── tsconfig.json           # TypeScript configuration
-└── vite.config.ts          # Vite & Tailwind configuration
+└── vite.config.ts          # Vite, Tailwind & VitePWA Workbox configuration
 ```
 
 ---

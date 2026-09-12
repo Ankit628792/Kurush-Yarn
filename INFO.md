@@ -46,3 +46,31 @@ The atelier creates slow-crafted works across five distinct categories:
 - **Official URL**: `https://www.instagram.com/kurush.yarn`
 - **Handle**: `@kurush.yarn`
 - **Policy**: All custom sizing requests, bespoke yarn color palettes, international shipping inquiries, and order confirmations are conducted through Instagram direct messages.
+
+---
+
+## ⚡ Progressive Web App (PWA) & Offline Capabilities
+
+- **Manifest**: Standalone display configuration with vector branding via `/favicon.svg`.
+- **Service Worker Strategy**: Managed via `vite-plugin-pwa` with automatic updates (`registerType: 'autoUpdate'`).
+- **Caching Tiers**:
+  - Precached static bundles (JS, CSS, HTML, WebP images).
+  - Runtime cache for Google Fonts stylesheets and binary webfont assets with a 1-year expiration policy (`CacheFirst`).
+- **Install Triggers**: Desktop install button in the navigation header, mobile install action in the mobile drawer, and guided modal instructions for iOS Safari users.
+- **Offline Mode**: Interactive offline banner alerting the visitor when navigating through cached exhibition works without network connectivity.
+
+---
+
+## 🌐 Routes & Deep Linking
+
+| Path | Purpose |
+|---|---|
+| `/` | Atelier welcome, ambient 3D fiber canvas, and curated hero highlights. |
+| `/works` | Full archival catalogue with fuzzy search, color filtering, and categorization. |
+| `/product/:slug` | High-definition multi-angle view, physical specs, and direct DM generator. |
+| `/material` | Fiber disclosures: organic combed cotton, Merino wool, and brass armature. |
+| `/process` | 5-phase slow-crafting timeline from hand-spun warp to structural stitches. |
+| `/saved` | LocalStorage-persisted bookmarks drawer with batch inquiry export. |
+| `/visitors` | Passkey-protected atelier interaction and audience telemetry dashboard. |
+| `/privacy` | Privacy policy and local data handling disclosure. |
+| `/license` | Dual-license software and artistic intellectual property terms. |
