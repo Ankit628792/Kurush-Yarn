@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Logo } from '../Brand/Logo';
 import { siteContent } from '../../data/content';
 import { ArrowUp, Instagram, ArrowUpRight, Sparkles } from 'lucide-react';
+import { PWAInstallButton } from '../PWA/PWAInstallButton';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -220,6 +221,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry, onOpe
               <Link to="/visitors" className="hover:text-[#D4A373] transition-colors hover:underline">
                 Visitors
               </Link>
+              <span>•</span>
+              <PWAInstallButton
+                variant="nav"
+                label="Install Atelier App"
+                className="!text-[#D4A373] !bg-white/5 hover:!bg-white/10 !border-white/10 text-[9px] py-0.5 px-2.5"
+              />
             </div>
           </div>
 

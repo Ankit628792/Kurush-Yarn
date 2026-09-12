@@ -14,6 +14,7 @@ import { BackToTop } from './components/Navigation/BackToTop';
 import { InstagramInquiryModal } from './components/Inquiry/instagram';
 import { SavedDrawer } from './components/Common/SavedDrawer';
 import { ErrorBoundary } from './components/Common/ErrorBoundary';
+import { OfflineIndicator } from './components/PWA/OfflineIndicator';
 import { Product } from './types/product';
 import { products } from './data/products';
 
@@ -130,7 +131,7 @@ const AppContent: React.FC = () => {
     const lenis = lenisRef.current;
     if (!lenis) return;
 
-    if (inquiryOpen || savedDrawerOpen || !introFinished || isVisitorsRoute) {
+    if (inquiryOpen || savedDrawerOpen || (!introFinished && location.pathname === '/')) {
       lenis.stop();
     } else {
       lenis.start();
@@ -138,12 +139,12 @@ const AppContent: React.FC = () => {
         mainContainerRef.current.focus({ preventScroll: true });
       }
     }
-  }, [inquiryOpen, savedDrawerOpen, introFinished, isVisitorsRoute]);
+  }, [inquiryOpen, savedDrawerOpen, introFinished, location.pathname]);
 
   // Keyboard navigation support for smooth scrolling (Arrow keys, PageUp/Down, Space, Home, End)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (inquiryOpen || savedDrawerOpen || !introFinished || isVisitorsRoute) {
+      if (inquiryOpen || savedDrawerOpen || (!introFinished && location.pathname === '/')) {
         return;
       }
 
@@ -487,6 +488,9 @@ const AppContent: React.FC = () => {
         selectedProduct={inquiryProduct}
         savedProducts={products.filter((p) => savedProductIds.includes(p.id))}
       />
+
+      {/* PWA Offline Mode Indicator */}
+      <OfflineIndicator />
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Logo } from '../Brand/Logo';
 import { Menu, X, Sparkles, Heart } from 'lucide-react';
+import { PWAInstallButton } from '../PWA/PWAInstallButton';
 
 interface NavbarProps {
   onNavigate?: (sectionId: string) => void;
@@ -150,6 +151,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </button>
 
+          {/* PWA Install Button (desktop) */}
+          <PWAInstallButton variant="nav" label="Install App" className="hidden lg:inline-flex" />
+
           {/* Inquire CTA Button */}
           <button
             onClick={onOpenInquiry}
@@ -204,6 +208,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {savedCount}
               </span>
             </Link>
+
+            {/* Mobile PWA Install Button */}
+            <div className="pt-1 pb-1">
+              <PWAInstallButton
+                variant="pill"
+                label="Install Atelier App"
+                className="w-full justify-center py-2.5"
+              />
+            </div>
 
             <button
               onClick={() => {

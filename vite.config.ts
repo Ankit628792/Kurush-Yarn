@@ -2,6 +2,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), ['APP_']);
@@ -12,7 +13,103 @@ export default defineConfig(({ mode }) => {
     define: {
       'import.meta.env.APP_URL': JSON.stringify(appUrl),
     },
-    plugins: [react(), tailwindcss()],
+    plugins: [
+      react(),
+      tailwindcss(),
+      VitePWA({
+        registerType: 'autoUpdate',
+        includeAssets: [
+          'favicon.svg',
+          'logo.png',
+          'apple-touch-icon.png',
+          'pwa-192x192.png',
+          'pwa-512x512.png',
+          'pwa-maskable-512x512.png',
+          'robots.txt'
+        ],
+        manifest: {
+          id: '/',
+          name: 'Kurush Yarn — Immersive Product Showcase',
+          short_name: 'Kurush Yarn',
+          description: 'A soft-futuristic digital exhibition for handcrafted textile objects created using Kurush and yarn.',
+          theme_color: '#FDFCFB',
+          background_color: '#FDFCFB',
+          display: 'standalone',
+          orientation: 'portrait-primary',
+          start_url: '/',
+          scope: '/',
+          icons: [
+            {
+              src: '/favicon.svg',
+              sizes: 'any',
+              type: 'image/svg+xml',
+              purpose: 'any',
+            },
+            {
+              src: '/favicon.svg',
+              sizes: 'any',
+              type: 'image/svg+xml',
+              purpose: 'maskable',
+            },
+            {
+              src: '/pwa-192x192.png',
+              sizes: '192x192',
+              type: 'image/png',
+              purpose: 'any',
+            },
+            {
+              src: '/pwa-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'any',
+            },
+            {
+              src: '/pwa-maskable-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'maskable',
+            },
+          ],
+        },
+        workbox: {
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,jpg,jpeg,woff,woff2}'],
+          runtimeCaching: [
+            {
+              urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'google-fonts-cache',
+                expiration: {
+                  maxEntries: 10,
+                  maxAgeSeconds: 60 * 60 * 24 * 365,
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+            {
+              urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'gstatic-fonts-cache',
+                expiration: {
+                  maxEntries: 10,
+                  maxAgeSeconds: 60 * 60 * 24 * 365,
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+          ],
+        },
+        devOptions: {
+          enabled: true,
+          type: 'module',
+        },
+      }),
+    ],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
