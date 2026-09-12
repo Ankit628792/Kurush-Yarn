@@ -28,6 +28,8 @@ import { SavedPage } from './pages/SavedPage';
 import { VisitorsPage } from './pages/VisitorsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ErrorPage } from './pages/ErrorPage';
+import { LicensePage } from './pages/LicensePage';
+import { PrivacyPage } from './pages/PrivacyPage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -100,6 +102,12 @@ const AppContent: React.FC = () => {
           return;
         } else if (cleanRoute === 'error' || cleanRoute === '500') {
           navigate('/error', { replace: true });
+          return;
+        } else if (cleanRoute === 'license') {
+          navigate('/license', { replace: true });
+          return;
+        } else if (cleanRoute === 'privacy') {
+          navigate('/privacy', { replace: true });
           return;
         }
       }
@@ -475,6 +483,10 @@ const AppContent: React.FC = () => {
           {/* Dedicated Visitors & Analytics Intelligence Route */}
           <Route path="/visitors" element={<VisitorsPage />} />
           <Route path="/analytics" element={<VisitorsPage />} />
+
+          {/* Legal and Intellectual Property Routes */}
+          <Route path="/license" element={<LicensePage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
 
           {/* Dedicated Error & Exception Routes */}
           <Route

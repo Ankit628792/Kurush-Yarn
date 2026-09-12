@@ -203,20 +203,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry, onOpe
               © {new Date().getFullYear()} Kurush Yarn Atelier. All rights reserved. Handcrafted with devotion.
             </div>
             
-            {/* Atelier Demonstration Fallback Triggers */}
+            {/* Atelier Legal Links */}
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-[#FDFCFB]/40 text-[9px] tracking-widest">
-              <span className="text-[#D4A373]/70">Demonstration links:</span>
-              <Link to="/404" className="hover:text-[#D4A373] transition-colors hover:underline">
-                404 Room
+              <Link to="/license" className="hover:text-[#D4A373] transition-colors hover:underline">
+                Atelier License
               </Link>
               <span>•</span>
-              <Link to="/error" className="hover:text-[#D4A373] transition-colors hover:underline">
-                500 Error Screen
+              <Link to="/privacy" className="hover:text-[#D4A373] transition-colors hover:underline">
+                Privacy Policy
               </Link>
-              <span>•</span>
-              <a href="/?error=true" className="hover:text-[#D4A373] transition-colors hover:underline">
-                Trigger Real Error
-              </a>
             </div>
           </div>
 

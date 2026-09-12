@@ -51,6 +51,13 @@ All bespoke commissions, inquiries, and orders are handled exclusively via Insta
 
 ---
 
-## 📄 License & Provenance
+## 📄 License & Intellectual Property
+
+This project holds a dual-layered intellectual property structure:
+
+- **Software & Codebase**: Licensed under the **[MIT License](LICENSE)**. You are free to modify, distribute, and utilize the structural React/TypeScript components, layout architecture, and Three.js WebGL simulation code.
+- **Creative Designs & Brand**: All physical botanical yarn designs, custom stitch structures, brand names ("Kurush", "Kurush Yarn"), logos, and high-definition photography are the exclusive copyright of **Kurush Yarn Atelier** and are **excluded** from the open-source license.
+
+For detailed terms, please review the [LICENSE](LICENSE) file or visit the **License & Provenance** section on the website.
 
 © 2026 Kurush Yarn Atelier. All rights reserved. Handcrafted with devotion.
