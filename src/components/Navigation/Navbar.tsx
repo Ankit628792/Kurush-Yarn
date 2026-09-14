@@ -152,7 +152,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* PWA Install Button (desktop) */}
-          <PWAInstallButton variant="nav" label="Install App" className="hidden lg:inline-flex" />
+          <PWAInstallButton variant="nav" label="Install" className="hidden lg:inline-flex" />
 
           {/* Inquire CTA Button */}
           <button
