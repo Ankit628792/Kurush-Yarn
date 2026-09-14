@@ -21,7 +21,7 @@ import {
   Share2,
   Copy,
   Check,
-  Pin,
+  MessageCircle,
   Twitter
 } from 'lucide-react';
 
@@ -218,16 +218,13 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
     onInquire(product);
   };
 
-  // Quick Pinterest Share
-  const handleQuickPinterest = (e: React.MouseEvent) => {
+  // Quick WhatsApp Share
+  const handleQuickWhatsApp = (e: React.MouseEvent) => {
     e.stopPropagation();
     const shareUrl = getProductPieceUrl(product.slug);
-    const fullImageUrl = getAbsoluteAssetUrl(product.heroImage);
-    const text = `${product.name} — Handcrafted Crochet Piece No. ${product.number} | Kurush Yarn Atelier`;
-    const pinUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(
-      shareUrl
-    )}&media=${encodeURIComponent(fullImageUrl)}&description=${encodeURIComponent(text)}`;
-    window.open(pinUrl, '_blank', 'noopener,noreferrer');
+    const text = `🧶 Discover "${product.name}" (Piece No. ${product.number}) — Handcrafted crochet ${product.categoryLabel.toLowerCase()} in ${product.material} by Kurush Yarn Atelier:\n${shareUrl}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
   // Lock body scroll and listen for escape key
@@ -603,16 +600,16 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   <span>Instagram</span>
                 </button>
 
-                {/* 3. Direct Pinterest Button */}
+                {/* 3. Direct WhatsApp Button */}
                 <button
                   type="button"
-                  onClick={handleQuickPinterest}
-                  className="py-2.5 px-3.5 rounded-xl bg-[#FAF7F2] hover:bg-[#E60023]/10 text-[#BD081C] border border-[#3D2B1F]/15 hover:border-[#E60023] text-[10px] uppercase tracking-wider font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
+                  onClick={handleQuickWhatsApp}
+                  className="py-2.5 px-3.5 rounded-xl bg-[#FAF7F2] hover:bg-[#25D366]/10 text-[#128C7E] border border-[#3D2B1F]/15 hover:border-[#25D366] text-[10px] uppercase tracking-wider font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
                   style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-                  title="Save Pin on Pinterest"
+                  title="Share on WhatsApp"
                 >
-                  <Pin size={14} />
-                  <span>Pin</span>
+                  <MessageCircle size={14} />
+                  <span>WhatsApp</span>
                 </button>
 
                 {/* 4. Full Modal Trigger */}

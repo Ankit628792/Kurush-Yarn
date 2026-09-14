@@ -9,7 +9,7 @@ import {
   Share2,
   Copy,
   Check,
-  Pin,
+  MessageCircle,
   Twitter,
   Facebook,
   Linkedin,
@@ -55,7 +55,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   // Canonical shareable deep link URL dynamically derived from current origin
   const shareUrl = getProductPieceUrl(product.slug);
 
-  // Image absolute URL for Pinterest / OpenGraph dynamically derived from current origin
+  // Image absolute URL for OpenGraph dynamically derived from current origin
   const fullImageUrl = getAbsoluteAssetUrl(product.heroImage);
 
   // Curated social sharing message
@@ -418,14 +418,13 @@ Explore the exhibition: ${shareUrl}
       }
     },
     {
-      name: 'Pinterest',
-      icon: Pin,
-      color: 'hover:bg-[#E60023]/10 hover:border-[#E60023] text-[#BD081C]',
-      badge: 'Save Pin',
+      name: 'WhatsApp',
+      icon: MessageCircle,
+      color: 'hover:bg-[#25D366]/10 hover:border-[#25D366] text-[#25D366]',
+      badge: 'Chat / Forward',
       action: () => {
-        const url = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(
-          shareUrl
-        )}&media=${encodeURIComponent(fullImageUrl)}&description=${encodeURIComponent(shareText)}`;
+        const text = `${shareText}\n\n${shareUrl}`;
+        const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
         window.open(url, '_blank', 'noopener,noreferrer');
       }
     },
