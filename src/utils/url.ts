@@ -32,13 +32,6 @@ export function getAppOrigin(): string {
   return '';
 }
 
-export function getBasePath(): string {
-  if (typeof window !== 'undefined' && window.location) {
-    return window.location.pathname || '/';
-  }
-  return '/';
-}
-
 /**
  * Returns the fully qualified dynamic deep link for a specific product piece
  */
